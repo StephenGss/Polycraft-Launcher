@@ -172,6 +172,7 @@ class MainWindow::Ui
 {
 public:
     TranslatedAction actionAddInstance;
+    TranslatedAction actionUpdatePolycraft;
     //TranslatedAction actionRefresh;
     TranslatedAction actionCheckUpdate;
     TranslatedAction actionSettings;
@@ -253,6 +254,7 @@ public:
         mainToolBar->setFloatable(false);
         mainToolBar.setWindowTitleId(QT_TRANSLATE_NOOP("MainWindow", "Main Toolbar"));
 
+        //TODO: remove add instance button?
         actionAddInstance = TranslatedAction(MainWindow);
         actionAddInstance->setObjectName(QStringLiteral("actionAddInstance"));
         actionAddInstance->setIcon(MMC->getThemedIcon("new"));
@@ -260,6 +262,14 @@ public:
         actionAddInstance.setTooltipId(QT_TRANSLATE_NOOP("MainWindow", "Add a new instance."));
         all_actions.append(&actionAddInstance);
         mainToolBar->addAction(actionAddInstance);
+
+        actionUpdatePolycraft = TranslatedAction(MainWindow);
+        actionUpdatePolycraft->setObjectName(QStringLiteral("actionUpdatePolycraft"));
+        actionUpdatePolycraft->setIcon(MMC->getThemedIcon("polycraft"));
+        actionUpdatePolycraft.setTextId(QT_TRANSLATE_NOOP("MainWindow", "PCW Update"));
+        actionUpdatePolycraft.setTooltipId(QT_TRANSLATE_NOOP("MainWindow", "Updates Polycraft World"));
+        all_actions.append(&actionUpdatePolycraft);
+        mainToolBar->addAction(actionUpdatePolycraft);
 
         mainToolBar->addSeparator();
 
@@ -800,6 +810,19 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new MainWindow
         {
             updater->checkForUpdate(MMC->settings()->get("UpdateChannel").toString(), false);
         }
+    }
+
+    // Add the news label to the news toolbar.
+    {
+        m_newsChecker.reset(new NewsChecker(BuildConfig.NEWS_RSS_URL));
+        newsLabel = new QToolButton();
+        newsLabel->setIcon(MMC->getThemedIcon("news"));
+        newsLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+        newsLabel->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+        ui->newsToolBar->insertWidget(ui->actionMoreNews, newsLabel);
+        QObject::connect(newsLabel, &QAbstractButton::clicked, this, &MainWindow::newsButtonClicked);
+        QObject::connect(m_newsChecker.get(), &NewsChecker::newsLoaded, this, &MainWindow::updateNewsLabel);
+        updateNewsLabel();
     }
 
     {
@@ -1384,6 +1407,22 @@ void MainWindow::addInstance(QString url)
 void MainWindow::on_actionAddInstance_triggered()
 {
     addInstance();
+}
+
+void MainWindow::on_actionUpdatePolycraft_triggered()
+{
+    QString input = "https://polycraft.utdallas.edu/downloads/polycraft_package.zip";
+    auto url = QUrl::fromUserInput(input);
+    QString groupName = MMC->settings()->get("LastUsedGroupForNewInstance").toString();
+
+    MMC->settings()->set("LastUsedGroupForNewInstance", groupName);
+
+    InstanceTask * creationTask = new InstanceImportTask(url);
+    creationTask->setName("Polycraft");
+    if(creationTask)
+    {
+        instanceFromInstanceTask(creationTask);
+    }
 }
 
 void MainWindow::droppedURLs(QList<QUrl> urls)

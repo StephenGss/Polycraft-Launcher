@@ -67,6 +67,8 @@ private slots:
 
     void on_actionAddInstance_triggered();
 
+    void on_actionUpdatePolycraft_triggered();
+
     void on_actionREDDIT_triggered();
 
     void on_actionDISCORD_triggered();
@@ -194,6 +196,8 @@ private:
 
 private:
     std::unique_ptr<Ui> ui;
+
+    std::unique_ptr<InstanceTask> creationTask;
 
     // these are managed by Qt's memory management model!
     GroupView *view = nullptr;
