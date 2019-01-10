@@ -69,6 +69,8 @@ private slots:
 
     void on_actionUpdatePolycraft_triggered();
 
+    void on_actionTest_triggered();
+
     void on_actionREDDIT_triggered();
 
     void on_actionDISCORD_triggered();

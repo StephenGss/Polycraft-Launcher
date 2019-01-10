@@ -173,6 +173,7 @@ class MainWindow::Ui
 public:
     TranslatedAction actionAddInstance;
     TranslatedAction actionUpdatePolycraft;
+    TranslatedAction actionTest;
     //TranslatedAction actionRefresh;
     TranslatedAction actionCheckUpdate;
     TranslatedAction actionSettings;
@@ -263,6 +264,8 @@ public:
         all_actions.append(&actionAddInstance);
         mainToolBar->addAction(actionAddInstance);
 
+        mainToolBar->addSeparator();
+
         actionUpdatePolycraft = TranslatedAction(MainWindow);
         actionUpdatePolycraft->setObjectName(QStringLiteral("actionUpdatePolycraft"));
         actionUpdatePolycraft->setIcon(MMC->getThemedIcon("polycraft"));
@@ -270,6 +273,13 @@ public:
         actionUpdatePolycraft.setTooltipId(QT_TRANSLATE_NOOP("MainWindow", "Updates Polycraft World"));
         all_actions.append(&actionUpdatePolycraft);
         mainToolBar->addAction(actionUpdatePolycraft);
+
+        actionTest = TranslatedAction(MainWindow);
+        actionTest->setObjectName(QStringLiteral("actionTest"));
+        actionTest.setTextId(QT_TRANSLATE_NOOP("MainWindow", "Test"));
+        actionTest.setTooltipId(QT_TRANSLATE_NOOP("MainWindow", "Test"));
+        all_actions.append(&actionTest);
+        mainToolBar->addAction(actionTest);
 
         mainToolBar->addSeparator();
 
@@ -373,14 +383,6 @@ public:
         }
 
         mainToolBar->addSeparator();
-
-        actionPatreon = TranslatedAction(MainWindow);
-        actionPatreon->setObjectName(QStringLiteral("actionPatreon"));
-        actionPatreon->setIcon(MMC->getThemedIcon("patreon"));
-        actionPatreon.setTextId(QT_TRANSLATE_NOOP("MainWindow", "Support MultiMC"));
-        actionPatreon.setTooltipId(QT_TRANSLATE_NOOP("MainWindow", "Open the MultiMC Patreon page."));
-        all_actions.append(&actionPatreon);
-        mainToolBar->addAction(actionPatreon);
 
         actionCAT = TranslatedAction(MainWindow);
         actionCAT->setObjectName(QStringLiteral("actionCAT"));
@@ -1422,6 +1424,19 @@ void MainWindow::on_actionUpdatePolycraft_triggered()
     if(creationTask)
     {
         instanceFromInstanceTask(creationTask);
+    }
+}
+
+void MainWindow::on_actionTest_triggered()
+{
+    if(MMC->showMainWindow()->ui->newsToolBar->isHidden()){
+        MMC->showMainWindow()->ui->newsToolBar->show();
+        MMC->showMainWindow()->ui->instanceToolBar->show();
+        MMC->showMainWindow()->ui->centralWidget->show();
+    }else{
+        MMC->showMainWindow()->ui->newsToolBar->hide();
+        MMC->showMainWindow()->ui->instanceToolBar->hide();
+        MMC->showMainWindow()->ui->centralWidget->hide();
     }
 }
 
