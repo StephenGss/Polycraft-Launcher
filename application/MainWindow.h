@@ -54,6 +54,8 @@ public:
     void closeEvent(QCloseEvent *event) override;
     void changeEvent(QEvent * event) override;
 
+    void hideAdvanced();
+
     void checkInstancePathForProblems();
 
     void updatesAllowedChanged(bool allowed);

@@ -216,6 +216,7 @@ public:
     QVector<TranslatedToolButton *> all_toolbuttons;
 
     QWidget *centralWidget = nullptr;
+    QWidget *polycraftWidget = nullptr;
     QHBoxLayout *horizontalLayout = nullptr;
     QStatusBar *statusBar = nullptr;
 
@@ -602,6 +603,11 @@ public:
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
         MainWindow->setCentralWidget(centralWidget);
 
+        polycraftWidget = new QWidget(MainWindow);
+        polycraftWidget->setObjectName(QStringLiteral("polycraftWidget"));
+
+
+
         createStatusBar(MainWindow);
         createNewsToolbar(MainWindow);
         createInstanceToolbar(MainWindow);
@@ -839,7 +845,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new MainWindow
     }
 
     setSelectedInstanceById(MMC->settings()->get("SelectedInstance").toString());
-
     // removing this looks stupid
     view->setFocus();
 }
@@ -1438,6 +1443,13 @@ void MainWindow::on_actionTest_triggered()
         MMC->showMainWindow()->ui->instanceToolBar->hide();
         MMC->showMainWindow()->ui->centralWidget->hide();
     }
+}
+
+void MainWindow::hideAdvanced()
+{
+    this->ui->newsToolBar->hide();
+    this->ui->instanceToolBar->hide();
+    this->ui->centralWidget->hide();
 }
 
 void MainWindow::droppedURLs(QList<QUrl> urls)

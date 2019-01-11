@@ -1105,6 +1105,7 @@ MainWindow* MultiMC::showMainWindow(bool minimized)
         else
         {
             m_mainWindow->show();
+            m_mainWindow->hideAdvanced();
         }
 
         m_mainWindow->checkInstancePathForProblems();
