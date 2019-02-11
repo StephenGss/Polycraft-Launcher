@@ -1,7 +1,7 @@
-<!DOCTYPE RCC>
-<RCC version="1.0">
+<RCC>
     <qresource prefix="/backgrounds">
         <file alias="kitteh">catbgrnd2.png</file>
         <file alias="catmas">catmas.png</file>
+        <file>ship.PNG</file>
     </qresource>
 </RCC>

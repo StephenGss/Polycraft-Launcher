@@ -817,6 +817,7 @@ bool InstanceList::commitStagedInstance(const QString& path, const QString& inst
         }
         m_groupMap[instID] = groupName;
         instanceSet.insert(instID);
+
         m_groups.insert(groupName);
         emit instancesChanged();
     }

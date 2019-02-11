@@ -31,6 +31,9 @@ public:
     /// URL for the updater's channel
     QString CHANLIST_URL;
 
+    /// URL for the Polycraft World Updater
+    QString PCW_VERSION_URL;
+
     /// Google analytics ID
     QString ANALYTICS_ID;
 

@@ -45,6 +45,7 @@
 #include <QtWidgets/QWidgetAction>
 #include <QtWidgets/QProgressDialog>
 #include <QtWidgets/QShortcut>
+#include <QtWidgets/QStackedWidget>
 
 #include <BaseInstance.h>
 #include <Env.h>
@@ -86,10 +87,13 @@
 #include "dialogs/EditAccountDialog.h"
 #include "dialogs/NotificationDialog.h"
 #include "dialogs/ExportInstanceDialog.h"
+#include "dialogs/PolycraftUpdateDialog.h"
 #include <InstanceImportTask.h>
 #include "UpdateController.h"
 #include "KonamiCode.h"
 #include <InstanceCopyTask.h>
+
+#include <widgets/PlayPolycraft.h>
 
 // WHY: to hold the pre-translation strings together with the T pointer, so it can be retranslated without a lot of ugly code
 template <typename T>
@@ -173,7 +177,7 @@ class MainWindow::Ui
 public:
     TranslatedAction actionAddInstance;
     TranslatedAction actionUpdatePolycraft;
-    TranslatedAction actionTest;
+    TranslatedAction actionToggleAdvanced;
     //TranslatedAction actionRefresh;
     TranslatedAction actionCheckUpdate;
     TranslatedAction actionSettings;
@@ -202,6 +206,7 @@ public:
     LabeledToolButton *changeIconButton = nullptr;
 
     QMenu * foldersMenu = nullptr;
+    QWidgetAction* foldersButtonAction;
     TranslatedToolButton foldersMenuButton;
     TranslatedAction actionViewInstanceFolder;
     TranslatedAction actionViewCentralModsFolder;
@@ -216,9 +221,17 @@ public:
     QVector<TranslatedToolButton *> all_toolbuttons;
 
     QWidget *centralWidget = nullptr;
-    QWidget *polycraftWidget = nullptr;
+    QStackedWidget *stackedCentralWidget = nullptr;
+    PlayPolycraft *polycraftWidget = nullptr;
+    QHBoxLayout *stackedCentralLayout = nullptr;
+    QHBoxLayout *polycraftLayout = nullptr;
     QHBoxLayout *horizontalLayout = nullptr;
     QStatusBar *statusBar = nullptr;
+
+    QString *polycraftReleaseVersion = nullptr;
+    QString *polycraftBetaVersion = nullptr;
+    QString *polycraftInstalledReleaseVersion = nullptr;
+    QString *polycraftInstalledBetaVersion = nullptr;
 
     TranslatedToolbar mainToolBar;
     TranslatedToolbar instanceToolBar;
@@ -275,12 +288,12 @@ public:
         all_actions.append(&actionUpdatePolycraft);
         mainToolBar->addAction(actionUpdatePolycraft);
 
-        actionTest = TranslatedAction(MainWindow);
-        actionTest->setObjectName(QStringLiteral("actionTest"));
-        actionTest.setTextId(QT_TRANSLATE_NOOP("MainWindow", "Test"));
-        actionTest.setTooltipId(QT_TRANSLATE_NOOP("MainWindow", "Test"));
-        all_actions.append(&actionTest);
-        mainToolBar->addAction(actionTest);
+        actionToggleAdvanced = TranslatedAction(MainWindow);
+        actionToggleAdvanced->setObjectName(QStringLiteral("actionToggleAdvanced"));
+        actionToggleAdvanced.setTextId(QT_TRANSLATE_NOOP("MainWindow", "Advanced Mode"));
+        actionToggleAdvanced.setTooltipId(QT_TRANSLATE_NOOP("MainWindow", "Toggle Advanced Mode"));
+        all_actions.append(&actionToggleAdvanced);
+        mainToolBar->addAction(actionToggleAdvanced);
 
         mainToolBar->addSeparator();
 
@@ -311,7 +324,7 @@ public:
         foldersMenuButton->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
         foldersMenuButton->setIcon(MMC->getThemedIcon("viewfolder"));
         all_toolbuttons.append(&foldersMenuButton);
-        QWidgetAction* foldersButtonAction = new QWidgetAction(MainWindow);
+        foldersButtonAction = new QWidgetAction(MainWindow);
         foldersButtonAction->setDefaultWidget(foldersMenuButton);
         mainToolBar->addAction(foldersButtonAction);
 
@@ -588,25 +601,41 @@ public:
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
         }
         MainWindow->resize(694, 563);
-        MainWindow->setWindowIcon(MMC->getThemedIcon("logo"));
-        MainWindow->setWindowTitle("MultiMC 5");
+        MainWindow->setWindowIcon(MMC->getThemedIcon("polycraft"));
+        MainWindow->setWindowTitle("Polycraft Launcher");
 
         createMainToolbar(MainWindow);
 
-        centralWidget = new QWidget(MainWindow);
+        centralWidget = new QWidget();
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
+
         horizontalLayout = new QHBoxLayout(centralWidget);
         horizontalLayout->setSpacing(0);
         horizontalLayout->setContentsMargins(11, 11, 11, 11);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalLayout->setSizeConstraint(QLayout::SetDefaultConstraint);
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        MainWindow->setCentralWidget(centralWidget);
 
-        polycraftWidget = new QWidget(MainWindow);
+        polycraftWidget = new PlayPolycraft();
+        QStringList *instances = new QStringList();
+        MMC->instances()->loadList();
+
+        for(int instCount = MMC->instances()->count()-1; instCount >= 0; instCount--){
+            instances->append(MMC->instances()->at(instCount)->id());
+        }
+
+        polycraftWidget->initialize(*instances);
         polycraftWidget->setObjectName(QStringLiteral("polycraftWidget"));
 
+        stackedCentralWidget = new QStackedWidget(MainWindow);
+        stackedCentralWidget->setObjectName(QStringLiteral("stackedCentralWidget"));
+        stackedCentralWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        stackedCentralWidget->addWidget(centralWidget);
+        stackedCentralWidget->addWidget(polycraftWidget);
 
+        MainWindow->setCentralWidget(stackedCentralWidget);
+        MainWindow->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        MainWindow->centralWidget()->adjustSize();
 
         createStatusBar(MainWindow);
         createNewsToolbar(MainWindow);
@@ -643,6 +672,51 @@ public:
         helpMenuButton->setText(tr("Help"));
     } // retranslateUi
 };
+
+void MainWindow::onResult(QNetworkReply *reply){
+    if(reply->error() == QNetworkReply::NoError){
+
+        QByteArray result = reply->readAll();
+        QJsonDocument jsonResponse = QJsonDocument::fromJson(result);
+        QJsonObject obj = jsonResponse.object();
+        QJsonValue value = obj.value("versions");
+        QJsonArray array = value.toArray();
+        QList<PolycraftUpdateDialog::version> *versions = new QList<PolycraftUpdateDialog::version>();
+
+        if(MMC->settings()->getSetting("polycraftVersion") == NULL)
+            MMC->settings()->registerSetting("polycraftVersion", "");
+        if(MMC->settings()->getSetting("polycraftBetaVersion") == NULL)
+            MMC->settings()->registerSetting("polycraftBetaVersion", "");
+        qDebug() << "**************************";
+        qDebug() << MMC->settings()->get("polycraftVersion").toString();
+        int counter = 0;
+        bool promptUpdate = false;
+        foreach (const QJsonValue & v, array){
+            struct PolycraftUpdateDialog::version version;
+            version.name = v.toObject().value("name").toString();
+            version.version = v.toObject().value("version").toString();
+            version.url = v.toObject().value("url").toString();
+            versions->append(version);
+            if(version.name.toLower().compare("release") == 0)
+                if(MMC->settings()->get("polycraftVersion").toString().compare(version.version) != 0){
+                    qDebug() << MMC->settings()->get("polycraftVersion").toString().compare(version.version);
+                    promptUpdate = true;
+                }
+            qDebug() << v.toObject().value("name").toString() << "::" << v.toObject().value("version").toString()<< "::" << v.toObject().value("url").toString();
+            counter++;
+        }
+
+        if(promptUpdate){
+            PolycraftUpdateDialog *polyUpdateDiag = new PolycraftUpdateDialog(this);
+            polyUpdateDiag->initialize(*versions);
+            polyUpdateDiag->show();
+        }
+
+    }
+    else
+        qDebug() << "ERROR";
+    reply->deleteLater();
+}
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new MainWindow::Ui)
 {
@@ -851,6 +925,19 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new MainWindow
 
 MainWindow::~MainWindow()
 {
+}
+
+void MainWindow::checkForPolycraftUpdate(){
+    QNetworkAccessManager *nam = new QNetworkAccessManager(this);
+    connect(nam, &QNetworkAccessManager::finished, this, &MainWindow::onResult);
+
+    QUrl url("http://127.0.0.1:8000/portal/version/");
+
+    qDebug()<< "url: "<< url.toString(QUrl::FullyEncoded);
+
+    nam->get(QNetworkRequest(url));
+
+
 }
 
 void MainWindow::konamiTriggered()
@@ -1432,24 +1519,48 @@ void MainWindow::on_actionUpdatePolycraft_triggered()
     }
 }
 
-void MainWindow::on_actionTest_triggered()
+void MainWindow::installInstanceFromURL(QUrl url, QString name){
+    InstanceTask * creationTask = new InstanceImportTask(url);
+    creationTask->setName("Polycraft " + name);
+    if(creationTask)
+    {
+        this->instanceFromInstanceTask(creationTask);
+    }
+}
+
+void MainWindow::on_actionToggleAdvanced_triggered()
 {
-    if(MMC->showMainWindow()->ui->newsToolBar->isHidden()){
-        MMC->showMainWindow()->ui->newsToolBar->show();
-        MMC->showMainWindow()->ui->instanceToolBar->show();
-        MMC->showMainWindow()->ui->centralWidget->show();
+    if(this->ui->newsToolBar->isHidden()){
+        showAdvanced();
     }else{
-        MMC->showMainWindow()->ui->newsToolBar->hide();
-        MMC->showMainWindow()->ui->instanceToolBar->hide();
-        MMC->showMainWindow()->ui->centralWidget->hide();
+        hideAdvanced();
     }
 }
 
 void MainWindow::hideAdvanced()
 {
-    this->ui->newsToolBar->hide();
-    this->ui->instanceToolBar->hide();
-    this->ui->centralWidget->hide();
+    this->resize(485, 400);
+    //this->setCentralWidget(this->ui->polycraftWidget);
+    toggleHideAdvanced(false);
+    this->ui->centralWidget->adjustSize();
+}
+
+void MainWindow::showAdvanced(){
+    toggleHideAdvanced(true);
+    //this->setCentralWidget(this->ui->centralWidget);
+    this->resize(694, 563);
+}
+
+void MainWindow::toggleHideAdvanced(bool flag)
+{
+    this->ui->newsToolBar->setVisible(flag);
+    this->ui->instanceToolBar->setVisible(flag);
+    this->ui->centralWidget->setVisible(flag);
+    this->ui->actionSettings->setVisible(flag);
+    this->ui->actionAddInstance->setVisible(flag);
+    this->ui->actionCAT->setVisible(flag);
+    this->ui->foldersButtonAction->setVisible(flag);
+    this->ui->polycraftWidget->setVisible(!flag);
 }
 
 void MainWindow::droppedURLs(QList<QUrl> urls)

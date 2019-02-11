@@ -6,7 +6,9 @@
 #include <QFlag>
 #include <QIcon>
 #include <QDateTime>
+#include <QList>
 #include <updater/GoUpdate.h>
+#include <dialogs/PolycraftUpdateDialog.h>
 
 #include <BaseInstance.h>
 
@@ -59,6 +61,8 @@ public:
     {
         return m_analytics;
     }
+
+    void updatePolycraft(QList<PolycraftUpdateDialog::version> versions);
 
     std::shared_ptr<SettingsObject> settings() const
     {

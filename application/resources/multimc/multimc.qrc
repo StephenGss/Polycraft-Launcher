@@ -2,7 +2,6 @@
     <qresource prefix="/icons/multimc">
         <file>index.theme</file>
         <file>scalable/logo.svg</file>
-        <file>scalable/multimc.svg</file>
         <file>scalable/reddit-alien.svg</file>
         <file>scalable/twitch.svg</file>
         <file>scalable/technic.svg</file>

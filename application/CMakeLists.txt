@@ -176,6 +176,8 @@ SET(MULTIMC_SOURCES
     dialogs/VersionSelectDialog.h
     dialogs/SkinUploadDialog.cpp
     dialogs/SkinUploadDialog.h
+    dialogs/PolycraftUpdateDialog.cpp
+    dialogs/PolycraftUpdateDialog.h
 
 
     # GUI - widgets
@@ -210,6 +212,8 @@ SET(MULTIMC_SOURCES
     widgets/VersionSelectWidget.h
     widgets/ProgressWidget.h
     widgets/ProgressWidget.cpp
+    widgets/PlayPolycraft.cpp
+    widgets/PlayPolycraft.h
 
     # GUI - instance group view
     groupview/GroupedProxyModel.cpp
@@ -267,10 +271,12 @@ SET(MULTIMC_UIS
     dialogs/UpdateDialog.ui
     dialogs/NotificationDialog.ui
     dialogs/SkinUploadDialog.ui
+    dialogs/PolycraftUpdateDialog.ui
 
     # Widgets/other
     widgets/CustomCommands.ui
     widgets/MCModInfoFrame.ui
+    widgets/PlayPolycraft.ui
 )
 
 set(MULTIMC_QRCS
