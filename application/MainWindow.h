@@ -64,7 +64,7 @@ public:
 
     void checkForPolycraftUpdate();
 
-    void installInstanceFromURL(QUrl url, QString name);
+    void installPolycraftInstanceFromURL(QUrl url, QString name, QString version);
 
     void updatePolycraftVersion(QString version){
         m_polycraftVersion = version;

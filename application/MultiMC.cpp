@@ -1045,17 +1045,13 @@ void MultiMC::updatePolycraft(QList<PolycraftUpdateDialog::version> versions){
     //install new isntances from polycraftworld.com
     foreach(const struct PolycraftUpdateDialog::version & v, versions){
         QString input = BuildConfig.PCW_VERSION_URL;
+        qDebug() << "**************************";
+        qDebug() << input + v.url;
         auto url = QUrl::fromUserInput(input + v.url);
         QString groupName = this->settings()->get("LastUsedGroupForNewInstance").toString();
 
         this->settings()->set("LastUsedGroupForNewInstance", groupName);
-        m_mainWindow->installInstanceFromURL(url, v.name + v.version);
-
-        //set new installed release version
-        if(v.name.contains("release", Qt::CaseInsensitive))
-            MMC->settings()->set("polycraftVersion", v.version);
-        else if(v.name.contains("beta", Qt::CaseInsensitive))
-            MMC->settings()->set("polycraftBetaVersion", v.version);
+        m_mainWindow->installPolycraftInstanceFromURL(url, v.name, v.version);
     }
 
 }
