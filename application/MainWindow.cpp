@@ -687,8 +687,8 @@ void MainWindow::onResult(QNetworkReply *reply){
             MMC->settings()->registerSetting("polycraftVersion", "");
         if(MMC->settings()->getSetting("polycraftBetaVersion") == NULL)
             MMC->settings()->registerSetting("polycraftBetaVersion", "");
-        qDebug() << "**************************";
-        qDebug() << MMC->settings()->get("polycraftVersion").toString();
+//        qDebug() << "**************************";
+//        qDebug() << MMC->settings()->get("polycraftVersion").toString();
         int counter = 0;
         bool promptUpdate = false;
         foreach (const QJsonValue & v, array){
@@ -931,13 +931,10 @@ void MainWindow::checkForPolycraftUpdate(){
     QNetworkAccessManager *nam = new QNetworkAccessManager(this);
     connect(nam, &QNetworkAccessManager::finished, this, &MainWindow::onResult);
 
-    QUrl url("http://127.0.0.1:8000/portal/version/");
+    QUrl url(BuildConfig.PCW_VERSION_URL + "/portal/version/");
 
     qDebug()<< "url: "<< url.toString(QUrl::FullyEncoded);
-
     nam->get(QNetworkRequest(url));
-
-
 }
 
 void MainWindow::konamiTriggered()
@@ -1515,16 +1512,26 @@ void MainWindow::on_actionUpdatePolycraft_triggered()
     creationTask->setName("Polycraft");
     if(creationTask)
     {
-        instanceFromInstanceTask(creationTask);
+        this->instanceFromInstanceTask(creationTask);
     }
 }
 
-void MainWindow::installInstanceFromURL(QUrl url, QString name){
+void MainWindow::installPolycraftInstanceFromURL(QUrl url, QString name, QString version){
     InstanceTask * creationTask = new InstanceImportTask(url);
-    creationTask->setName("Polycraft " + name);
+    creationTask->setName("Polycraft " + name + version);
     if(creationTask)
     {
-        this->instanceFromInstanceTask(creationTask);
+        unique_qobject_ptr<Task> task(MMC->instances()->wrapInstanceTask(creationTask));
+
+        connect(task.get(), &Task::succeeded, [this, name, version]()
+            {
+                //upon successful install, set new installed release version
+                if(name.contains("release", Qt::CaseInsensitive))
+                    MMC->settings()->set("polycraftVersion", version);
+                else if(name.contains("beta", Qt::CaseInsensitive))
+                    MMC->settings()->set("polycraftBetaVersion", version);
+            });
+        runModalTask(task.get());
     }
 }
 
