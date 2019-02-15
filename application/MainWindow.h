@@ -218,7 +218,8 @@ private:
     void instanceFromInstanceTask(InstanceTask *task);
     void finalizeInstance(InstancePtr inst);
 
-    void onResult(QNetworkReply *reply);
+    void onPolycraftVersionCheckResult(QNetworkReply *reply);
+    void onForcePolycraftVersionUpdateResult(QNetworkReply *reply);
 
 private:
     std::unique_ptr<Ui> ui;

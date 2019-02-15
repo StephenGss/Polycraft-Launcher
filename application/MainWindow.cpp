@@ -673,7 +673,7 @@ public:
     } // retranslateUi
 };
 
-void MainWindow::onResult(QNetworkReply *reply){
+void MainWindow::onPolycraftVersionCheckResult(QNetworkReply *reply){
     if(reply->error() == QNetworkReply::NoError){
 
         QByteArray result = reply->readAll();
@@ -714,7 +714,43 @@ void MainWindow::onResult(QNetworkReply *reply){
 
     }
     else
-        qDebug() << "ERROR";
+        qDebug() << "ERROR:" << reply->error();
+    reply->deleteLater();
+}
+
+void MainWindow::onForcePolycraftVersionUpdateResult(QNetworkReply *reply){
+    if(reply->error() == QNetworkReply::NoError){
+
+        QByteArray result = reply->readAll();
+        QJsonDocument jsonResponse = QJsonDocument::fromJson(result);
+        QJsonObject obj = jsonResponse.object();
+        QJsonValue value = obj.value("versions");
+        QJsonArray array = value.toArray();
+        QList<PolycraftUpdateDialog::version> *versions = new QList<PolycraftUpdateDialog::version>();
+
+        if(MMC->settings()->getSetting("polycraftVersion") == NULL)
+            MMC->settings()->registerSetting("polycraftVersion", "");
+        if(MMC->settings()->getSetting("polycraftBetaVersion") == NULL)
+            MMC->settings()->registerSetting("polycraftBetaVersion", "");
+//        qDebug() << "**************************";
+//        qDebug() << MMC->settings()->get("polycraftVersion").toString();
+        int counter = 0;
+        foreach (const QJsonValue & v, array){
+            struct PolycraftUpdateDialog::version version;
+            version.name = v.toObject().value("name").toString();
+            version.version = v.toObject().value("version").toString();
+            version.url = v.toObject().value("url").toString();
+            versions->append(version);
+
+            qDebug() << v.toObject().value("name").toString() << "::" << v.toObject().value("version").toString()<< "::" << v.toObject().value("url").toString();
+            counter++;
+        }
+
+        MMC->updatePolycraft(*versions);
+
+    }
+    else
+        qDebug() << "ERROR:" << reply->error();
     reply->deleteLater();
 }
 
@@ -929,7 +965,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::checkForPolycraftUpdate(){
     QNetworkAccessManager *nam = new QNetworkAccessManager(this);
-    connect(nam, &QNetworkAccessManager::finished, this, &MainWindow::onResult);
+    connect(nam, &QNetworkAccessManager::finished, this, &MainWindow::onPolycraftVersionCheckResult);
 
     QUrl url(BuildConfig.PCW_VERSION_URL + "/portal/version/");
 
@@ -1502,18 +1538,25 @@ void MainWindow::on_actionAddInstance_triggered()
 
 void MainWindow::on_actionUpdatePolycraft_triggered()
 {
-    QString input = "https://polycraft.utdallas.edu/downloads/polycraft_package.zip";
-    auto url = QUrl::fromUserInput(input);
-    QString groupName = MMC->settings()->get("LastUsedGroupForNewInstance").toString();
+//    QString input = "https://polycraft.utdallas.edu/downloads/polycraft_package.zip";
+//    auto url = QUrl::fromUserInput(input);
+//    QString groupName = MMC->settings()->get("LastUsedGroupForNewInstance").toString();
 
-    MMC->settings()->set("LastUsedGroupForNewInstance", groupName);
+//    MMC->settings()->set("LastUsedGroupForNewInstance", groupName);
 
-    InstanceTask * creationTask = new InstanceImportTask(url);
-    creationTask->setName("Polycraft");
-    if(creationTask)
-    {
-        this->instanceFromInstanceTask(creationTask);
-    }
+//    InstanceTask * creationTask = new InstanceImportTask(url);
+//    creationTask->setName("Polycraft");
+//    if(creationTask)
+//    {
+//        this->instanceFromInstanceTask(creationTask);
+//    }
+    QNetworkAccessManager *nam = new QNetworkAccessManager(this);
+    connect(nam, &QNetworkAccessManager::finished, this, &MainWindow::onPolycraftVersionCheckResult);
+
+    QUrl url(BuildConfig.PCW_VERSION_URL + "/portal/version/");
+
+    qDebug()<< "url: "<< url.toString(QUrl::FullyEncoded);
+    nam->get(QNetworkRequest(url));
 }
 
 void MainWindow::installPolycraftInstanceFromURL(QUrl url, QString name, QString version){

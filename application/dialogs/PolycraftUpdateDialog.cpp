@@ -18,10 +18,11 @@ PolycraftUpdateDialog::~PolycraftUpdateDialog()
 
 void PolycraftUpdateDialog::initialize(QList<version> versions){
     this->versions = versions;
-    QString labelText = "";
+    QString labelText = "There is a new versions of Polycraft World\nWould you like to update to version:";
     foreach(const struct version & v, versions){
         if(v.name.toLower().compare("release")){
-            labelText = "There is a new versions of Polycraft World\nWould you like to update to version:\'" + v.version + "\'?";
+            if(v.name.contains("beta", Qt::CaseInsensitive) != 0)
+                labelText = "There is a new versions of Polycraft World\nWould you like to update to version:\'" + v.version + "\'?";
         }
     }
     this->ui->label->setText(labelText);
