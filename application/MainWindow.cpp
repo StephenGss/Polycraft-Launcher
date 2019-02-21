@@ -1551,7 +1551,7 @@ void MainWindow::on_actionUpdatePolycraft_triggered()
 //        this->instanceFromInstanceTask(creationTask);
 //    }
     QNetworkAccessManager *nam = new QNetworkAccessManager(this);
-    connect(nam, &QNetworkAccessManager::finished, this, &MainWindow::onPolycraftVersionCheckResult);
+    connect(nam, &QNetworkAccessManager::finished, this, &MainWindow::onForcePolycraftVersionUpdateResult);
 
     QUrl url(BuildConfig.PCW_VERSION_URL + "/portal/version/");
 
@@ -1566,7 +1566,7 @@ void MainWindow::installPolycraftInstanceFromURL(QUrl url, QString name, QString
     {
         unique_qobject_ptr<Task> task(MMC->instances()->wrapInstanceTask(creationTask));
 
-        connect(task.get(), &Task::succeeded, [this, name, version]()
+        connect(task.get(), &Task::succeeded, [name, version]()
             {
                 //upon successful install, set new installed release version
                 if(name.contains("release", Qt::CaseInsensitive))
