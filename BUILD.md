@@ -158,9 +158,8 @@ Getting the project to build and run on Windows is easy if you use Qt's IDE, Qt 
 
 ```
 brew install qt5
-brew tap homebrew/versions
-brew install gcc48
 brew install cmake
+brew install llvm@6
 ```
 
 ### Build
@@ -168,16 +167,16 @@ brew install cmake
 Pick an installation path - this is where the final `.app` will be constructed when you run `make install`. Supply it as the `CMAKE_INSTALL_PREFIX` argument during CMake configuration.
 
 ```
-git clone https://github.com/MultiMC/MultiMC5.git
+git clone https://github.com/StephenGss/Polycraft-Launcher.git
+cd Polycraft-Launcher
 git submodule init
 git submodule update
-cd MultiMC5
 mkdir build
 cd build
 export CMAKE_PREFIX_PATH=/usr/local/opt/qt5
-export CC=/usr/local/bin/gcc-4.8
-export CXX=/usr/local/bin/g++-4.8
-cmake .. -DCMAKE_INSTALL_PREFIX:PATH=/Users/YOU/some/path/that/makes/sense/
+export CC=/usr/local/opt/llvm@6/bin/clang
+export CXX=/usr/local/opt/llvm@6/bin/clang++
+cmake .. -DCMAKE_INSTALL_PREFIX:PATH=/Users/YOU/some/path/that/makes/sense/ -DPCW_VERSION_URL=http://resturl.com
 make
 make install
 ```
