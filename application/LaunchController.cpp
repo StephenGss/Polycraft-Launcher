@@ -6,6 +6,7 @@
 #include "dialogs/ProfileSelectDialog.h"
 #include "dialogs/ProgressDialog.h"
 #include "dialogs/EditAccountDialog.h"
+#include "dialogs/LoginDialog.h"
 #include "InstanceWindow.h"
 #include "BuildConfig.h"
 #include "JavaCommon.h"
@@ -46,14 +47,37 @@ void LaunchController::login()
         auto reply = CustomMessageBox::selectable(
             m_parentWidget, tr("No Accounts"),
             tr("In order to play Minecraft, you must have at least one Mojang or Minecraft "
-               "account logged in to MultiMC."
+               "account logged in to the Polycraft Launcher."
                "Would you like to open the account manager to add an account now?"),
             QMessageBox::Information, QMessageBox::Yes | QMessageBox::No)->exec();
 
         if (reply == QMessageBox::Yes)
         {
             // Open the account manager.
-            SettingsUI::ShowPageDialog(MMC->globalSettingsPages(), m_parentWidget, "accounts");
+            MojangAccountPtr account = LoginDialog::newAccount(m_parentWidget, tr("Please enter your Mojang or Minecraft "
+                                                                                  "account username and password to add "
+                                                                                  "your account."));
+
+            if (account != nullptr)
+            {
+                MMC->accounts()->addAccount(account);
+                if (MMC->accounts()->count() == 1)
+                    MMC->accounts()->setActiveAccount(account->username());
+
+                // Grab associated player skins
+                auto job = new NetJob("Player skins: " + account->username());
+
+                for (AccountProfile profile : account->profiles())
+                {
+                    auto meta = Env::getInstance().metacache()->resolveEntry("skins", profile.id + ".png");
+                    auto action = Net::Download::makeCached(QUrl(URLConstants::SKINS_BASE + profile.id + ".png"), meta);
+                    job->addNetAction(action);
+                    meta->setStale(true);
+                }
+
+                job->start();
+            }
+            //SettingsUI::ShowPageDialog(MMC->globalSettingsPages(), m_parentWidget, "accounts");
         }
     }
     else if (account.get() == nullptr)
