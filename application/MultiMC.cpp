@@ -1134,7 +1134,7 @@ MainWindow* MultiMC::showMainWindow(bool minimized)
         m_openWindows++;
     }
     // FIXME: move this somewhere else...
-    if(false)
+    if(m_analytics)
     {
         auto windowSize = m_mainWindow->size();
         auto sizeString = QString("%1x%2").arg(windowSize.width()).arg(windowSize.height());
