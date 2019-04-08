@@ -59,7 +59,7 @@ void ForgeXzDownload::start()
     qDebug() << "Downloading " << m_url.toString();
     QNetworkRequest request(m_url);
     request.setRawHeader(QString("If-None-Match").toLatin1(), m_entry->getETag().toLatin1());
-    request.setHeader(QNetworkRequest::UserAgentHeader, "MultiMC/5.0 (Cached)");
+    request.setHeader(QNetworkRequest::UserAgentHeader, "PolycraftLauncher/5.0 (Cached)");
 
     QNetworkReply *rep = ENV.qnam().get(request);
 

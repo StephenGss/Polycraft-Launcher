@@ -39,7 +39,7 @@ Q_DECLARE_METATYPE(MojangAccountPtr)
  * A profile within someone's Mojang account.
  *
  * Currently, the profile system has not been implemented by Mojang yet,
- * but we might as well add some things for it in MultiMC right now so
+ * but we might as well add some things for it in PolycraftLauncher right now so
  * we don't have to rip the code to pieces to add it later.
  */
 struct AccountProfile

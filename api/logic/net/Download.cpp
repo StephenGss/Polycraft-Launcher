@@ -94,7 +94,7 @@ void Download::start()
             return;
     }
 
-    request.setHeader(QNetworkRequest::UserAgentHeader, "MultiMC/5.0");
+    request.setHeader(QNetworkRequest::UserAgentHeader, "PolycraftLauncher/5.0");
 
     QNetworkReply *rep =  ENV.qnam().get(request);
 

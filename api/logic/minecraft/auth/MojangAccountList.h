@@ -26,7 +26,7 @@
 
 /*!
  * \brief List of available Mojang accounts.
- * This should be loaded in the background by MultiMC on startup.
+ * This should be loaded in the background by PolycraftLauncher on startup.
  *
  * This class also inherits from QAbstractListModel. Methods from that
  * class determine how this list shows up in a list view. Said methods

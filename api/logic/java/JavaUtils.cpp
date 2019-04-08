@@ -77,14 +77,14 @@ QProcessEnvironment CleanEnviroment()
             qDebug() << "Env: ignoring" << key << value;
             continue;
         }
-        // filter MultiMC-related things
+        // filter PolycraftLauncher-related things
         if(key.startsWith("QT_"))
         {
             qDebug() << "Env: ignoring" << key << value;
             continue;
         }
 #ifdef Q_OS_LINUX
-        // Do not pass LD_* variables to java. They were intended for MultiMC
+        // Do not pass LD_* variables to java. They were intended for PolycraftLauncher
         if(key.startsWith("LD_"))
         {
             qDebug() << "Env: ignoring" << key << value;
@@ -328,7 +328,7 @@ QList<QString> JavaUtils::FindJavaPaths()
     // general locations used by distro packaging
     scanJavaDir("/usr/lib/jvm");
     scanJavaDir("/usr/lib32/jvm");
-    // javas stored in MultiMC's folder
+    // javas stored in PolycraftLauncher's folder
     scanJavaDir("java");
     return javas;
 }

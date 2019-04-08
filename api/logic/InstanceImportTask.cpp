@@ -85,10 +85,10 @@ void InstanceImportTask::processZipPack()
     QString root;
     if(!mmcFound.isNull())
     {
-        // process as MultiMC instance/pack
-        qDebug() << "MultiMC:" << mmcFound;
+        // process as PolycraftLauncher instance/pack
+        qDebug() << "PolycraftLauncher:" << mmcFound;
         root = mmcFound;
-        m_modpackType = ModpackType::MultiMC;
+        m_modpackType = ModpackType::PolycraftLauncher;
     }
     else if(!flameFound.isNull())
     {
@@ -157,7 +157,7 @@ void InstanceImportTask::extractFinished()
         case ModpackType::Flame:
             processFlame();
             return;
-        case ModpackType::MultiMC:
+        case ModpackType::PolycraftLauncher:
             processMultiMC();
             return;
         case ModpackType::Unknown:

@@ -25,7 +25,7 @@ class LegacyModList;
 class WorldList;
 class Task;
 /*
- * WHY: Legacy instances - from MultiMC 3 and 4 - are here only to provide a way to upgrade them to the current format.
+ * WHY: Legacy instances - from PolycraftLauncher 3 and 4 - are here only to provide a way to upgrade them to the current format.
  */
 class POLYCRAFTLAUNCHER_LOGIC_EXPORT LegacyInstance : public BaseInstance
 {

@@ -48,7 +48,7 @@ private: /* data */
     QFutureWatcher<QStringList> m_extractFutureWatcher;
     enum class ModpackType{
         Unknown,
-        MultiMC,
+        PolycraftLauncher,
         Flame
     } m_modpackType = ModpackType::Unknown;
 };

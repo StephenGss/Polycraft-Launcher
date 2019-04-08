@@ -126,7 +126,7 @@ void YggdrasilTask::processReply()
                "your root certificates</a></li>"
                "<li>Some device on your network is interfering with SSL traffic. In that case, "
                "you have bigger worries than Minecraft not starting.</li>"
-               "<li>Possibly something else. Check the MultiMC log file for details</li>"
+               "<li>Possibly something else. Check the PolycraftLauncher log file for details</li>"
                "</ul>"));
         return;
     // used for invalid credentials and similar errors. Fall through.

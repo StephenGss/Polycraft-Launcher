@@ -431,7 +431,7 @@ static void upgradeDeprecatedFiles(QString root, QString instanceName)
  */
 bool ComponentList::migratePreComponentConfig()
 {
-    // upgrade the very old files from the beginnings of MultiMC 5
+    // upgrade the very old files from the beginnings of PolycraftLauncher
     upgradeDeprecatedFiles(d->m_instance->instanceRoot(), d->m_instance->name());
 
     QList<ComponentPtr> components;

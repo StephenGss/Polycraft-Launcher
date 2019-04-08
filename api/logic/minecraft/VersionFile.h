@@ -27,19 +27,19 @@ public: /* methods */
     void applyTo(LaunchProfile* profile);
 
 public: /* data */
-    /// MultiMC: order hint for this version file if no explicit order is set
+    /// PolycraftLauncher: order hint for this version file if no explicit order is set
     int order = 0;
 
-    /// MultiMC: human readable name of this package
+    /// PolycraftLauncher: human readable name of this package
     QString name;
 
-    /// MultiMC: package ID of this package
+    /// PolycraftLauncher: package ID of this package
     QString uid;
 
-    /// MultiMC: version of this package
+    /// PolycraftLauncher: version of this package
     QString version;
 
-    /// MultiMC: DEPRECATED dependency on a Minecraft version
+    /// PolycraftLauncher: DEPRECATED dependency on a Minecraft version
     QString dependsOnMinecraftVersion;
 
     /// Mojang: DEPRECATED used to version the Mojang version format
@@ -51,7 +51,7 @@ public: /* data */
     /// Mojang: class to launch Minecraft with
     QString mainClass;
 
-    /// MultiMC: class to launch legacy Minecraft with (embed in a custom window)
+    /// PolycraftLauncher: class to launch legacy Minecraft with (embed in a custom window)
     QString appletClass;
 
     /// Mojang: Minecraft launch arguments (may contain placeholders for variable substitution)
@@ -69,7 +69,7 @@ public: /* data */
     /// Mojang: DEPRECATED asset group to be used with Minecraft
     QString assets;
 
-    /// MultiMC: list of tweaker mod arguments for launchwrapper
+    /// PolycraftLauncher: list of tweaker mod arguments for launchwrapper
     QStringList addTweakers;
 
     /// Mojang: list of libraries to add to the version
@@ -78,23 +78,23 @@ public: /* data */
     /// The main jar (Minecraft version library, normally)
     LibraryPtr mainJar;
 
-    /// MultiMC: list of attached traits of this version file - used to enable features
+    /// PolycraftLauncher: list of attached traits of this version file - used to enable features
     QSet<QString> traits;
 
-    /// MultiMC: list of jar mods added to this version
+    /// PolycraftLauncher: list of jar mods added to this version
     QList<LibraryPtr> jarMods;
 
-    /// MultiMC: list of mods added to this version
+    /// PolycraftLauncher: list of mods added to this version
     QList<LibraryPtr> mods;
 
     /**
-     * MultiMC: set of packages this depends on
+     * PolycraftLauncher: set of packages this depends on
      * NOTE: this is shared with the meta format!!!
      */
     Meta::RequireSet requires;
 
     /**
-     * MultiMC: set of packages this conflicts with
+     * PolycraftLauncher: set of packages this conflicts with
      * NOTE: this is shared with the meta format!!!
      */
     Meta::RequireSet conflicts;
