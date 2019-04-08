@@ -780,7 +780,7 @@ std::shared_ptr<LaunchTask> MinecraftInstance::createLaunchTask(AuthSessionPtr s
 
     // print a header
     {
-        process->appendStep(std::make_shared<TextPrint>(pptr, "Minecraft folder is:\n" + gameRoot() + "\n\n", MessageLevel::MultiMC));
+        process->appendStep(std::make_shared<TextPrint>(pptr, "Minecraft folder is:\n" + gameRoot() + "\n\n", MessageLevel::PolycraftLauncher));
     }
 
     // check java

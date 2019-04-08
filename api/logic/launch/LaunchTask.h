@@ -105,8 +105,8 @@ signals:
     void requestLogging();
 
 public slots:
-    void onLogLines(const QStringList& lines, MessageLevel::Enum defaultLevel = MessageLevel::MultiMC);
-    void onLogLine(QString line, MessageLevel::Enum defaultLevel = MessageLevel::MultiMC);
+    void onLogLines(const QStringList& lines, MessageLevel::Enum defaultLevel = MessageLevel::PolycraftLauncher);
+    void onLogLine(QString line, MessageLevel::Enum defaultLevel = MessageLevel::PolycraftLauncher);
     void onReadyForLaunch();
     void onStepFinished();
     void onProgressReportingRequested();

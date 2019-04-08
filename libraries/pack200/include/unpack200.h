@@ -25,7 +25,7 @@
 
 #pragma once
 
-#include "multimc_unpack200_export.h"
+#include "polycraftlauncher_unpack200_export.h"
 
 /**
  * @brief Unpack a PACK200 file
@@ -34,4 +34,4 @@
  * @param output_path Path to the output file in PACK200 format. System native string encoding.
  * @throw std::runtime_error for any error encountered
  */
-MULTIMC_UNPACK200_EXPORT void unpack_200(FILE * input_path, FILE * output_path);
+POLYCRAFTLAUNCHER_UNPACK200_EXPORT void unpack_200(FILE * input_path, FILE * output_path);

@@ -2,8 +2,8 @@
 
 MessageLevel::Enum MessageLevel::getLevel(const QString& levelName)
 {
-    if (levelName == "MultiMC")
-        return MessageLevel::MultiMC;
+    if (levelName == "PolycraftLauncher")
+        return MessageLevel::PolycraftLauncher;
     else if (levelName == "Debug")
         return MessageLevel::Debug;
     else if (levelName == "Info")

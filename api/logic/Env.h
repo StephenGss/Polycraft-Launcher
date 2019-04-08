@@ -27,7 +27,7 @@ class Index;
 
 class POLYCRAFTLAUNCHER_LOGIC_EXPORT Env
 {
-    friend class MultiMC;
+    friend class PolycraftLauncher;
 private:
     struct Private;
     Env();

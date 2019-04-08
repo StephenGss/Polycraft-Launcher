@@ -26,11 +26,11 @@
 #include "Env.h" // there is a global icon list inside Env.
 #include <icons/IIconList.h>
 
-#include "multimc_gui_export.h"
+#include "polycraftlauncher_gui_export.h"
 
 class QFileSystemWatcher;
 
-class MULTIMC_GUI_EXPORT IconList : public QAbstractListModel, public IIconList
+class POLYCRAFTLAUNCHER_GUI_EXPORT IconList : public QAbstractListModel, public IIconList
 {
     Q_OBJECT
 public:

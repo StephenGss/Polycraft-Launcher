@@ -19,9 +19,9 @@
 #include <QIcon>
 #include <icons/IIconList.h>
 
-#include "multimc_gui_export.h"
+#include "polycraftlauncher_gui_export.h"
 
-struct MULTIMC_GUI_EXPORT MMCImage
+struct POLYCRAFTLAUNCHER_GUI_EXPORT MMCImage
 {
     QIcon icon;
     QString key;
@@ -32,7 +32,7 @@ struct MULTIMC_GUI_EXPORT MMCImage
     }
 };
 
-struct MULTIMC_GUI_EXPORT MMCIcon
+struct POLYCRAFTLAUNCHER_GUI_EXPORT MMCIcon
 {
     QString m_key;
     QString m_name;
