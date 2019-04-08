@@ -1,5 +1,5 @@
 #include "LanguageWizardPage.h"
-#include <MultiMC.h>
+#include <PolycraftLauncher.h>
 #include <translations/TranslationsModel.h>
 
 #include <QVBoxLayout>
@@ -50,7 +50,7 @@ bool LanguageWizardPage::validatePage()
 void LanguageWizardPage::retranslate()
 {
     setTitle(tr("Language"));
-    setSubTitle(tr("Select the language to use in MultiMC"));
+    setSubTitle(tr("Select the language to use in PolycraftLauncher"));
 }
 
 void LanguageWizardPage::languageRowChanged(const QModelIndex &current, const QModelIndex &previous)

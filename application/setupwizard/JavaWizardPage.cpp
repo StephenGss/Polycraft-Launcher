@@ -1,5 +1,5 @@
 #include "JavaWizardPage.h"
-#include <MultiMC.h>
+#include <PolycraftLauncher.h>
 
 #include <QVBoxLayout>
 #include <QGroupBox>

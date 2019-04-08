@@ -15,14 +15,14 @@
 #include "net/URLConstants.h"
 #include "MojangDownloadInfo.h"
 
-#include "multimc_logic_export.h"
+#include "polycraftlauncher_logic_export.h"
 
 class Library;
 class MinecraftInstance;
 
 typedef std::shared_ptr<Library> LibraryPtr;
 
-class MULTIMC_LOGIC_EXPORT Library
+class POLYCRAFTLAUNCHER_LOGIC_EXPORT Library
 {
     friend class OneSixVersionFormat;
     friend class MojangVersionFormat;

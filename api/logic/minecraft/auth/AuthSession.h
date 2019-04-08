@@ -4,7 +4,7 @@
 #include <QMultiMap>
 #include <memory>
 
-#include "multimc_logic_export.h"
+#include "polycraftlauncher_logic_export.h"
 
 class MojangAccount;
 
@@ -14,7 +14,7 @@ struct User
     QMultiMap<QString, QString> properties;
 };
 
-struct MULTIMC_LOGIC_EXPORT AuthSession
+struct POLYCRAFTLAUNCHER_LOGIC_EXPORT AuthSession
 {
     bool MakeOffline(QString offline_playername);
 

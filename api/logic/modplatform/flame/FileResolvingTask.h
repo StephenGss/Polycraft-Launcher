@@ -4,11 +4,11 @@
 #include "net/NetJob.h"
 #include "PackManifest.h"
 
-#include "multimc_logic_export.h"
+#include "polycraftlauncher_logic_export.h"
 
 namespace Flame
 {
-class MULTIMC_LOGIC_EXPORT FileResolvingTask : public Task
+class POLYCRAFTLAUNCHER_LOGIC_EXPORT FileResolvingTask : public Task
 {
     Q_OBJECT
 public:

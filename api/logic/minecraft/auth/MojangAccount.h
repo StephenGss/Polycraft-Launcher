@@ -1,4 +1,4 @@
-/* Copyright 2013-2018 MultiMC Contributors
+/* Copyright 2013-2018 Polycraft Launcher Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@
 #include "AuthSession.h"
 #include "Usable.h"
 
-#include "multimc_logic_export.h"
+#include "polycraftlauncher_logic_export.h"
 
 class Task;
 class YggdrasilTask;
@@ -61,7 +61,7 @@ enum AccountStatus
  * Said information may include things such as that account's username, client token, and access
  * token if the user chose to stay logged in.
  */
-class MULTIMC_LOGIC_EXPORT MojangAccount :
+class POLYCRAFTLAUNCHER_LOGIC_EXPORT MojangAccount :
     public QObject,
     public Usable,
     public std::enable_shared_from_this<MojangAccount>

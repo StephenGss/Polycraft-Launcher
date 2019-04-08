@@ -1,4 +1,4 @@
-Package: multimc
+Package: polycraftlauncher
 Version: 1.2-1
 Architecture: all
 Maintainer: Petr Mrázek <peterix@gmail.com>
@@ -7,6 +7,6 @@ Priority: optional
 Installed-Size: 75
 Depends: zenity, desktop-file-utils
 Recommends: openjdk-8-jre
-Homepage: http://multimc.org
-Description: A local install wrapper for MultiMC
+Homepage: http://polycraftlauncher.org
+Description: A local install wrapper for PolycraftLauncher
 

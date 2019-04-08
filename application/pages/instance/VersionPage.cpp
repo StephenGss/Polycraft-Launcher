@@ -1,4 +1,4 @@
-/* Copyright 2013-2018 MultiMC Contributors
+/* Copyright 2013-2018 PolycraftLauncher Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-#include "MultiMC.h"
+#include "PolycraftLauncher.h"
 
 #include <QMessageBox>
 #include <QEvent>
@@ -42,7 +42,7 @@
 #include "icons/IconList.h"
 #include "Exception.h"
 
-#include "MultiMC.h"
+#include "PolycraftLauncher.h"
 
 #include <meta/Index.h>
 #include <meta/VersionList.h>
@@ -341,7 +341,7 @@ void VersionPage::on_downloadBtn_clicked()
     {
         CustomMessageBox::selectable(
             this, tr("Error"),
-            tr("MultiMC cannot download Minecraft or update instances unless you have at least "
+            tr("PolycraftLauncher cannot download Minecraft or update instances unless you have at least "
                "one account added.\nPlease add your Mojang or Minecraft account."),
             QMessageBox::Warning)->show();
         return;

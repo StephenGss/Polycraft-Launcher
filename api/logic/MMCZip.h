@@ -1,4 +1,4 @@
-/* Copyright 2013-2018 MultiMC Contributors
+/* Copyright 2013-2018 Polycraft Launcher Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@
 #include "minecraft/Mod.h"
 #include <functional>
 
-#include "multimc_logic_export.h"
+#include "polycraftlauncher_logic_export.h"
 
 #include <JlCompress.h>
 
@@ -31,20 +31,20 @@ namespace MMCZip
     /**
      * Merge two zip files, using a filter function
      */
-    bool MULTIMC_LOGIC_EXPORT mergeZipFiles(QuaZip *into, QFileInfo from, QSet<QString> &contained,
+    bool POLYCRAFTLAUNCHER_LOGIC_EXPORT mergeZipFiles(QuaZip *into, QFileInfo from, QSet<QString> &contained,
                                             const JlCompress::FilterFunction filter = nullptr);
 
     /**
      * take a source jar, add mods to it, resulting in target jar
      */
-    bool MULTIMC_LOGIC_EXPORT createModdedJar(QString sourceJarPath, QString targetJarPath, const QList<Mod>& mods);
+    bool POLYCRAFTLAUNCHER_LOGIC_EXPORT createModdedJar(QString sourceJarPath, QString targetJarPath, const QList<Mod>& mods);
 
     /**
      * Find a single file in archive by file name (not path)
      *
      * \return the path prefix where the file is
      */
-    QString MULTIMC_LOGIC_EXPORT findFolderOfFileInZip(QuaZip * zip, const QString & what, const QString &root = QString(""));
+    QString POLYCRAFTLAUNCHER_LOGIC_EXPORT findFolderOfFileInZip(QuaZip * zip, const QString & what, const QString &root = QString(""));
 
     /**
      * Find a multiple files of the same name in archive by file name
@@ -52,12 +52,12 @@ namespace MMCZip
      *
      * \return true if anything was found
      */
-    bool MULTIMC_LOGIC_EXPORT findFilesInZip(QuaZip * zip, const QString & what, QStringList & result, const QString &root = QString());
+    bool POLYCRAFTLAUNCHER_LOGIC_EXPORT findFilesInZip(QuaZip * zip, const QString & what, QStringList & result, const QString &root = QString());
 
     /**
      * Extract a subdirectory from an archive
      */
-    QStringList MULTIMC_LOGIC_EXPORT extractSubDir(QuaZip *zip, const QString & subdir, const QString &target);
+    QStringList POLYCRAFTLAUNCHER_LOGIC_EXPORT extractSubDir(QuaZip *zip, const QString & subdir, const QString &target);
 
     /**
      * Extract a whole archive.
@@ -66,6 +66,6 @@ namespace MMCZip
      * \param dir The directory to extract to, the current directory if left empty.
      * \return The list of the full paths of the files extracted, empty on failure.
      */
-    QStringList MULTIMC_LOGIC_EXPORT extractDir(QString fileCompressed, QString dir);
+    QStringList POLYCRAFTLAUNCHER_LOGIC_EXPORT extractDir(QString fileCompressed, QString dir);
 
 }

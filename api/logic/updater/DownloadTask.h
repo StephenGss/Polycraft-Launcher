@@ -1,4 +1,4 @@
-/* Copyright 2013-2018 MultiMC Contributors
+/* Copyright 2013-2018 Polycraft Launcher Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@
 #include "net/NetJob.h"
 #include "GoUpdate.h"
 
-#include "multimc_logic_export.h"
+#include "polycraftlauncher_logic_export.h"
 
 namespace GoUpdate
 {
@@ -27,7 +27,7 @@ namespace GoUpdate
  * The DownloadTask is a task that takes a given version ID and repository URL,
  * downloads that version's files from the repository, and prepares to install them.
  */
-class MULTIMC_LOGIC_EXPORT DownloadTask : public Task
+class POLYCRAFTLAUNCHER_LOGIC_EXPORT DownloadTask : public Task
 {
     Q_OBJECT
 

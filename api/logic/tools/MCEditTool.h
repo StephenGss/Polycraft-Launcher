@@ -2,9 +2,9 @@
 
 #include <QString>
 #include "settings/SettingsObject.h"
-#include "multimc_logic_export.h"
+#include "polycraftlauncher_logic_export.h"
 
-class MULTIMC_LOGIC_EXPORT MCEditTool
+class POLYCRAFTLAUNCHER_LOGIC_EXPORT MCEditTool
 {
 public:
     MCEditTool(SettingsObjectPtr settings);

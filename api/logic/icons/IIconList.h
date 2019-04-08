@@ -2,7 +2,7 @@
 
 #include <QString>
 #include <QStringList>
-#include "multimc_logic_export.h"
+#include "polycraftlauncher_logic_export.h"
 
 enum IconType : unsigned
 {
@@ -13,7 +13,7 @@ enum IconType : unsigned
     ToBeDeleted
 };
 
-class MULTIMC_LOGIC_EXPORT IIconList
+class POLYCRAFTLAUNCHER_LOGIC_EXPORT IIconList
 {
 public:
     virtual ~IIconList();

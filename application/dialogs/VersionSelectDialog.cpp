@@ -1,4 +1,4 @@
-/* Copyright 2013-2018 MultiMC Contributors
+/* Copyright 2013-2018 PolycraftLauncher Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@
 #include <BaseVersionList.h>
 #include <tasks/Task.h>
 #include <QDebug>
-#include "MultiMC.h"
+#include "PolycraftLauncher.h"
 #include <VersionProxyModel.h>
 #include <widgets/VersionSelectWidget.h>
 

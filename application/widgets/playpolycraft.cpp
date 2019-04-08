@@ -1,6 +1,6 @@
 #include "PlayPolycraft.h"
 #include "ui_PlayPolycraft.h"
-#include "MultiMC.h"
+#include "PolycraftLauncher.h"
 #include "InstanceList.h"
 
 PlayPolycraft::~PlayPolycraft()

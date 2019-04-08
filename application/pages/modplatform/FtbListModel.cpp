@@ -1,5 +1,5 @@
 #include "FtbListModel.h"
-#include "MultiMC.h"
+#include "PolycraftLauncher.h"
 
 #include <MMCStrings.h>
 #include <Version.h>

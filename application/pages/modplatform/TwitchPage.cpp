@@ -1,7 +1,7 @@
 #include "TwitchPage.h"
 #include "ui_TwitchPage.h"
 
-#include "MultiMC.h"
+#include "PolycraftLauncher.h"
 #include "dialogs/NewInstanceDialog.h"
 
 TwitchPage::TwitchPage(NewInstanceDialog* dialog, QWidget *parent)

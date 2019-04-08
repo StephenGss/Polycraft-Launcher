@@ -7,7 +7,7 @@
 #include "meta/JsonFormat.h"
 #include "ProblemProvider.h"
 #include "QObjectPtr.h"
-#include "multimc_logic_export.h"
+#include "polycraftlauncher_logic_export.h"
 
 class ComponentList;
 class LaunchProfile;
@@ -18,7 +18,7 @@ namespace Meta
 }
 class VersionFile;
 
-class MULTIMC_LOGIC_EXPORT Component : public QObject, public ProblemProvider
+class POLYCRAFTLAUNCHER_LOGIC_EXPORT Component : public QObject, public ProblemProvider
 {
 Q_OBJECT
 public:

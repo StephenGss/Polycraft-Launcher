@@ -10,7 +10,7 @@ if(WIN32)
     cmake_policy(SET CMP0020 OLD)
 endif()
 
-project(MultiMC)
+project(PolycraftLauncher)
 enable_testing()
 
 ##################################### Set CMake options #####################################
@@ -41,45 +41,45 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Werror=return-type")
 ##################################### Set Application options #####################################
 
 ######## Set URLs ########
-set(MultiMC_NEWS_RSS_URL "https://multimc.org/rss.xml" CACHE STRING "URL to fetch MultiMC's news RSS feed from.")
+set(PolycraftLauncher_NEWS_RSS_URL "https://multimc.org/rss.xml" CACHE STRING "URL to fetch PolycraftLauncher's news RSS feed from.")
 
 # Polycraft World Check for Updates url
 set(PCW_VERSION_URL "" CACHE STRING "URL for the channel list.")
 
 ######## Set version numbers ########
-set(MultiMC_VERSION_MAJOR    0)
-set(MultiMC_VERSION_MINOR    6)
-set(MultiMC_VERSION_HOTFIX   3)
+set(PolycraftLauncher_VERSION_MAJOR    0)
+set(PolycraftLauncher_VERSION_MINOR    6)
+set(PolycraftLauncher_VERSION_HOTFIX   3)
 
 # Build number
-set(MultiMC_VERSION_BUILD -1 CACHE STRING "Build number. -1 for no build number.")
+set(PolycraftLauncher_VERSION_BUILD -1 CACHE STRING "Build number. -1 for no build number.")
 
 # Build platform.
-set(MultiMC_BUILD_PLATFORM "" CACHE STRING "A short string identifying the platform that this build was built for. Only used by the notification system and to display in the about dialog.")
+set(PolycraftLauncher_BUILD_PLATFORM "" CACHE STRING "A short string identifying the platform that this build was built for. Only used by the notification system and to display in the about dialog.")
 
 # Channel list URL
-set(MultiMC_CHANLIST_URL "" CACHE STRING "URL for the channel list.")
+set(PolycraftLauncher_CHANLIST_URL "" CACHE STRING "URL for the channel list.")
 
 # Notification URL
-set(MultiMC_NOTIFICATION_URL "" CACHE STRING "URL for checking for notifications.")
+set(PolycraftLauncher_NOTIFICATION_URL "" CACHE STRING "URL for checking for notifications.")
 
 # paste.ee API key
-set(MultiMC_PASTE_EE_API_KEY "aOkZcshDwpOI0Pvs20Tme2lx0tKgW9taVvFBHSpPE" CACHE STRING "API key you can get from paste.ee when you register an account")
+set(PolycraftLauncher_PASTE_EE_API_KEY "aOkZcshDwpOI0Pvs20Tme2lx0tKgW9taVvFBHSpPE" CACHE STRING "API key you can get from paste.ee when you register an account")
 
 # Google analytics ID
-set(MultiMC_ANALYTICS_ID "UA-61127107-2" CACHE STRING "ID you can get from Google analytics")
+set(PolycraftLauncher_ANALYTICS_ID "UA-61127107-2" CACHE STRING "ID you can get from Google analytics")
 
 #### Check the current Git commit and branch
 include(GetGitRevisionDescription)
-get_git_head_revision(MultiMC_GIT_REFSPEC MultiMC_GIT_COMMIT)
+get_git_head_revision(PolycraftLauncher_GIT_REFSPEC PolycraftLauncher_GIT_COMMIT)
 
-message(STATUS "Git commit: ${MultiMC_GIT_COMMIT}")
-message(STATUS "Git refspec: ${MultiMC_GIT_REFSPEC}")
+message(STATUS "Git commit: ${PolycraftLauncher_GIT_COMMIT}")
+message(STATUS "Git refspec: ${PolycraftLauncher_GIT_REFSPEC}")
 
-set(MultiMC_RELEASE_VERSION_NAME "${MultiMC_VERSION_MAJOR}.${MultiMC_VERSION_MINOR}.${MultiMC_VERSION_HOTFIX}")
+set(PolycraftLauncher_RELEASE_VERSION_NAME "${PolycraftLauncher_VERSION_MAJOR}.${PolycraftLauncher_VERSION_MINOR}.${PolycraftLauncher_VERSION_HOTFIX}")
 
 #### Custom target to just print the version.
-add_custom_target(version echo "Version: ${MultiMC_RELEASE_VERSION_NAME}")
+add_custom_target(version echo "Version: ${PolycraftLauncher_RELEASE_VERSION_NAME}")
 
 ################################ 3rd Party Libs ################################
 
@@ -107,44 +107,44 @@ endif()
 ####################################### Install layout #######################################
 
 # How to install the build results
-set(MultiMC_LAYOUT "auto" CACHE STRING "The layout for MultiMC installation (auto, win-bundle, lin-bundle, lin-nodeps, lin-system, mac-bundle)")
-set_property(CACHE MultiMC_LAYOUT PROPERTY STRINGS auto win-bundle lin-bundle lin-nodeps lin-system mac-bundle)
+set(PolycraftLauncher_LAYOUT "auto" CACHE STRING "The layout for PolycraftLauncher installation (auto, win-bundle, lin-bundle, lin-nodeps, lin-system, mac-bundle)")
+set_property(CACHE PolycraftLauncher_LAYOUT PROPERTY STRINGS auto win-bundle lin-bundle lin-nodeps lin-system mac-bundle)
 
-if(MultiMC_LAYOUT STREQUAL "auto")
+if(PolycraftLauncher_LAYOUT STREQUAL "auto")
     if(UNIX AND APPLE)
-        set(MultiMC_LAYOUT_REAL "mac-bundle")
+        set(PolycraftLauncher_LAYOUT_REAL "mac-bundle")
     elseif(UNIX)
-        set(MultiMC_LAYOUT_REAL "lin-nodeps")
+        set(PolycraftLauncher_LAYOUT_REAL "lin-nodeps")
     elseif(WIN32)
-        set(MultiMC_LAYOUT_REAL "win-bundle")
+        set(PolycraftLauncher_LAYOUT_REAL "win-bundle")
     else()
         message(FATAL_ERROR "Cannot choose a sensible install layout for your platform.")
     endif()
 else()
-    set(MultiMC_LAYOUT_REAL ${MultiMC_LAYOUT})
+    set(PolycraftLauncher_LAYOUT_REAL ${PolycraftLauncher_LAYOUT})
 endif()
 
-if(MultiMC_LAYOUT_REAL STREQUAL "mac-bundle")
-    set(BINARY_DEST_DIR "MultiMC.app/Contents/MacOS")
-    set(LIBRARY_DEST_DIR "MultiMC.app/Contents/MacOS")
-    set(PLUGIN_DEST_DIR "MultiMC.app/Contents/MacOS")
-    set(RESOURCES_DEST_DIR "MultiMC.app/Contents/Resources")
-    set(JARS_DEST_DIR "MultiMC.app/Contents/MacOS/jars")
+if(PolycraftLauncher_LAYOUT_REAL STREQUAL "mac-bundle")
+    set(BINARY_DEST_DIR "PolycraftLauncher.app/Contents/MacOS")
+    set(LIBRARY_DEST_DIR "PolycraftLauncher.app/Contents/MacOS")
+    set(PLUGIN_DEST_DIR "PolycraftLauncher.app/Contents/MacOS")
+    set(RESOURCES_DEST_DIR "PolycraftLauncher.app/Contents/Resources")
+    set(JARS_DEST_DIR "PolycraftLauncher.app/Contents/MacOS/jars")
 
     set(BUNDLE_DEST_DIR ".")
 
     # Apps to bundle
-    set(APPS "\${CMAKE_INSTALL_PREFIX}/MultiMC.app")
+    set(APPS "\${CMAKE_INSTALL_PREFIX}/PolycraftLauncher.app")
 
     # Mac bundle settings
-    set(MACOSX_BUNDLE_BUNDLE_NAME "MultiMC")
-    set(MACOSX_BUNDLE_INFO_STRING "MultiMC Minecraft launcher and management utility.")
-    set(MACOSX_BUNDLE_GUI_IDENTIFIER "org.multimc.MultiMC5")
-    set(MACOSX_BUNDLE_BUNDLE_VERSION "${MultiMC_VERSION_MAJOR}.${MultiMC_VERSION_MINOR}.${MultiMC_VERSION_HOTFIX}.${MultiMC_VERSION_BUILD}")
-    set(MACOSX_BUNDLE_SHORT_VERSION_STRING "${MultiMC_VERSION_MAJOR}.${MultiMC_VERSION_MINOR}.${MultiMC_VERSION_HOTFIX}.${MultiMC_VERSION_BUILD}")
-    set(MACOSX_BUNDLE_LONG_VERSION_STRING "${MultiMC_VERSION_MAJOR}.${MultiMC_VERSION_MINOR}.${MultiMC_VERSION_HOTFIX}.${MultiMC_VERSION_BUILD}")
-    set(MACOSX_BUNDLE_ICON_FILE MultiMC.icns)
-    set(MACOSX_BUNDLE_COPYRIGHT "Copyright 2015-2018 MultiMC Contributors")
+    set(MACOSX_BUNDLE_BUNDLE_NAME "PolycraftLauncher")
+    set(MACOSX_BUNDLE_INFO_STRING "PolycraftLauncher Minecraft launcher and management utility.")
+    set(MACOSX_BUNDLE_GUI_IDENTIFIER "org.multimc.PolycraftLauncher5")
+    set(MACOSX_BUNDLE_BUNDLE_VERSION "${PolycraftLauncher_VERSION_MAJOR}.${PolycraftLauncher_VERSION_MINOR}.${PolycraftLauncher_VERSION_HOTFIX}.${PolycraftLauncher_VERSION_BUILD}")
+    set(MACOSX_BUNDLE_SHORT_VERSION_STRING "${PolycraftLauncher_VERSION_MAJOR}.${PolycraftLauncher_VERSION_MINOR}.${PolycraftLauncher_VERSION_HOTFIX}.${PolycraftLauncher_VERSION_BUILD}")
+    set(MACOSX_BUNDLE_LONG_VERSION_STRING "${PolycraftLauncher_VERSION_MAJOR}.${PolycraftLauncher_VERSION_MINOR}.${PolycraftLauncher_VERSION_HOTFIX}.${PolycraftLauncher_VERSION_BUILD}")
+    set(MACOSX_BUNDLE_ICON_FILE PolycraftLauncher.icns)
+    set(MACOSX_BUNDLE_COPYRIGHT "Copyright 2015-2018 PolycraftLauncher Contributors")
 
     # directories to look for dependencies
     set(DIRS ${QT_LIBS_DIR} ${QT_LIBEXECS_DIR} ${CMAKE_LIBRARY_OUTPUT_DIRECTORY} ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
@@ -153,9 +153,9 @@ if(MultiMC_LAYOUT_REAL STREQUAL "mac-bundle")
     set(INSTALL_BUNDLE "full")
 
     # Add the icon
-    install(FILES application/resources/MultiMC.icns DESTINATION ${RESOURCES_DEST_DIR})
+    install(FILES application/resources/PolycraftLauncher.icns DESTINATION ${RESOURCES_DEST_DIR})
 
-elseif(MultiMC_LAYOUT_REAL STREQUAL "lin-bundle")
+elseif(PolycraftLauncher_LAYOUT_REAL STREQUAL "lin-bundle")
     set(BINARY_DEST_DIR "bin")
     set(LIBRARY_DEST_DIR "bin")
     set(PLUGIN_DEST_DIR "plugins")
@@ -164,7 +164,7 @@ elseif(MultiMC_LAYOUT_REAL STREQUAL "lin-bundle")
     set(JARS_DEST_DIR "bin/jars")
 
     # Apps to bundle
-    set(APPS "\${CMAKE_INSTALL_PREFIX}/bin/MultiMC")
+    set(APPS "\${CMAKE_INSTALL_PREFIX}/bin/PolycraftLauncher")
 
     # directories to look for dependencies
     set(DIRS ${QT_LIBS_DIR} ${QT_LIBEXECS_DIR} ${CMAKE_LIBRARY_OUTPUT_DIRECTORY} ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
@@ -173,12 +173,12 @@ elseif(MultiMC_LAYOUT_REAL STREQUAL "lin-bundle")
     set(INSTALL_BUNDLE "full")
 
     # Set RPATH
-    SET(MultiMC_BINARY_RPATH "$ORIGIN/")
+    SET(PolycraftLauncher_BINARY_RPATH "$ORIGIN/")
 
     # Install basic runner script
-    install(PROGRAMS application/package/linux/MultiMC DESTINATION ${BUNDLE_DEST_DIR})
+    install(PROGRAMS application/package/linux/PolycraftLauncher DESTINATION ${BUNDLE_DEST_DIR})
 
-elseif(MultiMC_LAYOUT_REAL STREQUAL "lin-nodeps")
+elseif(PolycraftLauncher_LAYOUT_REAL STREQUAL "lin-nodeps")
     set(BINARY_DEST_DIR "bin")
     set(LIBRARY_DEST_DIR "bin")
     set(PLUGIN_DEST_DIR "plugins")
@@ -190,28 +190,28 @@ elseif(MultiMC_LAYOUT_REAL STREQUAL "lin-nodeps")
     set(INSTALL_BUNDLE "nodeps")
 
     # Set RPATH
-    SET(MultiMC_BINARY_RPATH "$ORIGIN/")
+    SET(PolycraftLauncher_BINARY_RPATH "$ORIGIN/")
 
     # Install basic runner script
-    install(PROGRAMS application/package/linux/MultiMC DESTINATION ${BUNDLE_DEST_DIR})
+    install(PROGRAMS application/package/linux/PolycraftLauncher DESTINATION ${BUNDLE_DEST_DIR})
 
-elseif(MultiMC_LAYOUT_REAL STREQUAL "lin-system")
-    set(MultiMC_APP_BINARY_NAME "multimc" CACHE STRING "Name of the MultiMC binary")
-    set(MultiMC_BINARY_DEST_DIR "bin" CACHE STRING "Path to the binary directory")
-    set(MultiMC_LIBRARY_DEST_DIR "lib${LIB_SUFFIX}" CACHE STRING "Path to the library directory")
-    set(MultiMC_SHARE_DEST_DIR "share/multimc" CACHE STRING "Path to the shared data directory")
-    set(JARS_DEST_DIR "${MultiMC_SHARE_DEST_DIR}/jars")
+elseif(PolycraftLauncher_LAYOUT_REAL STREQUAL "lin-system")
+    set(PolycraftLauncher_APP_BINARY_NAME "multimc" CACHE STRING "Name of the PolycraftLauncher binary")
+    set(PolycraftLauncher_BINARY_DEST_DIR "bin" CACHE STRING "Path to the binary directory")
+    set(PolycraftLauncher_LIBRARY_DEST_DIR "lib${LIB_SUFFIX}" CACHE STRING "Path to the library directory")
+    set(PolycraftLauncher_SHARE_DEST_DIR "share/multimc" CACHE STRING "Path to the shared data directory")
+    set(JARS_DEST_DIR "${PolycraftLauncher_SHARE_DEST_DIR}/jars")
 
-    set(BINARY_DEST_DIR ${MultiMC_BINARY_DEST_DIR})
-    set(LIBRARY_DEST_DIR ${MultiMC_LIBRARY_DEST_DIR})
+    set(BINARY_DEST_DIR ${PolycraftLauncher_BINARY_DEST_DIR})
+    set(LIBRARY_DEST_DIR ${PolycraftLauncher_LIBRARY_DEST_DIR})
 
-    MESSAGE(STATUS "Compiling for linux system with ${MultiMC_SHARE_DEST_DIR} and MULTIMC_LINUX_DATADIR")
-    SET(MultiMC_APP_BINARY_DEFS "-DMULTIMC_JARS_LOCATION=${CMAKE_INSTALL_PREFIX}/${JARS_DEST_DIR}" "-DMULTIMC_LINUX_DATADIR")
+    MESSAGE(STATUS "Compiling for linux system with ${PolycraftLauncher_SHARE_DEST_DIR} and PolycraftLauncher_LINUX_DATADIR")
+    SET(PolycraftLauncher_APP_BINARY_DEFS "-DPolycraftLauncher_JARS_LOCATION=${CMAKE_INSTALL_PREFIX}/${JARS_DEST_DIR}" "-DPolycraftLauncher_LINUX_DATADIR")
 
     # install as bundle with no dependencies included
     set(INSTALL_BUNDLE "nodeps")
 
-elseif(MultiMC_LAYOUT_REAL STREQUAL "win-bundle")
+elseif(PolycraftLauncher_LAYOUT_REAL STREQUAL "win-bundle")
     set(BINARY_DEST_DIR ".")
     set(LIBRARY_DEST_DIR ".")
     set(PLUGIN_DEST_DIR ".")
@@ -220,7 +220,7 @@ elseif(MultiMC_LAYOUT_REAL STREQUAL "win-bundle")
     set(JARS_DEST_DIR "jars")
 
     # Apps to bundle
-    set(APPS "\${CMAKE_INSTALL_PREFIX}/MultiMC.exe")
+    set(APPS "\${CMAKE_INSTALL_PREFIX}/PolycraftLauncher.exe")
 
     # directories to look for dependencies
     set(DIRS ${QT_LIBS_DIR} ${QT_LIBEXECS_DIR} ${CMAKE_LIBRARY_OUTPUT_DIRECTORY} ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})

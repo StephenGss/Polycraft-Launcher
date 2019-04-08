@@ -1,7 +1,7 @@
 #include "PolycraftUpdateDialog.h"
 #include "ui_PolycraftUpdateDialog.h"
 
-#include <MultiMC.h>
+#include <PolycraftLauncher.h>
 
 PolycraftUpdateDialog::PolycraftUpdateDialog(QWidget *parent) :
     QDialog(parent),

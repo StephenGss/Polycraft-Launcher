@@ -2,10 +2,10 @@
 
 #include "net/NetAction.h"
 
-#include "multimc_logic_export.h"
+#include "polycraftlauncher_logic_export.h"
 
 namespace Net {
-class MULTIMC_LOGIC_EXPORT Validator
+class POLYCRAFTLAUNCHER_LOGIC_EXPORT Validator
 {
 public: /* con/des */
     Validator() {};

@@ -1,4 +1,4 @@
-/* Copyright 2013-2018 MultiMC Contributors
+/* Copyright 2013-2018 PolycraftLauncher Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@
 #include <QKeyEvent>
 #include <QAbstractItemModel>
 
-#include "MultiMC.h"
+#include "PolycraftLauncher.h"
 #include "dialogs/CustomMessageBox.h"
 #include "dialogs/ModEditDialogCommon.h"
 #include <GuiUtil.h>

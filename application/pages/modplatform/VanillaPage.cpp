@@ -1,7 +1,7 @@
 #include "VanillaPage.h"
 #include "ui_VanillaPage.h"
 
-#include "MultiMC.h"
+#include "PolycraftLauncher.h"
 
 #include <meta/Index.h>
 #include <meta/VersionList.h>

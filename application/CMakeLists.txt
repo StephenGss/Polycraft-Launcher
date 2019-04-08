@@ -6,11 +6,11 @@ configure_file("${PROJECT_SOURCE_DIR}/BuildConfig.cpp.in" "${PROJECT_BINARY_DIR}
 ################################ FILES ################################
 
 ######## Sources and headers ########
-SET(MULTIMC_SOURCES
+SET(POLYCRAFTLAUNCHER_SOURCES
     # Application base
     main.cpp
-    MultiMC.h
-    MultiMC.cpp
+    PolycraftLauncher.h
+    PolycraftLauncher.cpp
     BuildConfig.h
     ${PROJECT_BINARY_DIR}/BuildConfig.cpp
     UpdateController.cpp
@@ -118,8 +118,8 @@ SET(MULTIMC_SOURCES
     pages/global/JavaPage.h
     pages/global/MinecraftPage.cpp
     pages/global/MinecraftPage.h
-    pages/global/MultiMCPage.cpp
-    pages/global/MultiMCPage.h
+    pages/global/PolycraftLauncherPage.cpp
+    pages/global/PolycraftLauncherPage.h
     pages/global/ProxyPage.cpp
     pages/global/ProxyPage.h
     pages/global/PasteEEPage.cpp
@@ -227,7 +227,7 @@ SET(MULTIMC_SOURCES
     )
 
 ######## UIs ########
-SET(MULTIMC_UIS
+SET(POLYCRAFTLAUNCHER_UIS
     # Instance pages
     pages/instance/VersionPage.ui
     pages/instance/ModFolderPage.ui
@@ -245,7 +245,7 @@ SET(MULTIMC_UIS
     pages/global/ExternalToolsPage.ui
     pages/global/JavaPage.ui
     pages/global/MinecraftPage.ui
-    pages/global/MultiMCPage.ui
+    pages/global/PolycraftLauncherPage.ui
     pages/global/ProxyPage.ui
     pages/global/PasteEEPage.ui
     pages/global/PackagesPage.ui
@@ -279,10 +279,10 @@ SET(MULTIMC_UIS
     widgets/PlayPolycraft.ui
 )
 
-set(MULTIMC_QRCS
+set(POLYCRAFTLAUNCHER_QRCS
     resources/assets/assets.qrc
     resources/backgrounds/backgrounds.qrc
-    resources/multimc/multimc.qrc
+    resources/polycraftlauncher/polycraftlauncher.qrc
     resources/pe_dark/pe_dark.qrc
     resources/pe_light/pe_light.qrc
     resources/pe_colored/pe_colored.qrc
@@ -295,33 +295,33 @@ set(MULTIMC_QRCS
 
 ######## Windows resource files ########
 if(WIN32)
-    set(MULTIMC_RCS resources/multimc.rc)
+    set(POLYCRAFTLAUNCHER_RCS resources/polycraftlauncher.rc)
 endif()
 
 # Qt 5 stuff
-qt5_wrap_ui(MULTIMC_UI ${MULTIMC_UIS})
-qt5_add_resources(MULTIMC_RESOURCES ${MULTIMC_QRCS})
+qt5_wrap_ui(POLYCRAFTLAUNCHER_UI ${POLYCRAFTLAUNCHER_UIS})
+qt5_add_resources(POLYCRAFTLAUNCHER_RESOURCES ${POLYCRAFTLAUNCHER_QRCS})
 
 # Add executable
-add_executable(MultiMC MACOSX_BUNDLE WIN32 ${MULTIMC_SOURCES} ${MULTIMC_UI} ${MULTIMC_RESOURCES} ${MULTIMC_RCS})
-target_link_libraries(MultiMC MultiMC_gui ${QUAZIP_LIBRARIES} hoedown MultiMC_rainbow LocalPeer ganalytics)
-if(DEFINED MultiMC_APP_BINARY_NAME)
-    set_target_properties(MultiMC PROPERTIES OUTPUT_NAME "${MultiMC_APP_BINARY_NAME}")
+add_executable(PolycraftLauncher MACOSX_BUNDLE WIN32 ${POLYCRAFTLAUNCHER_SOURCES} ${POLYCRAFTLAUNCHER_UI} ${POLYCRAFTLAUNCHER_RESOURCES} ${POLYCRAFTLAUNCHER_RCS})
+target_link_libraries(PolycraftLauncher PolycraftLauncher_gui ${QUAZIP_LIBRARIES} hoedown PolycraftLauncher_rainbow LocalPeer ganalytics)
+if(DEFINED PolycraftLauncher_APP_BINARY_NAME)
+    set_target_properties(PolycraftLauncher PROPERTIES OUTPUT_NAME "${PolycraftLauncher_APP_BINARY_NAME}")
 endif()
-if(DEFINED MultiMC_BINARY_RPATH)
-    SET_TARGET_PROPERTIES(MultiMC PROPERTIES INSTALL_RPATH "${MultiMC_BINARY_RPATH}")
+if(DEFINED PolycraftLauncher_BINARY_RPATH)
+    SET_TARGET_PROPERTIES(PolycraftLauncher PROPERTIES INSTALL_RPATH "${PolycraftLauncher_BINARY_RPATH}")
 endif()
-if(DEFINED MultiMC_APP_BINARY_DEFS)
-    target_compile_definitions(MultiMC PRIVATE ${MultiMC_APP_BINARY_DEFS})
+if(DEFINED PolycraftLauncher_APP_BINARY_DEFS)
+    target_compile_definitions(PolycraftLauncher PRIVATE ${PolycraftLauncher_APP_BINARY_DEFS})
 endif()
 
-install(TARGETS MultiMC
+install(TARGETS PolycraftLauncher
     BUNDLE DESTINATION ${BUNDLE_DEST_DIR} COMPONENT Runtime
     LIBRARY DESTINATION ${LIBRARY_DEST_DIR} COMPONENT Runtime
     RUNTIME DESTINATION ${BINARY_DEST_DIR} COMPONENT Runtime
 )
 
-#### The MultiMC bundle mess! ####
+#### The PolycraftLauncher bundle mess! ####
 # Bundle utilities are used to complete the portable packages - they add all the libraries that would otherwise be missing on the target system.
 # NOTE: it seems that this absolutely has to be here, and nowhere else.
 if(INSTALL_BUNDLE STREQUAL "full")

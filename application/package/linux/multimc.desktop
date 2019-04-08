@@ -1,11 +1,11 @@
 [Desktop Entry]
 Version=1.0
-Name=MultiMC
-GenericName=MultiMC
+Name=PolycraftLauncher
+GenericName=PolycraftLauncher
 Comment=Free, open source launcher and instance manager for Minecraft.
 Type=Application
 Terminal=false
-Exec=multimc
-Icon=multimc
+Exec=polycraftlauncher
+Icon=polycraftlauncher
 Categories=Game
 Keywords=game;minecraft;

@@ -4,7 +4,7 @@
 #include "minecraft/Mod.h"
 #include <QProcess>
 #include <QDir>
-#include "multimc_logic_export.h"
+#include "polycraftlauncher_logic_export.h"
 
 class ModsModel;
 class SimpleModList;
@@ -12,7 +12,7 @@ class WorldList;
 class LaunchStep;
 class ComponentList;
 
-class MULTIMC_LOGIC_EXPORT MinecraftInstance: public BaseInstance
+class POLYCRAFTLAUNCHER_LOGIC_EXPORT MinecraftInstance: public BaseInstance
 {
     Q_OBJECT
 public:

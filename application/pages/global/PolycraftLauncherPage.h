@@ -1,4 +1,4 @@
-/* Copyright 2013-2018 MultiMC Contributors
+/* Copyright 2013-2018 PolycraftLauncher Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@
 
 #include "java/JavaChecker.h"
 #include "pages/BasePage.h"
-#include <MultiMC.h>
+#include <PolycraftLauncher.h>
 #include "ColorCache.h"
 #include <translations/TranslationsModel.h>
 
@@ -29,32 +29,32 @@ class SettingsObject;
 
 namespace Ui
 {
-class MultiMCPage;
+class PolycraftLauncherPage;
 }
 
-class MultiMCPage : public QWidget, public BasePage
+class PolycraftLauncherPage : public QWidget, public BasePage
 {
     Q_OBJECT
 
 public:
-    explicit MultiMCPage(QWidget *parent = 0);
-    ~MultiMCPage();
+    explicit PolycraftLauncherPage(QWidget *parent = 0);
+    ~PolycraftLauncherPage();
 
     QString displayName() const override
     {
-        return "MultiMC";
+        return "PolycraftLauncher";
     }
     QIcon icon() const override
     {
-        return MMC->getThemedIcon("multimc");
+        return MMC->getThemedIcon("polycraftlauncher");
     }
     QString id() const override
     {
-        return "multimc-settings";
+        return "polycraftlauncher-settings";
     }
     QString helpPage() const override
     {
-        return "MultiMC-settings";
+        return "PolycraftLauncher-settings";
     }
     bool apply() override;
 
@@ -88,7 +88,7 @@ slots:
     void updateChannelSelectionChanged(int index);
 
 private:
-    Ui::MultiMCPage *ui;
+    Ui::PolycraftLauncherPage *ui;
 
     /*!
      * Stores the currently selected update channel.

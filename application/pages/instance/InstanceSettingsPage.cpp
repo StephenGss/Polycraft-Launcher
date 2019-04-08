@@ -7,7 +7,7 @@
 
 #include "dialogs/VersionSelectDialog.h"
 #include "JavaCommon.h"
-#include "MultiMC.h"
+#include "PolycraftLauncher.h"
 
 #include <java/JavaInstallList.h>
 #include <FileSystem.h>

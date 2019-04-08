@@ -1,4 +1,4 @@
-/* Copyright 2013-2018 MultiMC Contributors
+/* Copyright 2013-2018 Polycraft Launcher Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,13 +17,13 @@
 
 #include <QProcess>
 #include "MessageLevel.h"
-#include "multimc_logic_export.h"
+#include "polycraftlauncher_logic_export.h"
 
 /*
  * This is a basic process.
  * It has line-based logging support and hides some of the nasty bits.
  */
-class MULTIMC_LOGIC_EXPORT LoggedProcess : public QProcess
+class POLYCRAFTLAUNCHER_LOGIC_EXPORT LoggedProcess : public QProcess
 {
 Q_OBJECT
 public:

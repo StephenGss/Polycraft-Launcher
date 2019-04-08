@@ -1,10 +1,10 @@
 #pragma once
 
 #include "tasks/Task.h"
-#include "multimc_logic_export.h"
+#include "polycraftlauncher_logic_export.h"
 #include "settings/SettingsObject.h"
 
-class MULTIMC_LOGIC_EXPORT InstanceTask : public Task
+class POLYCRAFTLAUNCHER_LOGIC_EXPORT InstanceTask : public Task
 {
     Q_OBJECT
 public:

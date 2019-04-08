@@ -1,4 +1,4 @@
-/* Copyright 2013-2018 MultiMC Contributors
+/* Copyright 2013-2018 PolycraftLauncher Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@
 #include "tasks/Task.h"
 #include "minecraft/auth/YggdrasilTask.h"
 
-#include "MultiMC.h"
+#include "PolycraftLauncher.h"
 
 AccountListPage::AccountListPage(QWidget *parent)
     : QWidget(parent), ui(new Ui::AccountListPage)

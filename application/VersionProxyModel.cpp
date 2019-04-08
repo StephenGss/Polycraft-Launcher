@@ -1,5 +1,5 @@
 #include "VersionProxyModel.h"
-#include "MultiMC.h"
+#include "PolycraftLauncher.h"
 #include <QSortFilterProxyModel>
 #include <QPixmapCache>
 #include <Version.h>

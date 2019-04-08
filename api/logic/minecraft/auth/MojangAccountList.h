@@ -1,4 +1,4 @@
-/* Copyright 2013-2018 MultiMC Contributors
+/* Copyright 2013-2018 Polycraft Launcher Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@
 #include <QAbstractListModel>
 #include <QSharedPointer>
 
-#include "multimc_logic_export.h"
+#include "polycraftlauncher_logic_export.h"
 
 /*!
  * \brief List of available Mojang accounts.
@@ -33,7 +33,7 @@
  * all have a default implementation, but they can be overridden by subclasses to
  * change the behavior of the list.
  */
-class MULTIMC_LOGIC_EXPORT MojangAccountList : public QAbstractListModel
+class POLYCRAFTLAUNCHER_LOGIC_EXPORT MojangAccountList : public QAbstractListModel
 {
     Q_OBJECT
 public:

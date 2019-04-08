@@ -1,5 +1,5 @@
 #include "InstanceProxyModel.h"
-#include "MultiMC.h"
+#include "PolycraftLauncher.h"
 #include <BaseInstance.h>
 #include <icons/IconList.h>
 

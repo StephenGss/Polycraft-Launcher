@@ -1,4 +1,4 @@
-#include "MultiMC.h"
+#include "PolycraftLauncher.h"
 #include "MainWindow.h"
 #include "LaunchController.h"
 #include <InstanceList.h>
@@ -33,14 +33,14 @@ int main(int argc, char *argv[])
 #endif
 
     // initialize Qt
-    MultiMC app(argc, argv);
+    PolycraftLauncher app(argc, argv);
 
     switch (app.status())
     {
-    case MultiMC::StartingUp:
-    case MultiMC::Initialized:
+    case PolycraftLauncher::StartingUp:
+    case PolycraftLauncher::Initialized:
     {
-        Q_INIT_RESOURCE(multimc);
+        Q_INIT_RESOURCE(polycraftlauncher);
         Q_INIT_RESOURCE(backgrounds);
         Q_INIT_RESOURCE(assets);
 
@@ -53,9 +53,9 @@ int main(int argc, char *argv[])
         Q_INIT_RESOURCE(flat);
         return app.exec();
     }
-    case MultiMC::Failed:
+    case PolycraftLauncher::Failed:
         return 1;
-    case MultiMC::Succeeded:
+    case PolycraftLauncher::Succeeded:
         return 0;
     }
 }

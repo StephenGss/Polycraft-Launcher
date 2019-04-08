@@ -1,4 +1,4 @@
-/* Copyright 2013-2018 MultiMC Contributors
+/* Copyright 2013-2018 PolycraftLauncher Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 #include "AboutDialog.h"
 #include "ui_AboutDialog.h"
 #include <QIcon>
-#include "MultiMC.h"
+#include "PolycraftLauncher.h"
 #include "BuildConfig.h"
 
 #include <net/NetJob.h>
@@ -40,10 +40,10 @@ static QString getCreditsHtml(QStringList patrons)
         ""
         "<body style=' font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;'>"
         ""
-        "<h3>MultiMC Developers</h3>"
+        "<h3>PolycraftLauncher Developers</h3>"
         "<p>Andrew Okin &lt;<a href='mailto:forkk@forkk.net'>forkk@forkk.net</a>&gt;</p>"
         "<p>Petr Mrázek &lt;<a href='mailto:peterix@gmail.com'>peterix@gmail.com</a>&gt;</p>"
-        "<p>Sky Welch &lt;<a href='mailto:multimc@bunnies.io'>multimc@bunnies.io</a>&gt;</p>"
+        "<p>Sky Welch &lt;<a href='mailto:polycraftlauncher@bunnies.io'>polycraftlauncher@bunnies.io</a>&gt;</p>"
         "<p>Jan (02JanDal) &lt;<a href='mailto:02jandal@gmail.com'>02jandal@gmail.com</a>&gt;</p>"
         "<p>RoboSky &lt;<a href='https://twitter.com/RoboSky_'>@RoboSky_</a>&gt;</p>"
         ""
@@ -94,7 +94,7 @@ AboutDialog::AboutDialog(QWidget *parent) : QDialog(parent), ui(new Ui::AboutDia
     ui->urlLabel->setOpenExternalLinks(true);
 
     ui->icon->setPixmap(MMC->getThemedIcon("logo").pixmap(64));
-    ui->title->setText("MultiMC 5");
+    ui->title->setText("PolycraftLauncher 5");
 
     ui->versionLabel->setText(tr("Version") +": " + BuildConfig.printableVersionString());
     ui->platformLabel->setText(tr("Platform") +": " + BuildConfig.BUILD_PLATFORM);
@@ -124,7 +124,7 @@ AboutDialog::~AboutDialog()
 void AboutDialog::loadPatronList()
 {
     netJob.reset(new NetJob("Patreon Patron List"));
-    netJob->addNetAction(Net::Download::makeByteArray(QUrl("https://files.multimc.org/patrons.txt"), &dataSink));
+    netJob->addNetAction(Net::Download::makeByteArray(QUrl("https://files.polycraftlauncher.org/patrons.txt"), &dataSink));
     connect(netJob.get(), &NetJob::succeeded, this, &AboutDialog::patronListLoaded);
     netJob->start();
 }

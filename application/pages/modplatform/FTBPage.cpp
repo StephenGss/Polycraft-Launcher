@@ -3,7 +3,7 @@
 
 #include <QInputDialog>
 
-#include "MultiMC.h"
+#include "PolycraftLauncher.h"
 #include "dialogs/CustomMessageBox.h"
 #include "dialogs/NewInstanceDialog.h"
 #include "modplatform/ftb/FtbPackFetchTask.h"

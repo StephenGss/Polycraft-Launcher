@@ -1,4 +1,4 @@
-/* Copyright 2013-2018 MultiMC Contributors
+/* Copyright 2013-2018 PolycraftLauncher Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,7 +32,7 @@
 
 #include "net/Mode.h"
 
-#include "multimc_logic_export.h"
+#include "polycraftlauncher_logic_export.h"
 
 class QDir;
 class Task;
@@ -50,7 +50,7 @@ typedef std::shared_ptr<BaseInstance> InstancePtr;
  * To create a new instance type, create a new class inheriting from this class
  * and implement the pure virtual functions.
  */
-class MULTIMC_LOGIC_EXPORT BaseInstance : public QObject, public std::enable_shared_from_this<BaseInstance>
+class POLYCRAFTLAUNCHER_LOGIC_EXPORT BaseInstance : public QObject, public std::enable_shared_from_this<BaseInstance>
 {
     Q_OBJECT
 protected:

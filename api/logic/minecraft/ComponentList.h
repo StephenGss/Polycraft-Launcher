@@ -1,4 +1,4 @@
-/* Copyright 2013-2018 MultiMC Contributors
+/* Copyright 2013-2018 Polycraft Launcher Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,14 +27,14 @@
 #include "ProfileUtils.h"
 #include "BaseVersion.h"
 #include "MojangDownloadInfo.h"
-#include "multimc_logic_export.h"
+#include "polycraftlauncher_logic_export.h"
 #include "net/Mode.h"
 
 class MinecraftInstance;
 struct ComponentListData;
 class ComponentUpdateTask;
 
-class MULTIMC_LOGIC_EXPORT ComponentList : public QAbstractListModel
+class POLYCRAFTLAUNCHER_LOGIC_EXPORT ComponentList : public QAbstractListModel
 {
     Q_OBJECT
     friend ComponentUpdateTask;

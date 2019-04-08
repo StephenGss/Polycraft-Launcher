@@ -1,4 +1,4 @@
-/* Copyright 2013-2018 MultiMC Contributors
+/* Copyright 2013-2018 PolycraftLauncher Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@
 
 #include "BaseVersion.h"
 #include "tasks/Task.h"
-#include "multimc_logic_export.h"
+#include "polycraftlauncher_logic_export.h"
 #include "QObjectPtr.h"
 
 /*!
@@ -36,7 +36,7 @@
  * all have a default implementation, but they can be overridden by plugins to
  * change the behavior of the list.
  */
-class MULTIMC_LOGIC_EXPORT BaseVersionList : public QAbstractListModel
+class POLYCRAFTLAUNCHER_LOGIC_EXPORT BaseVersionList : public QAbstractListModel
 {
     Q_OBJECT
 public:

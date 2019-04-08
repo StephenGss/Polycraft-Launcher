@@ -3,9 +3,9 @@
 #include <QSet>
 #include <QString>
 #include <QFile>
-#include "multimc_logic_export.h"
+#include "polycraftlauncher_logic_export.h"
 
-class MULTIMC_LOGIC_EXPORT FtbPrivatePackManager
+class POLYCRAFTLAUNCHER_LOGIC_EXPORT FtbPrivatePackManager
 {
 public:
     ~FtbPrivatePackManager()

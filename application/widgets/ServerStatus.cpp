@@ -4,7 +4,7 @@
 #include "status/StatusChecker.h"
 #include <DesktopServices.h>
 
-#include "MultiMC.h"
+#include "PolycraftLauncher.h"
 
 #include <QHBoxLayout>
 #include <QFrame>

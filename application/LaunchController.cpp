@@ -1,7 +1,7 @@
 #include "LaunchController.h"
 #include "MainWindow.h"
 #include <minecraft/auth/MojangAccountList.h>
-#include "MultiMC.h"
+#include "PolycraftLauncher.h"
 #include "dialogs/CustomMessageBox.h"
 #include "dialogs/ProfileSelectDialog.h"
 #include "dialogs/ProgressDialog.h"
@@ -242,7 +242,7 @@ void LaunchController::launchInstance()
     connect(m_launcher.get(), &LaunchTask::requestProgress, this, &LaunchController::onProgressRequested);
 
 
-    m_launcher->prependStep(std::make_shared<TextPrint>(m_launcher.get(), "MultiMC version: " + BuildConfig.printableVersionString() + "\n\n", MessageLevel::MultiMC));
+    m_launcher->prependStep(std::make_shared<TextPrint>(m_launcher.get(), "PolycraftLauncher version: " + BuildConfig.printableVersionString() + "\n\n", MessageLevel::PolycraftLauncher));
     m_launcher->start();
 }
 

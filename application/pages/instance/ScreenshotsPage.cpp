@@ -14,7 +14,7 @@
 #include <QClipboard>
 #include <QKeyEvent>
 
-#include <MultiMC.h>
+#include <PolycraftLauncher.h>
 
 #include "dialogs/ProgressDialog.h"
 #include "dialogs/CustomMessageBox.h"
