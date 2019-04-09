@@ -6,21 +6,21 @@ Config BuildConfig;
 Config::Config()
 {
     // Version information
-    VERSION_MAJOR = @MultiMC_VERSION_MAJOR@;
-    VERSION_MINOR = @MultiMC_VERSION_MINOR@;
-    VERSION_HOTFIX = @MultiMC_VERSION_HOTFIX@;
-    VERSION_BUILD = @MultiMC_VERSION_BUILD@;
+    VERSION_MAJOR = @PolycraftLauncher_VERSION_MAJOR@;
+    VERSION_MINOR = @PolycraftLauncher_VERSION_MINOR@;
+    VERSION_HOTFIX = @PolycraftLauncher_VERSION_HOTFIX@;
+    VERSION_BUILD = @PolycraftLauncher_VERSION_BUILD@;
 
-    BUILD_PLATFORM = "@MultiMC_BUILD_PLATFORM@";
-    CHANLIST_URL = "@MultiMC_CHANLIST_URL@";
-    ANALYTICS_ID = "@MultiMC_ANALYTICS_ID@";
-    NOTIFICATION_URL = "@MultiMC_NOTIFICATION_URL@";
-    FULL_VERSION_STR = "@MultiMC_VERSION_MAJOR@.@MultiMC_VERSION_MINOR@.@MultiMC_VERSION_BUILD@";
+    BUILD_PLATFORM = "@PolycraftLauncher_BUILD_PLATFORM@";
+    CHANLIST_URL = "@PolycraftLauncher_CHANLIST_URL@";
+    ANALYTICS_ID = "@PolycraftLauncher_ANALYTICS_ID@";
+    NOTIFICATION_URL = "@PolycraftLauncher_NOTIFICATION_URL@";
+    FULL_VERSION_STR = "@PolycraftLauncher_VERSION_MAJOR@.@PolycraftLauncher_VERSION_MINOR@.@PolycraftLauncher_VERSION_BUILD@";
 	
 	PCW_VERSION_URL = "@PCW_VERSION_URL@";
 
-    GIT_COMMIT = "@MultiMC_GIT_COMMIT@";
-    GIT_REFSPEC = "@MultiMC_GIT_REFSPEC@";
+    GIT_COMMIT = "@PolycraftLauncher_GIT_COMMIT@";
+    GIT_REFSPEC = "@PolycraftLauncher_GIT_REFSPEC@";
     if(GIT_REFSPEC.startsWith("refs/heads/") && !CHANLIST_URL.isEmpty() && VERSION_BUILD >= 0)
     {
         VERSION_CHANNEL = GIT_REFSPEC;
@@ -32,9 +32,9 @@ Config::Config()
         VERSION_CHANNEL = QObject::tr("custom");
     }
 
-    VERSION_STR = "@MultiMC_VERSION_STRING@";
-    NEWS_RSS_URL = "@MultiMC_NEWS_RSS_URL@";
-    PASTE_EE_KEY = "@MultiMC_PASTE_EE_API_KEY@";
+    VERSION_STR = "@PolycraftLauncher_VERSION_STRING@";
+    NEWS_RSS_URL = "@PolycraftLauncher_NEWS_RSS_URL@";
+    PASTE_EE_KEY = "@PolycraftLauncher_PASTE_EE_API_KEY@";
 }
 
 QString Config::printableVersionString() const

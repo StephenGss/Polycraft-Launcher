@@ -1,4 +1,4 @@
-/* Copyright 2015-2018 MultiMC Contributors
+/* Copyright 2015-2018 Polycraft Launcher Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,13 +19,13 @@
 #include <QObject>
 #include "QObjectPtr.h"
 
-#include "multimc_logic_export.h"
+#include "polycraftlauncher_logic_export.h"
 #include "net/Mode.h"
 
 class Task;
 namespace Meta
 {
-class MULTIMC_LOGIC_EXPORT BaseEntity
+class POLYCRAFTLAUNCHER_LOGIC_EXPORT BaseEntity
 {
 public: /* types */
     using Ptr = std::shared_ptr<BaseEntity>;

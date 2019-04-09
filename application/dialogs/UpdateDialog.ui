@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MultiMC Update</string>
+   <string>PolycraftLauncher Update</string>
   </property>
   <property name="windowIcon">
    <iconset>
@@ -92,7 +92,7 @@ p, li { white-space: pre-wrap; }
   <tabstop>btnUpdateLater</tabstop>
  </tabstops>
  <resources>
-  <include location="../../resources/multimc/multimc.qrc"/>
+  <include location="../../resources/polycraftlauncher/polycraftlauncher.qrc"/>
  </resources>
  <connections/>
 </ui>

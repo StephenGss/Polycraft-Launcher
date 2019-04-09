@@ -3,13 +3,13 @@
 #include <QObject>
 #include <BaseInstance.h>
 
-#include "multimc_logic_export.h"
+#include "polycraftlauncher_logic_export.h"
 
 class BaseInstance;
 class SettingsObject;
 class QProcess;
 
-class MULTIMC_LOGIC_EXPORT BaseExternalTool : public QObject
+class POLYCRAFTLAUNCHER_LOGIC_EXPORT BaseExternalTool : public QObject
 {
     Q_OBJECT
 public:
@@ -21,7 +21,7 @@ protected:
     SettingsObjectPtr globalSettings;
 };
 
-class MULTIMC_LOGIC_EXPORT BaseDetachedTool : public BaseExternalTool
+class POLYCRAFTLAUNCHER_LOGIC_EXPORT BaseDetachedTool : public BaseExternalTool
 {
     Q_OBJECT
 public:
@@ -35,7 +35,7 @@ protected:
     virtual void runImpl() = 0;
 };
 
-class MULTIMC_LOGIC_EXPORT BaseExternalToolFactory
+class POLYCRAFTLAUNCHER_LOGIC_EXPORT BaseExternalToolFactory
 {
 public:
     virtual ~BaseExternalToolFactory();
@@ -53,7 +53,7 @@ protected:
     SettingsObjectPtr globalSettings;
 };
 
-class MULTIMC_LOGIC_EXPORT BaseDetachedToolFactory : public BaseExternalToolFactory
+class POLYCRAFTLAUNCHER_LOGIC_EXPORT BaseDetachedToolFactory : public BaseExternalToolFactory
 {
 public:
     virtual BaseDetachedTool *createDetachedTool(InstancePtr instance, QObject *parent = 0);

@@ -1,4 +1,4 @@
-/* Copyright 2013-2018 MultiMC Contributors
+/* Copyright 2013-2018 Polycraft Launcher Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,11 +26,11 @@
 #include "Env.h" // there is a global icon list inside Env.
 #include <icons/IIconList.h>
 
-#include "multimc_gui_export.h"
+#include "polycraftlauncher_gui_export.h"
 
 class QFileSystemWatcher;
 
-class MULTIMC_GUI_EXPORT IconList : public QAbstractListModel, public IIconList
+class POLYCRAFTLAUNCHER_GUI_EXPORT IconList : public QAbstractListModel, public IIconList
 {
     Q_OBJECT
 public:

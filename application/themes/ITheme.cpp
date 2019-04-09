@@ -2,7 +2,7 @@
 #include "rainbow.h"
 #include <QStyleFactory>
 #include <QDir>
-#include "MultiMC.h"
+#include "PolycraftLauncher.h"
 
 void ITheme::apply(bool)
 {

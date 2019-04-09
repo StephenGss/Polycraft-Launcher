@@ -1,7 +1,7 @@
 #pragma once
 
 #include "InstanceTask.h"
-#include "multimc_logic_export.h"
+#include "polycraftlauncher_logic_export.h"
 #include "net/NetJob.h"
 #include <QUrl>
 #include <QFuture>
@@ -15,7 +15,7 @@ namespace Flame
     class FileResolvingTask;
 }
 
-class MULTIMC_LOGIC_EXPORT InstanceImportTask : public InstanceTask
+class POLYCRAFTLAUNCHER_LOGIC_EXPORT InstanceImportTask : public InstanceTask
 {
     Q_OBJECT
 public:
@@ -27,7 +27,7 @@ protected:
 
 private:
     void processZipPack();
-    void processMultiMC();
+    void processPolycraftLauncher();
     void processFlame();
 
 private slots:
@@ -48,7 +48,7 @@ private: /* data */
     QFutureWatcher<QStringList> m_extractFutureWatcher;
     enum class ModpackType{
         Unknown,
-        MultiMC,
+        PolycraftLauncher,
         Flame
     } m_modpackType = ModpackType::Unknown;
 };

@@ -1,4 +1,4 @@
-/* Copyright 2013-2018 MultiMC Contributors
+/* Copyright 2013-2018 PolycraftLauncher Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-#include "MultiMC.h"
+#include "PolycraftLauncher.h"
 #include "NewComponentDialog.h"
 #include "ui_NewComponentDialog.h"
 
@@ -68,7 +68,7 @@ void NewComponentDialog::updateDialogState()
     }
     else
     {
-        QString suggestedUid = "org.multimc.custom." + protoUid;
+        QString suggestedUid = "org.polycraftlauncher.custom." + protoUid;
         ui->uidTextBox->setPlaceholderText(suggestedUid);
     }
     bool allowOK = !name().isEmpty() && !uid().isEmpty() && !uidBlacklist.contains(uid());

@@ -1,4 +1,4 @@
-/* Copyright 2013-2018 MultiMC Contributors
+/* Copyright 2013-2018 Polycraft Launcher Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -94,7 +94,7 @@ void Download::start()
             return;
     }
 
-    request.setHeader(QNetworkRequest::UserAgentHeader, "MultiMC/5.0");
+    request.setHeader(QNetworkRequest::UserAgentHeader, "PolycraftLauncher/5.0");
 
     QNetworkReply *rep =  ENV.qnam().get(request);
 

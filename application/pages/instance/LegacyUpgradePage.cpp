@@ -4,7 +4,7 @@
 #include "InstanceList.h"
 #include "minecraft/legacy/LegacyInstance.h"
 #include "minecraft/legacy/LegacyUpgradeTask.h"
-#include "MultiMC.h"
+#include "PolycraftLauncher.h"
 #include "dialogs/CustomMessageBox.h"
 #include "dialogs/ProgressDialog.h"
 

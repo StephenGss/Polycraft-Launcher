@@ -1,4 +1,4 @@
-/* Copyright 2013-2018 MultiMC Contributors
+/* Copyright 2013-2018 Polycraft Launcher Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,13 +19,13 @@
 #include <LoggedProcess.h>
 #include <java/JavaChecker.h>
 
-#include "multimc_logic_export.h"
+#include "polycraftlauncher_logic_export.h"
 
 /*
  * FIXME: maybe do not export
  */
 
-class MULTIMC_LOGIC_EXPORT TextPrint: public LaunchStep
+class POLYCRAFTLAUNCHER_LOGIC_EXPORT TextPrint: public LaunchStep
 {
     Q_OBJECT
 public:

@@ -1,4 +1,4 @@
-/* Copyright 2013-2018 MultiMC Contributors
+/* Copyright 2013-2018 Polycraft Launcher Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -100,7 +100,7 @@ void PrintInstanceInfo::executeTask()
     ::runGlxinfo(log);
 #endif
 
-    logLines(log, MessageLevel::MultiMC);
-    logLines(instance->verboseDescription(m_session), MessageLevel::MultiMC);
+    logLines(log, MessageLevel::PolycraftLauncher);
+    logLines(instance->verboseDescription(m_session), MessageLevel::PolycraftLauncher);
     emitSucceeded();
 }

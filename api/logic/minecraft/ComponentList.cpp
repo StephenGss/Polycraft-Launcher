@@ -1,4 +1,4 @@
-/* Copyright 2013-2018 MultiMC Contributors
+/* Copyright 2013-2018 Polycraft Launcher Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -431,7 +431,7 @@ static void upgradeDeprecatedFiles(QString root, QString instanceName)
  */
 bool ComponentList::migratePreComponentConfig()
 {
-    // upgrade the very old files from the beginnings of MultiMC 5
+    // upgrade the very old files from the beginnings of PolycraftLauncher
     upgradeDeprecatedFiles(d->m_instance->instanceRoot(), d->m_instance->name());
 
     QList<ComponentPtr> components;
@@ -1032,7 +1032,7 @@ bool ComponentList::installJarMods_internal(QStringList filepaths)
         auto uuid = QUuid::createUuid();
         QString id = uuid.toString().remove('{').remove('}');
         QString target_filename = id + ".jar";
-        QString target_id = "org.multimc.jarmod." + id;
+        QString target_id = "org.polycraftlauncher.jarmod." + id;
         QString target_name = sourceInfo.completeBaseName() + " (jar mod)";
         QString finalPath = FS::PathCombine(d->m_instance->jarModsDir(), target_filename);
 
@@ -1049,7 +1049,7 @@ bool ComponentList::installJarMods_internal(QStringList filepaths)
 
         auto f = std::make_shared<VersionFile>();
         auto jarMod = std::make_shared<Library>();
-        jarMod->setRawName(GradleSpecifier("org.multimc.jarmods:" + id + ":1"));
+        jarMod->setRawName(GradleSpecifier("org.polycraftlauncher.jarmods:" + id + ":1"));
         jarMod->setFilename(target_filename);
         jarMod->setDisplayName(sourceInfo.completeBaseName());
         jarMod->setHint("local");
@@ -1089,7 +1089,7 @@ bool ComponentList::installCustomJar_internal(QString filepath)
         return false;
     }
 
-    auto specifier = GradleSpecifier("org.multimc:customjar:1");
+    auto specifier = GradleSpecifier("org.polycraftlauncher:customjar:1");
     QFileInfo sourceInfo(filepath);
     QString target_filename = specifier.getFileName();
     QString target_id = specifier.artifactId();

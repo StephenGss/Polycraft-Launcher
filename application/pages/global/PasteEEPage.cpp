@@ -1,4 +1,4 @@
-/* Copyright 2013-2018 MultiMC Contributors
+/* Copyright 2013-2018 PolycraftLauncher Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@
 
 #include "settings/SettingsObject.h"
 #include "tools/BaseProfiler.h"
-#include "MultiMC.h"
+#include "PolycraftLauncher.h"
 
 PasteEEPage::PasteEEPage(QWidget *parent) :
     QWidget(parent),
@@ -44,9 +44,9 @@ void PasteEEPage::loadSettings()
 {
     auto s = MMC->settings();
     QString keyToUse = s->get("PasteEEAPIKey").toString();
-    if(keyToUse == "multimc")
+    if(keyToUse == "polycraftlauncher")
     {
-        ui->multimcButton->setChecked(true);
+        ui->polycraftlauncherButton->setChecked(true);
     }
     else
     {
@@ -64,7 +64,7 @@ void PasteEEPage::applySettings()
         pasteKeyToUse = ui->customAPIkeyEdit->text();
     else
     {
-        pasteKeyToUse =  "multimc";
+        pasteKeyToUse =  "polycraftlauncher";
     }
     s->set("PasteEEAPIKey", pasteKeyToUse);
 }

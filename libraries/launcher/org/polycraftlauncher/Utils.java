@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2018 MultiMC Contributors
+ * Copyright 2012-2018 Polycraft Launcher Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.multimc;
+package org.polycraftlauncher;
 
 import java.io.*;
 import java.io.File;
@@ -94,7 +94,7 @@ public class Utils
     }
 
     /**
-     * Log to the MultiMC console
+     * Log to the PolycraftLauncher console
      *
      * @param message A String containing the message
      * @param level   A String containing the level name. See MinecraftLauncher::getLevel()
@@ -108,7 +108,7 @@ public class Utils
 
     public static void log(String message)
     {
-        log(message, "MultiMC");
+        log(message, "PolycraftLauncher");
     }
 
     public static void log()

@@ -1,9 +1,9 @@
-#include "MultiMC.h"
+#include "PolycraftLauncher.h"
 #include "BuildConfig.h"
 #include "MainWindow.h"
 #include "InstanceWindow.h"
 #include "pages/BasePageProvider.h"
-#include "pages/global/MultiMCPage.h"
+#include "pages/global/PolycraftLauncherPage.h"
 #include "pages/global/MinecraftPage.h"
 #include "pages/global/JavaPage.h"
 #include "pages/global/ProxyPage.h"
@@ -81,7 +81,7 @@ static const QLatin1String liveCheckFile("live.check");
 
 using namespace Commandline;
 
-#define MACOS_HINT "If you are on macOS Sierra, you might have to move MultiMC.app to your /Applications or ~/Applications folder. "\
+#define MACOS_HINT "If you are on macOS Sierra, you might have to move PolycraftLauncher.app to your /Applications or ~/Applications folder. "\
     "This usually fixes the problem and you can move the application elsewhere afterwards.\n"\
     "\n"
 
@@ -105,7 +105,7 @@ static void appDebugOutput(QtMsgType type, const QMessageLogContext &context, co
     fflush(stderr);
 }
 
-MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
+PolycraftLauncher::PolycraftLauncher(int &argc, char **argv) : QApplication(argc, argv)
 {
 #if defined Q_OS_WIN32
     // attach the parent console
@@ -131,10 +131,10 @@ MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
         consoleAttached = true;
     }
 #endif
-    setOrganizationName("MultiMC");
-    setOrganizationDomain("multimc.org");
-    setApplicationName("MultiMC5");
-    setApplicationDisplayName("MultiMC 5");
+    setOrganizationName("PolycraftLauncher");
+    setOrganizationDomain("polycraftlauncher.org");
+    setApplicationName("PolycraftLauncher5");
+    setApplicationDisplayName("PolycraftLauncher 5");
     setApplicationVersion(BuildConfig.printableVersionString());
 
     startTime = QDateTime::currentDateTime();
@@ -158,7 +158,7 @@ MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
         // --dir
         parser.addOption("dir");
         parser.addShortOpt("dir", 'd');
-        parser.addDocumentation("dir", "use the supplied folder as MultiMC root instead of "
+        parser.addDocumentation("dir", "use the supplied folder as PolycraftLauncher root instead of "
                                        "the binary location (use '.' for current)");
         // --launch
         parser.addOption("launch");
@@ -166,7 +166,7 @@ MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
         parser.addDocumentation("launch", "launch the specified instance (by instance ID)");
         // --alive
         parser.addSwitch("alive");
-        parser.addDocumentation("alive", "write a small '" + liveCheckFile + "' file after MultiMC starts");
+        parser.addDocumentation("alive", "write a small '" + liveCheckFile + "' file after PolycraftLauncher starts");
 
         // parse the arguments
         try
@@ -176,9 +176,9 @@ MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
         catch (const ParsingError &e)
         {
             std::cerr << "CommandLineError: " << e.what() << std::endl;
-            std::cerr << "Try '%1 -h' to get help on MultiMC's command line parameters."
+            std::cerr << "Try '%1 -h' to get help on PolycraftLauncher's command line parameters."
                       << std::endl;
-            m_status = MultiMC::Failed;
+            m_status = PolycraftLauncher::Failed;
             return;
         }
 
@@ -186,7 +186,7 @@ MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
         if (args["help"].toBool())
         {
             std::cout << qPrintable(parser.compileHelp(arguments()[0]));
-            m_status = MultiMC::Succeeded;
+            m_status = PolycraftLauncher::Succeeded;
             return;
         }
 
@@ -195,7 +195,7 @@ MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
         {
             std::cout << "Version " << BuildConfig.printableVersionString().toStdString() << std::endl;
             std::cout << "Git " << BuildConfig.GIT_COMMIT.toStdString() << std::endl;
-            m_status = MultiMC::Succeeded;
+            m_status = PolycraftLauncher::Succeeded;
             return;
         }
     }
@@ -210,18 +210,18 @@ MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
     QString dirParam = args["dir"].toString();
     if (!dirParam.isEmpty())
     {
-        // the dir param. it makes multimc data path point to whatever the user specified
+        // the dir param. it makes polycraftlauncher data path point to whatever the user specified
         // on command line
         adjustedBy += "Command line " + dirParam;
         dataPath = dirParam;
     }
     else
     {
-#ifdef MULTIMC_LINUX_DATADIR
+#ifdef POLYCRAFTLAUNCHER_LINUX_DATADIR
         QString xdgDataHome = QFile::decodeName(qgetenv("XDG_DATA_HOME"));
         if (xdgDataHome.isEmpty())
             xdgDataHome = QDir::homePath() + QLatin1String("/.local/share");
-        dataPath = xdgDataHome + "/multimc";
+        dataPath = xdgDataHome + "/polycraftlauncher";
         adjustedBy += "XDG standard " + dataPath;
 #else
         dataPath = applicationDirPath();
@@ -232,36 +232,36 @@ MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
     if (!FS::ensureFolderPathExists(dataPath))
     {
         showFatalErrorMessage(
-            "MultiMC data folder could not be created.",
-            "MultiMC data folder could not be created.\n"
+            "PolycraftLauncher data folder could not be created.",
+            "PolycraftLauncher data folder could not be created.\n"
             "\n"
 #if defined(Q_OS_MAC)
             MACOS_HINT
 #endif
-            "Make sure you have the right permissions to the MultiMC data folder and any folder needed to access it.\n"
+            "Make sure you have the right permissions to the PolycraftLauncher data folder and any folder needed to access it.\n"
             "\n"
-            "MultiMC cannot continue until you fix this problem."
+            "PolycraftLauncher cannot continue until you fix this problem."
         );
         return;
     }
     if (!QDir::setCurrent(dataPath))
     {
         showFatalErrorMessage(
-            "MultiMC data folder could not be opened.",
-            "MultiMC data folder could not be opened.\n"
+            "PolycraftLauncher data folder could not be opened.",
+            "PolycraftLauncher data folder could not be opened.\n"
             "\n"
 #if defined(Q_OS_MAC)
             MACOS_HINT
 #endif
-            "Make sure you have the right permissions to the MultiMC data folder.\n"
+            "Make sure you have the right permissions to the PolycraftLauncher data folder.\n"
             "\n"
-            "MultiMC cannot continue until you fix this problem."
+            "PolycraftLauncher cannot continue until you fix this problem."
         );
         return;
     }
 
     /*
-     * Establish the mechanism for communication with an already running MultiMC that uses the same data path.
+     * Establish the mechanism for communication with an already running PolycraftLauncher that uses the same data path.
      * If there is one, tell it what the user actually wanted to do and exit.
      * We want to initialize this before logging to avoid messing with the log of a potential already running copy.
      */
@@ -269,7 +269,7 @@ MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
     {
         // FIXME: you can run the same binaries with multiple data dirs and they won't clash. This could cause issues for updates.
         m_peerInstance = new LocalPeer(this, appID);
-        connect(m_peerInstance, &LocalPeer::messageReceived, this, &MultiMC::messageReceived);
+        connect(m_peerInstance, &LocalPeer::messageReceived, this, &PolycraftLauncher::messageReceived);
         if(m_peerInstance->isClient())
         {
             if(m_instanceIdToLaunch.isEmpty())
@@ -280,14 +280,14 @@ MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
             {
                 m_peerInstance->sendMessage(m_instanceIdToLaunch, 2000);
             }
-            m_status = MultiMC::Succeeded;
+            m_status = PolycraftLauncher::Succeeded;
             return;
         }
     }
 
     // init the logger
     {
-        static const QString logBase = "MultiMC-%0.log";
+        static const QString logBase = "PolycraftLauncher-%0.log";
         auto moveFile = [](const QString &oldName, const QString &newName)
         {
             QFile::remove(newName);
@@ -304,15 +304,15 @@ MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
         if(!logFile->open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Truncate))
         {
             showFatalErrorMessage(
-                "MultiMC data folder is not writable!",
-                "MultiMC couldn't create a log file - the MultiMC data folder is not writable.\n"
+                "PolycraftLauncher data folder is not writable!",
+                "PolycraftLauncher couldn't create a log file - the PolycraftLauncher data folder is not writable.\n"
                 "\n"
     #if defined(Q_OS_MAC)
                 MACOS_HINT
     #endif
-                "Make sure you have write permissions to the MultiMC data folder.\n"
+                "Make sure you have write permissions to the PolycraftLauncher data folder.\n"
                 "\n"
-                "MultiMC cannot continue until you fix this problem."
+                "PolycraftLauncher cannot continue until you fix this problem."
             );
             return;
         }
@@ -335,11 +335,11 @@ MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
         FS::updateTimestamp(m_rootPath);
 #endif
 
-#ifdef MULTIMC_JARS_LOCATION
-        ENV.setJarsPath( TOSTRING(MULTIMC_JARS_LOCATION) );
+#ifdef POLYCRAFTLAUNCHER_JARS_LOCATION
+        ENV.setJarsPath( TOSTRING(POLYCRAFTLAUNCHER_JARS_LOCATION) );
 #endif
 
-        qDebug() << "MultiMC 5, (c) 2013-2018 MultiMC Contributors";
+        qDebug() << "PolycraftLauncher 5, (c) 2013-2018 PolycraftLauncher Contributors";
         qDebug() << "Version                    : " << BuildConfig.printableVersionString();
         qDebug() << "Git commit                 : " << BuildConfig.GIT_COMMIT;
         qDebug() << "Git refspec                : " << BuildConfig.GIT_REFSPEC;
@@ -385,13 +385,13 @@ MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
 
     // Initialize application settings
     {
-        m_settings.reset(new INISettingsObject("multimc.cfg", this));
+        m_settings.reset(new INISettingsObject("polycraftlauncher.cfg", this));
         // Updates
         m_settings->registerSetting("UpdateChannel", BuildConfig.VERSION_CHANNEL);
         m_settings->registerSetting("AutoUpdate", true);
 
         // Theming
-        m_settings->registerSetting("IconTheme", QString("multimc"));
+        m_settings->registerSetting("IconTheme", QString("polycraftlauncher"));
         m_settings->registerSetting("ApplicationTheme", QString("system"));
 
         // Notifications
@@ -501,7 +501,7 @@ MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
         m_settings->registerSetting("UpdateDialogGeometry", "");
 
         // paste.ee API key
-        m_settings->registerSetting("PasteEEAPIKey", "multimc");
+        m_settings->registerSetting("PasteEEAPIKey", "polycraftlauncher");
 
         if(!BuildConfig.ANALYTICS_ID.isEmpty())
         {
@@ -514,7 +514,7 @@ MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
         // Init page provider
         {
             m_globalSettingsProvider = std::make_shared<GenericPageProvider>(tr("Settings"));
-            m_globalSettingsProvider->addPage<MultiMCPage>();
+            m_globalSettingsProvider->addPage<PolycraftLauncherPage>();
             m_globalSettingsProvider->addPage<MinecraftPage>();
             m_globalSettingsProvider->addPage<JavaPage>();
             m_globalSettingsProvider->addPage<CustomCommandsPage>();
@@ -548,9 +548,9 @@ MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
         auto setting = MMC->settings()->getSetting("IconsDir");
         QStringList instFolders =
         {
-            ":/icons/multimc/32x32/instances/",
-            ":/icons/multimc/50x50/instances/",
-            ":/icons/multimc/128x128/instances/"
+            ":/icons/polycraftlauncher/32x32/instances/",
+            ":/icons/polycraftlauncher/50x50/instances/",
+            ":/icons/polycraftlauncher/128x128/instances/"
         };
         m_icons.reset(new IconList(instFolders, setting->get().toString()));
         connect(setting.get(), &Setting::SettingChanged,[&](const Setting &, QVariant value)
@@ -645,7 +645,7 @@ MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
         m_mcedit.reset(new MCEditTool(m_settings));
     }
 
-    connect(this, &MultiMC::aboutToQuit, [this](){
+    connect(this, &PolycraftLauncher::aboutToQuit, [this](){
         if(m_instances)
         {
             // save any remaining instance state
@@ -675,7 +675,7 @@ MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
         }
 
         auto analyticsSetting = m_settings->getSetting("Analytics");
-        connect(analyticsSetting.get(), &Setting::SettingChanged, this, &MultiMC::analyticsSettingChanged);
+        connect(analyticsSetting.get(), &Setting::SettingChanged, this, &PolycraftLauncher::analyticsSettingChanged);
         QString clientID = m_settings->get("AnalyticsClientID").toString();
         if(clientID.isEmpty())
         {
@@ -711,7 +711,7 @@ MultiMC::MultiMC(int &argc, char **argv) : QApplication(argc, argv)
     performMainStartupAction();
 }
 
-bool MultiMC::createSetupWizard()
+bool PolycraftLauncher::createSetupWizard()
 {
     bool javaRequired = [&]()
     {
@@ -769,22 +769,22 @@ bool MultiMC::createSetupWizard()
         {
             m_setupWizard->addPage(new AnalyticsWizardPage(m_setupWizard));
         }
-        connect(m_setupWizard, &QDialog::finished, this, &MultiMC::setupWizardFinished);
+        connect(m_setupWizard, &QDialog::finished, this, &PolycraftLauncher::setupWizardFinished);
         m_setupWizard->show();
         return true;
     }
     return false;
 }
 
-void MultiMC::setupWizardFinished(int status)
+void PolycraftLauncher::setupWizardFinished(int status)
 {
     qDebug() << "Wizard result =" << status;
     performMainStartupAction();
 }
 
-void MultiMC::performMainStartupAction()
+void PolycraftLauncher::performMainStartupAction()
 {
-    m_status = MultiMC::Initialized;
+    m_status = PolycraftLauncher::Initialized;
     if(!m_instanceIdToLaunch.isEmpty())
     {
         auto inst = instances()->getInstanceById(m_instanceIdToLaunch);
@@ -803,14 +803,14 @@ void MultiMC::performMainStartupAction()
     }
 }
 
-void MultiMC::showFatalErrorMessage(const QString& title, const QString& content)
+void PolycraftLauncher::showFatalErrorMessage(const QString& title, const QString& content)
 {
-    m_status = MultiMC::Failed;
+    m_status = PolycraftLauncher::Failed;
     auto dialog = CustomMessageBox::selectable(nullptr, title, content, QMessageBox::Critical);
     dialog->exec();
 }
 
-MultiMC::~MultiMC()
+PolycraftLauncher::~PolycraftLauncher()
 {
     // kill the other globals.
     Env::dispose();
@@ -830,7 +830,7 @@ MultiMC::~MultiMC()
 #endif
 }
 
-void MultiMC::messageReceived(const QString& message)
+void PolycraftLauncher::messageReceived(const QString& message)
 {
     if(status() != Initialized)
     {
@@ -851,7 +851,7 @@ void MultiMC::messageReceived(const QString& message)
     }
 }
 
-void MultiMC::analyticsSettingChanged(const Setting&, QVariant value)
+void PolycraftLauncher::analyticsSettingChanged(const Setting&, QVariant value)
 {
     if(!m_analytics)
         return;
@@ -867,12 +867,12 @@ void MultiMC::analyticsSettingChanged(const Setting&, QVariant value)
     m_analytics->enable(enabled);
 }
 
-std::shared_ptr<TranslationsModel> MultiMC::translations()
+std::shared_ptr<TranslationsModel> PolycraftLauncher::translations()
 {
     return m_translations;
 }
 
-std::shared_ptr<JavaInstallList> MultiMC::javalist()
+std::shared_ptr<JavaInstallList> PolycraftLauncher::javalist()
 {
     if (!m_javalist)
     {
@@ -881,7 +881,7 @@ std::shared_ptr<JavaInstallList> MultiMC::javalist()
     return m_javalist;
 }
 
-std::vector<ITheme *> MultiMC::getValidApplicationThemes()
+std::vector<ITheme *> PolycraftLauncher::getValidApplicationThemes()
 {
     std::vector<ITheme *> ret;
     auto iter = m_themes.cbegin();
@@ -893,7 +893,7 @@ std::vector<ITheme *> MultiMC::getValidApplicationThemes()
     return ret;
 }
 
-void MultiMC::setApplicationTheme(const QString& name, bool initial)
+void PolycraftLauncher::setApplicationTheme(const QString& name, bool initial)
 {
     auto systemPalette = qApp->palette();
     auto themeIter = m_themes.find(name);
@@ -908,17 +908,17 @@ void MultiMC::setApplicationTheme(const QString& name, bool initial)
     }
 }
 
-void MultiMC::setIconTheme(const QString& name)
+void PolycraftLauncher::setIconTheme(const QString& name)
 {
     XdgIcon::setThemeName(name);
 }
 
-QIcon MultiMC::getThemedIcon(const QString& name)
+QIcon PolycraftLauncher::getThemedIcon(const QString& name)
 {
     return XdgIcon::fromTheme(name);
 }
 
-bool MultiMC::openJsonEditor(const QString &filename)
+bool PolycraftLauncher::openJsonEditor(const QString &filename)
 {
     const QString file = QDir::current().absoluteFilePath(filename);
     if (m_settings->get("JsonEditor").toString().isEmpty())
@@ -932,7 +932,7 @@ bool MultiMC::openJsonEditor(const QString &filename)
     }
 }
 
-bool MultiMC::launch(InstancePtr instance, bool online, BaseProfilerFactory *profiler)
+bool PolycraftLauncher::launch(InstancePtr instance, bool online, BaseProfilerFactory *profiler)
 {
     if(m_updateRunning)
     {
@@ -962,8 +962,8 @@ bool MultiMC::launch(InstancePtr instance, bool online, BaseProfilerFactory *pro
         {
             controller->setParentWidget(m_mainWindow);
         }
-        connect(controller.get(), &LaunchController::succeeded, this, &MultiMC::controllerSucceeded);
-        connect(controller.get(), &LaunchController::failed, this, &MultiMC::controllerFailed);
+        connect(controller.get(), &LaunchController::succeeded, this, &PolycraftLauncher::controllerSucceeded);
+        connect(controller.get(), &LaunchController::failed, this, &PolycraftLauncher::controllerFailed);
         addRunningInstance();
         controller->start();
         return true;
@@ -981,7 +981,7 @@ bool MultiMC::launch(InstancePtr instance, bool online, BaseProfilerFactory *pro
     return false;
 }
 
-bool MultiMC::kill(InstancePtr instance)
+bool PolycraftLauncher::kill(InstancePtr instance)
 {
     if (!instance->isRunning())
     {
@@ -998,7 +998,7 @@ bool MultiMC::kill(InstancePtr instance)
     return true;
 }
 
-void MultiMC::addRunningInstance()
+void PolycraftLauncher::addRunningInstance()
 {
     m_runningInstances ++;
     if(m_runningInstances == 1)
@@ -1007,7 +1007,7 @@ void MultiMC::addRunningInstance()
     }
 }
 
-void MultiMC::subRunningInstance()
+void PolycraftLauncher::subRunningInstance()
 {
     if(m_runningInstances == 0)
     {
@@ -1021,22 +1021,22 @@ void MultiMC::subRunningInstance()
     }
 }
 
-bool MultiMC::shouldExitNow() const
+bool PolycraftLauncher::shouldExitNow() const
 {
     return m_runningInstances == 0 && m_openWindows == 0;
 }
 
-bool MultiMC::updatesAreAllowed()
+bool PolycraftLauncher::updatesAreAllowed()
 {
     return m_runningInstances == 0;
 }
 
-void MultiMC::updateIsRunning(bool running)
+void PolycraftLauncher::updateIsRunning(bool running)
 {
     m_updateRunning = running;
 }
 
-void MultiMC::updatePolycraft(QList<PolycraftUpdateDialog::version> versions){
+void PolycraftLauncher::updatePolycraft(QList<PolycraftUpdateDialog::version> versions){
     //delete current instances
     for(int instCount = this->instances()->count()-1; instCount >= 0; instCount--){
         this->instances()->deleteInstance(this->instances()->at(instCount)->id());
@@ -1056,7 +1056,7 @@ void MultiMC::updatePolycraft(QList<PolycraftUpdateDialog::version> versions){
 
 }
 
-void MultiMC::controllerSucceeded()
+void PolycraftLauncher::controllerSucceeded()
 {
     auto controller = qobject_cast<LaunchController *>(QObject::sender());
     if(!controller)
@@ -1083,7 +1083,7 @@ void MultiMC::controllerSucceeded()
     }
 }
 
-void MultiMC::controllerFailed(const QString& error)
+void PolycraftLauncher::controllerFailed(const QString& error)
 {
     Q_UNUSED(error);
     auto controller = qobject_cast<LaunchController *>(QObject::sender());
@@ -1104,7 +1104,7 @@ void MultiMC::controllerFailed(const QString& error)
     }
 }
 
-MainWindow* MultiMC::showMainWindow(bool minimized)
+MainWindow* PolycraftLauncher::showMainWindow(bool minimized)
 {
     if(m_mainWindow)
     {
@@ -1129,8 +1129,8 @@ MainWindow* MultiMC::showMainWindow(bool minimized)
         }
 
         m_mainWindow->checkInstancePathForProblems();
-        connect(this, &MultiMC::updateAllowedChanged, m_mainWindow, &MainWindow::updatesAllowedChanged);
-        connect(m_mainWindow, &MainWindow::isClosing, this, &MultiMC::on_windowClose);
+        connect(this, &PolycraftLauncher::updateAllowedChanged, m_mainWindow, &MainWindow::updatesAllowedChanged);
+        connect(m_mainWindow, &MainWindow::isClosing, this, &PolycraftLauncher::on_windowClose);
         m_openWindows++;
     }
     // FIXME: move this somewhere else...
@@ -1190,7 +1190,7 @@ MainWindow* MultiMC::showMainWindow(bool minimized)
     return m_mainWindow;
 }
 
-InstanceWindow *MultiMC::showInstanceWindow(InstancePtr instance, QString page)
+InstanceWindow *PolycraftLauncher::showInstanceWindow(InstancePtr instance, QString page)
 {
     if(!instance)
         return nullptr;
@@ -1207,7 +1207,7 @@ InstanceWindow *MultiMC::showInstanceWindow(InstancePtr instance, QString page)
     {
         window = new InstanceWindow(instance);
         m_openWindows ++;
-        connect(window, &InstanceWindow::isClosing, this, &MultiMC::on_windowClose);
+        connect(window, &InstanceWindow::isClosing, this, &PolycraftLauncher::on_windowClose);
     }
     if(!page.isEmpty())
     {
@@ -1220,7 +1220,7 @@ InstanceWindow *MultiMC::showInstanceWindow(InstancePtr instance, QString page)
     return window;
 }
 
-void MultiMC::on_windowClose()
+void PolycraftLauncher::on_windowClose()
 {
     m_openWindows--;
     auto instWindow = qobject_cast<InstanceWindow *>(QObject::sender());

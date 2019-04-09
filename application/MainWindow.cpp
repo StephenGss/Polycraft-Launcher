@@ -1,4 +1,4 @@
-/* Copyright 2013-2018 MultiMC Contributors
+/* Copyright 2013-2018 PolycraftLauncher Contributors
  *
  * Authors: Andrew Okin
  *          Peterix
@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-#include "MultiMC.h"
+#include "PolycraftLauncher.h"
 #include "BuildConfig.h"
 
 #include "MainWindow.h"
@@ -344,7 +344,7 @@ public:
         actionReportBug->setObjectName(QStringLiteral("actionReportBug"));
         actionReportBug->setIcon(MMC->getThemedIcon("bug"));
         actionReportBug.setTextId(QT_TRANSLATE_NOOP("MainWindow", "Report a Bug"));
-        actionReportBug.setTooltipId(QT_TRANSLATE_NOOP("MainWindow", "Open the bug tracker to report a bug with MultiMC."));
+        actionReportBug.setTooltipId(QT_TRANSLATE_NOOP("MainWindow", "Open the bug tracker to report a bug with PolycraftLauncher."));
         all_actions.append(&actionReportBug);
         helpMenu->addAction(actionReportBug);
 
@@ -352,7 +352,7 @@ public:
         actionDISCORD->setObjectName(QStringLiteral("actionDISCORD"));
         actionDISCORD->setIcon(MMC->getThemedIcon("discord"));
         actionDISCORD.setTextId(QT_TRANSLATE_NOOP("MainWindow", "Discord"));
-        actionDISCORD.setTooltipId(QT_TRANSLATE_NOOP("MainWindow", "Open MultiMC discord voice chat."));
+        actionDISCORD.setTooltipId(QT_TRANSLATE_NOOP("MainWindow", "Open PolycraftLauncher discord voice chat."));
         all_actions.append(&actionDISCORD);
         helpMenu->addAction(actionDISCORD);
 
@@ -360,7 +360,7 @@ public:
         actionREDDIT->setObjectName(QStringLiteral("actionREDDIT"));
         actionREDDIT->setIcon(MMC->getThemedIcon("reddit-alien"));
         actionREDDIT.setTextId(QT_TRANSLATE_NOOP("MainWindow", "Reddit"));
-        actionREDDIT.setTooltipId(QT_TRANSLATE_NOOP("MainWindow", "Open MultiMC subreddit."));
+        actionREDDIT.setTooltipId(QT_TRANSLATE_NOOP("MainWindow", "Open PolycraftLauncher subreddit."));
         all_actions.append(&actionREDDIT);
         helpMenu->addAction(actionREDDIT);
 
@@ -368,14 +368,14 @@ public:
         actionAbout->setObjectName(QStringLiteral("actionAbout"));
         actionAbout->setIcon(MMC->getThemedIcon("about"));
         actionAbout->setMenuRole(QAction::AboutRole);
-        actionAbout.setTextId(QT_TRANSLATE_NOOP("MainWindow", "About MultiMC"));
-        actionAbout.setTooltipId(QT_TRANSLATE_NOOP("MainWindow", "View information about MultiMC."));
+        actionAbout.setTextId(QT_TRANSLATE_NOOP("MainWindow", "About PolycraftLauncher"));
+        actionAbout.setTooltipId(QT_TRANSLATE_NOOP("MainWindow", "View information about PolycraftLauncher."));
         all_actions.append(&actionAbout);
         helpMenu->addAction(actionAbout);
 
         helpMenuButton = TranslatedToolButton(MainWindow);
         helpMenuButton.setTextId(QT_TRANSLATE_NOOP("MainWindow", "Help"));
-        helpMenuButton.setTooltipId(QT_TRANSLATE_NOOP("MainWindow", "Get help with MultiMC or Minecraft."));
+        helpMenuButton.setTooltipId(QT_TRANSLATE_NOOP("MainWindow", "Get help with PolycraftLauncher or Minecraft."));
         helpMenuButton->setMenu(helpMenu);
         helpMenuButton->setPopupMode(QToolButton::InstantPopup);
         helpMenuButton->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
@@ -391,7 +391,7 @@ public:
             actionCheckUpdate->setObjectName(QStringLiteral("actionCheckUpdate"));
             actionCheckUpdate->setIcon(MMC->getThemedIcon("checkupdate"));
             actionCheckUpdate.setTextId(QT_TRANSLATE_NOOP("MainWindow", "Update"));
-            actionCheckUpdate.setTooltipId(QT_TRANSLATE_NOOP("MainWindow", "Check for new updates for MultiMC."));
+            actionCheckUpdate.setTooltipId(QT_TRANSLATE_NOOP("MainWindow", "Check for new updates for PolycraftLauncher."));
             all_actions.append(&actionCheckUpdate);
             mainToolBar->addAction(actionCheckUpdate);
         }
@@ -443,7 +443,7 @@ public:
         actionMoreNews->setObjectName(QStringLiteral("actionMoreNews"));
         actionMoreNews->setIcon(MMC->getThemedIcon("news"));
         actionMoreNews.setTextId(QT_TRANSLATE_NOOP("MainWindow", "More news..."));
-        actionMoreNews.setTooltipId(QT_TRANSLATE_NOOP("MainWindow", "Open the MultiMC development blog to read more news about MultiMC."));
+        actionMoreNews.setTooltipId(QT_TRANSLATE_NOOP("MainWindow", "Open the PolycraftLauncher development blog to read more news about PolycraftLauncher."));
         all_actions.append(&actionMoreNews);
         newsToolBar->addAction(actionMoreNews);
 
@@ -648,7 +648,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        QString winTitle = tr("MultiMC 5 - Version %1").arg(BuildConfig.printableVersionString());
+        QString winTitle = tr("PolycraftLauncher 5 - Version %1").arg(BuildConfig.printableVersionString());
         if (!BuildConfig.BUILD_PLATFORM.isEmpty())
         {
             winTitle += tr(" on %1", "on platform, as in operating system").arg(BuildConfig.BUILD_PLATFORM);
@@ -1013,7 +1013,7 @@ void MainWindow::showInstanceContextMenu(const QPoint &pos)
     {
         auto group = view->groupNameAt(pos);
 
-        QAction *actionVoid = new QAction("MultiMC", this);
+        QAction *actionVoid = new QAction("PolycraftLauncher", this);
         actionVoid->setEnabled(false);
 
         QAction *actionCreateInstance = new QAction(tr("Create instance"), this);
@@ -1489,7 +1489,7 @@ void MainWindow::finalizeInstance(InstancePtr inst)
     }
     else
     {
-        CustomMessageBox::selectable(this, tr("Error"), tr("MultiMC cannot download Minecraft or update instances unless you have at least "
+        CustomMessageBox::selectable(this, tr("Error"), tr("PolycraftLauncher cannot download Minecraft or update instances unless you have at least "
                                                            "one account added.\nPlease add your Mojang or Minecraft account."),
                                      QMessageBox::Warning)
             ->show();
@@ -1632,7 +1632,7 @@ void MainWindow::droppedURLs(QList<QUrl> urls)
 
 void MainWindow::on_actionREDDIT_triggered()
 {
-    DesktopServices::openUrl(QUrl("https://www.reddit.com/r/MultiMC/"));
+    DesktopServices::openUrl(QUrl("https://www.reddit.com/r/PolycraftLauncher/"));
 }
 
 void MainWindow::on_actionDISCORD_triggered()
@@ -1811,17 +1811,17 @@ void MainWindow::on_actionManageAccounts_triggered()
 
 void MainWindow::on_actionReportBug_triggered()
 {
-    DesktopServices::openUrl(QUrl("https://github.com/MultiMC/MultiMC5/issues"));
+    DesktopServices::openUrl(QUrl("https://github.com/PolycraftLauncher/PolycraftLauncher5/issues"));
 }
 
 void MainWindow::on_actionPatreon_triggered()
 {
-    DesktopServices::openUrl(QUrl("https://www.patreon.com/multimc"));
+    DesktopServices::openUrl(QUrl("https://www.patreon.com/polycraftlauncher"));
 }
 
 void MainWindow::on_actionMoreNews_triggered()
 {
-    DesktopServices::openUrl(QUrl("https://multimc.org/posts.html"));
+    DesktopServices::openUrl(QUrl("https://polycraftlauncher.org/posts.html"));
 }
 
 void MainWindow::newsButtonClicked()
@@ -1833,7 +1833,7 @@ void MainWindow::newsButtonClicked()
     }
     else
     {
-        DesktopServices::openUrl(QUrl("https://multimc.org/posts.html"));
+        DesktopServices::openUrl(QUrl("https://polycraftlauncher.org/posts.html"));
     }
 }
 
@@ -2060,18 +2060,18 @@ void MainWindow::checkInstancePathForProblems()
         warning.setText(tr("Your instance folder contains \'!\' and this is known to cause Java problems!"));
         warning.setInformativeText(tr("You have now two options: <br/>"
                                       " - change the instance folder in the settings <br/>"
-                                      " - move this installation of MultiMC5 to a different folder"));
+                                      " - move this installation of PolycraftLauncher5 to a different folder"));
         warning.setDefaultButton(QMessageBox::Ok);
         warning.exec();
     }
     auto tempFolderText = tr("This is a problem: <br/>"
-                             " - MultiMC will likely be deleted without warning by the operating system <br/>"
-                             " - close MultiMC now and extract it to a real location, not a temporary folder");
+                             " - PolycraftLauncher will likely be deleted without warning by the operating system <br/>"
+                             " - close PolycraftLauncher now and extract it to a real location, not a temporary folder");
     QString pathfoldername = QDir(instanceFolder).absolutePath();
     if (pathfoldername.contains("Rar$", Qt::CaseInsensitive))
     {
         QMessageBox warning(this);
-        warning.setText(tr("Your instance folder contains \'Rar$\' - that means you haven't extracted the MultiMC zip!"));
+        warning.setText(tr("Your instance folder contains \'Rar$\' - that means you haven't extracted the PolycraftLauncher zip!"));
         warning.setInformativeText(tempFolderText);
         warning.setDefaultButton(QMessageBox::Ok);
         warning.exec();

@@ -1,4 +1,4 @@
-/* Copyright 2013-2018 MultiMC Contributors
+/* Copyright 2013-2018 Polycraft Launcher Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 
 #include <memory>
 
-#include "multimc_logic_export.h"
+#include "polycraftlauncher_logic_export.h"
 
 class MinecraftInstance;
 class QDir;
@@ -27,7 +27,7 @@ class Task;
 class BaseVersion;
 typedef std::shared_ptr<BaseVersion> BaseVersionPtr;
 
-class MULTIMC_LOGIC_EXPORT BaseInstaller
+class POLYCRAFTLAUNCHER_LOGIC_EXPORT BaseInstaller
 {
 public:
     BaseInstaller();

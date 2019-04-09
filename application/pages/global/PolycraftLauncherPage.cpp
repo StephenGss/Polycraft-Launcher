@@ -1,4 +1,4 @@
-/* Copyright 2013-2018 MultiMC Contributors
+/* Copyright 2013-2018 PolycraftLauncher Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,8 +13,8 @@
  * limitations under the License.
  */
 
-#include "MultiMCPage.h"
-#include "ui_MultiMCPage.h"
+#include "PolycraftLauncherPage.h"
+#include "ui_PolycraftLauncherPage.h"
 
 #include <QFileDialog>
 #include <QMessageBox>
@@ -25,7 +25,7 @@
 
 #include "settings/SettingsObject.h"
 #include <FileSystem.h>
-#include "MultiMC.h"
+#include "PolycraftLauncher.h"
 #include "BuildConfig.h"
 #include "themes/ITheme.h"
 
@@ -38,7 +38,7 @@ enum InstSortMode
     Sort_LastLaunch
 };
 
-MultiMCPage::MultiMCPage(QWidget *parent) : QWidget(parent), ui(new Ui::MultiMCPage)
+PolycraftLauncherPage::PolycraftLauncherPage(QWidget *parent) : QWidget(parent), ui(new Ui::PolycraftLauncherPage)
 {
     ui->setupUi(this);
     auto origForeground = ui->fontPreview->palette().color(ui->fontPreview->foregroundRole());
@@ -56,7 +56,7 @@ MultiMCPage::MultiMCPage(QWidget *parent) : QWidget(parent), ui(new Ui::MultiMCP
     if(BuildConfig.UPDATER_ENABLED)
     {
         QObject::connect(MMC->updateChecker().get(), &UpdateChecker::channelListLoaded, this,
-                        &MultiMCPage::refreshUpdateChannelList);
+                        &PolycraftLauncherPage::refreshUpdateChannelList);
 
         if (MMC->updateChecker()->hasChannels())
         {
@@ -81,18 +81,18 @@ MultiMCPage::MultiMCPage(QWidget *parent) : QWidget(parent), ui(new Ui::MultiMCP
     connect(ui->languageBox, SIGNAL(currentIndexChanged(int)), SLOT(languageIndexChanged(int)));
 }
 
-MultiMCPage::~MultiMCPage()
+PolycraftLauncherPage::~PolycraftLauncherPage()
 {
     delete ui;
 }
 
-bool MultiMCPage::apply()
+bool PolycraftLauncherPage::apply()
 {
     applySettings();
     return true;
 }
 
-void MultiMCPage::on_instDirBrowseBtn_clicked()
+void PolycraftLauncherPage::on_instDirBrowseBtn_clicked()
 {
     QString raw_dir = QFileDialog::getExistingDirectory(this, tr("Instance Folder"), ui->instDirTextBox->text());
 
@@ -124,7 +124,7 @@ void MultiMCPage::on_instDirBrowseBtn_clicked()
     }
 }
 
-void MultiMCPage::on_iconsDirBrowseBtn_clicked()
+void PolycraftLauncherPage::on_iconsDirBrowseBtn_clicked()
 {
     QString raw_dir = QFileDialog::getExistingDirectory(this, tr("Icons Folder"), ui->iconsDirTextBox->text());
 
@@ -135,7 +135,7 @@ void MultiMCPage::on_iconsDirBrowseBtn_clicked()
         ui->iconsDirTextBox->setText(cooked_dir);
     }
 }
-void MultiMCPage::on_modsDirBrowseBtn_clicked()
+void PolycraftLauncherPage::on_modsDirBrowseBtn_clicked()
 {
     QString raw_dir = QFileDialog::getExistingDirectory(this, tr("Mods Folder"), ui->modsDirTextBox->text());
 
@@ -147,7 +147,7 @@ void MultiMCPage::on_modsDirBrowseBtn_clicked()
     }
 }
 
-void MultiMCPage::languageIndexChanged(int index)
+void PolycraftLauncherPage::languageIndexChanged(int index)
 {
     auto languageCode = ui->languageBox->itemData(ui->languageBox->currentIndex()).toString();
     if(languageCode.isEmpty())
@@ -160,7 +160,7 @@ void MultiMCPage::languageIndexChanged(int index)
     translations->updateLanguage(languageCode);
 }
 
-void MultiMCPage::refreshUpdateChannelList()
+void PolycraftLauncherPage::refreshUpdateChannelList()
 {
     // Stop listening for selection changes. It's going to change a lot while we update it and
     // we don't need to update the
@@ -205,12 +205,12 @@ void MultiMCPage::refreshUpdateChannelList()
     ui->updateChannelComboBox->setEnabled(true);
 }
 
-void MultiMCPage::updateChannelSelectionChanged(int index)
+void PolycraftLauncherPage::updateChannelSelectionChanged(int index)
 {
     refreshUpdateChannelDesc();
 }
 
-void MultiMCPage::refreshUpdateChannelDesc()
+void PolycraftLauncherPage::refreshUpdateChannelDesc()
 {
     // Get the channel list.
     QList<UpdateChecker::ChannelListEntry> channelList = MMC->updateChecker()->getChannelList();
@@ -232,7 +232,7 @@ void MultiMCPage::refreshUpdateChannelDesc()
     }
 }
 
-void MultiMCPage::applySettings()
+void PolycraftLauncherPage::applySettings()
 {
     auto s = MMC->settings();
 
@@ -277,7 +277,7 @@ void MultiMCPage::applySettings()
         break;
     case 0:
     default:
-        s->set("IconTheme", "multimc");
+        s->set("IconTheme", "polycraftlauncher");
         break;
     }
 
@@ -328,7 +328,7 @@ void MultiMCPage::applySettings()
         s->set("Analytics", ui->analyticsCheck->isChecked());
     }
 }
-void MultiMCPage::loadSettings()
+void PolycraftLauncherPage::loadSettings()
 {
     auto s = MMC->settings();
     // Language
@@ -436,7 +436,7 @@ void MultiMCPage::loadSettings()
     }
 }
 
-void MultiMCPage::refreshFontPreview()
+void PolycraftLauncherPage::refreshFontPreview()
 {
     int fontSize = ui->fontSizeBox->value();
     QString fontFamily = ui->consoleFont->currentFont().family();

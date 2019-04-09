@@ -1,4 +1,4 @@
-/* Copyright 2013-2018 MultiMC Contributors
+/* Copyright 2013-2018 Polycraft Launcher Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -177,7 +177,7 @@ void UpdateChecker::updateChanList(bool notifyNoUpdate)
     if (m_channelListUrl.isEmpty())
     {
         qCritical() << "Failed to update channel list. No channel list URL set."
-                    << "If you'd like to use MultiMC's update system, please pass the channel "
+                    << "If you'd like to use PolycraftLauncher's update system, please pass the channel "
                         "list URL to CMake at compile time.";
         return;
     }

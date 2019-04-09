@@ -38,9 +38,9 @@ class GAnalytics;
 #if defined(MMC)
 #undef MMC
 #endif
-#define MMC (static_cast<MultiMC *>(QCoreApplication::instance()))
+#define MMC (static_cast<PolycraftLauncher *>(QCoreApplication::instance()))
 
-class MultiMC : public QApplication
+class PolycraftLauncher : public QApplication
 {
     // friends for the purpose of limiting access to deprecated stuff
     Q_OBJECT
@@ -54,8 +54,8 @@ public:
     };
 
 public:
-    MultiMC(int &argc, char **argv);
-    virtual ~MultiMC();
+    PolycraftLauncher(int &argc, char **argv);
+    virtual ~PolycraftLauncher();
 
     GAnalytics *analytics() const
     {
@@ -195,7 +195,7 @@ private:
     QMap<QString, std::shared_ptr<BaseProfilerFactory>> m_profilers;
 
     QString m_rootPath;
-    Status m_status = MultiMC::StartingUp;
+    Status m_status = PolycraftLauncher::StartingUp;
 
 #if defined Q_OS_WIN32
     // used on Windows to attach the standard IO streams
@@ -218,7 +218,7 @@ private:
     // main window, if any
     MainWindow * m_mainWindow = nullptr;
 
-    // peer MultiMC instance connector - used to implement single instance MultiMC and signalling
+    // peer PolycraftLauncher instance connector - used to implement single instance PolycraftLauncher and signalling
     LocalPeer * m_peerInstance = nullptr;
 
     GAnalytics * m_analytics = nullptr;

@@ -2,9 +2,9 @@
 
 #include "BaseProfiler.h"
 
-#include "multimc_logic_export.h"
+#include "polycraftlauncher_logic_export.h"
 
-class MULTIMC_LOGIC_EXPORT JVisualVMFactory : public BaseProfilerFactory
+class POLYCRAFTLAUNCHER_LOGIC_EXPORT JVisualVMFactory : public BaseProfilerFactory
 {
 public:
     QString name() const override { return "JVisualVM"; }

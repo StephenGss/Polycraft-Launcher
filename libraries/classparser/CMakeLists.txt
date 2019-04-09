@@ -6,7 +6,7 @@ set(CMAKE_AUTOMOC ON)
 include(TestBigEndian)
 test_big_endian(BIGENDIAN)
 if(${BIGENDIAN})
-    add_definitions(-DMULTIMC_BIG_ENDIAN)
+    add_definitions(-DPolycraftLauncher_BIG_ENDIAN)
 endif(${BIGENDIAN})
 
 # Find Qt
@@ -36,6 +36,6 @@ src/annotations.cpp
 
 add_definitions(-DCLASSPARSER_LIBRARY)
 
-add_library(MultiMC_classparser STATIC ${CLASSPARSER_SOURCES} ${CLASSPARSER_HEADERS})
-target_include_directories(MultiMC_classparser PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
-target_link_libraries(MultiMC_classparser MultiMC_quazip Qt5::Core)
+add_library(PolycraftLauncher_classparser STATIC ${CLASSPARSER_SOURCES} ${CLASSPARSER_HEADERS})
+target_include_directories(PolycraftLauncher_classparser PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
+target_link_libraries(PolycraftLauncher_classparser PolycraftLauncher_quazip Qt5::Core)

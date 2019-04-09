@@ -1,5 +1,5 @@
 <RCC>
-    <qresource prefix="/icons/multimc">
+    <qresource prefix="/icons/polycraftlauncher">
         <file>index.theme</file>
         <file>scalable/logo.svg</file>
         <file>scalable/reddit-alien.svg</file>

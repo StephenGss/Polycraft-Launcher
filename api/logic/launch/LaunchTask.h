@@ -1,4 +1,4 @@
-/* Copyright 2013-2018 MultiMC Contributors
+/* Copyright 2013-2018 Polycraft Launcher Contributors
  *
  * Authors: Orochimarufan <orochimarufan.x3@gmail.com>
  *
@@ -24,9 +24,9 @@
 #include "LoggedProcess.h"
 #include "LaunchStep.h"
 
-#include "multimc_logic_export.h"
+#include "polycraftlauncher_logic_export.h"
 
-class MULTIMC_LOGIC_EXPORT LaunchTask: public Task
+class POLYCRAFTLAUNCHER_LOGIC_EXPORT LaunchTask: public Task
 {
     Q_OBJECT
 protected:
@@ -105,8 +105,8 @@ signals:
     void requestLogging();
 
 public slots:
-    void onLogLines(const QStringList& lines, MessageLevel::Enum defaultLevel = MessageLevel::MultiMC);
-    void onLogLine(QString line, MessageLevel::Enum defaultLevel = MessageLevel::MultiMC);
+    void onLogLines(const QStringList& lines, MessageLevel::Enum defaultLevel = MessageLevel::PolycraftLauncher);
+    void onLogLine(QString line, MessageLevel::Enum defaultLevel = MessageLevel::PolycraftLauncher);
     void onReadyForLaunch();
     void onStepFinished();
     void onProgressReportingRequested();

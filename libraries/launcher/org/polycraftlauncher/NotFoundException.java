@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2018 MultiMC Contributors
+ * Copyright 2012-2018 Polycraft Launcher Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package org.multimc;
+package org.polycraftlauncher;
 
-public interface Launcher
+public class NotFoundException extends Exception
 {
-    abstract int launch(ParamBucket params);
 }

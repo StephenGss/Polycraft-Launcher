@@ -175,7 +175,7 @@ void MojangVersionFormat::readVersionProperties(const QJsonObject &in, VersionFi
         {
             out->addProblem(
                 ProblemSeverity::Warning,
-                QObject::tr("The 'minimumLauncherVersion' value of this version (%1) is higher than supported by MultiMC (%2). It might not work properly!")
+                QObject::tr("The 'minimumLauncherVersion' value of this version (%1) is higher than supported by PolycraftLauncher (%2). It might not work properly!")
                     .arg(out->minimumLauncherVersion)
                     .arg(CURRENT_MINIMUM_LAUNCHER_VERSION));
         }

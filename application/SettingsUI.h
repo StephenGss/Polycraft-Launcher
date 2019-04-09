@@ -1,6 +1,6 @@
 #pragma once
 #include "pages/BasePageProvider.h"
-#include "MultiMC.h"
+#include "PolycraftLauncher.h"
 #include "pagedialog/PageDialog.h"
 #include "InstancePageProvider.h"
 #include <settings/SettingsObject.h>

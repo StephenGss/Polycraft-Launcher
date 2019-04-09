@@ -399,7 +399,7 @@ QStringList MinecraftInstance::processMinecraftArgs(AuthSessionPtr session) cons
     }
 
     // blatant self-promotion.
-    token_mapping["profile_name"] = token_mapping["version_name"] = "MultiMC5";
+    token_mapping["profile_name"] = token_mapping["version_name"] = "PolycraftLauncher";
 
     token_mapping["version_type"] = profile->getMinecraftVersionType();
 
@@ -780,7 +780,7 @@ std::shared_ptr<LaunchTask> MinecraftInstance::createLaunchTask(AuthSessionPtr s
 
     // print a header
     {
-        process->appendStep(std::make_shared<TextPrint>(pptr, "Minecraft folder is:\n" + gameRoot() + "\n\n", MessageLevel::MultiMC));
+        process->appendStep(std::make_shared<TextPrint>(pptr, "Minecraft folder is:\n" + gameRoot() + "\n\n", MessageLevel::PolycraftLauncher));
     }
 
     // check java

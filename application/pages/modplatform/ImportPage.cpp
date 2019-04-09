@@ -1,7 +1,7 @@
 #include "ImportPage.h"
 #include "ui_ImportPage.h"
 
-#include "MultiMC.h"
+#include "PolycraftLauncher.h"
 #include "dialogs/NewInstanceDialog.h"
 #include <QFileDialog>
 #include <QValidator>

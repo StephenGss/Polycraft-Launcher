@@ -1,10 +1,10 @@
 [Desktop Entry]
 Categories=Game;
-Exec=/opt/multimc/run.sh
-Icon=/opt/multimc/icon.svg
+Exec=/opt/polycraftlauncher/run.sh
+Icon=/opt/polycraftlauncher/icon.svg
 Keywords=game;Minecraft;
 MimeType=
-Name=MultiMC 5
+Name=PolycraftLauncher 5
 Path=
 StartupNotify=true
 Terminal=false

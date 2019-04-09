@@ -1,4 +1,4 @@
-/* Copyright 2013-2018 MultiMC Contributors
+/* Copyright 2013-2018 Polycraft Launcher Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@
 #include <QVariant>
 #include <memory>
 
-#include "multimc_logic_export.h"
+#include "polycraftlauncher_logic_export.h"
 
 class Setting;
 class SettingsObject;
@@ -40,7 +40,7 @@ typedef std::shared_ptr<SettingsObject> SettingsObjectPtr;
  *
  * \sa Setting
  */
-class MULTIMC_LOGIC_EXPORT SettingsObject : public QObject
+class POLYCRAFTLAUNCHER_LOGIC_EXPORT SettingsObject : public QObject
 {
     Q_OBJECT
 public:

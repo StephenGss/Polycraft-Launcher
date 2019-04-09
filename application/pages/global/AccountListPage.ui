@@ -90,7 +90,7 @@
            <item>
             <widget class="QPushButton" name="noDefaultBtn">
              <property name="toolTip">
-              <string>Set no default account. This will cause MultiMC to prompt you to select an account every time you launch an instance that doesn't have its own default set.</string>
+              <string>Set no default account. This will cause PolycraftLauncher to prompt you to select an account every time you launch an instance that doesn't have its own default set.</string>
              </property>
              <property name="text">
               <string>&amp;No Default</string>

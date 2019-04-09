@@ -1,4 +1,4 @@
-/* Copyright 2013-2018 MultiMC Contributors
+/* Copyright 2013-2018 Polycraft Launcher Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -244,7 +244,7 @@ QString BaseInstance::name() const
 
 QString BaseInstance::windowTitle() const
 {
-    return "MultiMC: " + name().replace(QRegExp("[ \n\r\t]+"), " ");
+    return "PolycraftLauncher: " + name().replace(QRegExp("[ \n\r\t]+"), " ");
 }
 
 // FIXME: why is this here? move it to MinecraftInstance!!!

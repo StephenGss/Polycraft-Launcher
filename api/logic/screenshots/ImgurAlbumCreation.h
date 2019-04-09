@@ -2,10 +2,10 @@
 #include "net/NetAction.h"
 #include "Screenshot.h"
 
-#include "multimc_logic_export.h"
+#include "polycraftlauncher_logic_export.h"
 
 typedef std::shared_ptr<class ImgurAlbumCreation> ImgurAlbumCreationPtr;
-class MULTIMC_LOGIC_EXPORT ImgurAlbumCreation : public NetAction
+class POLYCRAFTLAUNCHER_LOGIC_EXPORT ImgurAlbumCreation : public NetAction
 {
 public:
     explicit ImgurAlbumCreation(QList<ScreenshotPtr> screenshots);

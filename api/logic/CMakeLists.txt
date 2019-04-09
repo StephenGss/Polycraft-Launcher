@@ -1,4 +1,4 @@
-project(MultiMC_logic)
+project(PolycraftLauncher_logic)
 
 include (UnitTest)
 
@@ -84,13 +84,13 @@ set(CORE_SOURCES
 
 add_unit_test(FileSystem
     SOURCES FileSystem_test.cpp
-    LIBS MultiMC_logic
+    LIBS PolycraftLauncher_logic
     DATA testdata
     )
 
 add_unit_test(GZip
     SOURCES GZip_test.cpp
-    LIBS MultiMC_logic
+    LIBS PolycraftLauncher_logic
     )
 
 set(PATHMATCHER_SOURCES
@@ -154,13 +154,13 @@ set(UPDATE_SOURCES
 
 add_unit_test(UpdateChecker
     SOURCES updater/UpdateChecker_test.cpp
-    LIBS MultiMC_logic
+    LIBS PolycraftLauncher_logic
     DATA updater/testdata
     )
 
 add_unit_test(DownloadTask
     SOURCES updater/DownloadTask_test.cpp
-    LIBS MultiMC_logic
+    LIBS PolycraftLauncher_logic
     DATA updater/testdata
     )
 
@@ -297,30 +297,30 @@ set(MINECRAFT_SOURCES
 
 add_unit_test(GradleSpecifier
     SOURCES minecraft/GradleSpecifier_test.cpp
-    LIBS MultiMC_logic
+    LIBS PolycraftLauncher_logic
     )
 
 add_unit_test(MojangVersionFormat
     SOURCES minecraft/MojangVersionFormat_test.cpp
-    LIBS MultiMC_logic
+    LIBS PolycraftLauncher_logic
     DATA minecraft/testdata
     )
 
 add_unit_test(Library
     SOURCES minecraft/Library_test.cpp
-    LIBS MultiMC_logic
+    LIBS PolycraftLauncher_logic
     )
 
 # FIXME: shares data with FileSystem test
 add_unit_test(SimpleModList
     SOURCES minecraft/SimpleModList_test.cpp
     DATA testdata
-    LIBS MultiMC_logic
+    LIBS PolycraftLauncher_logic
     )
 
 add_unit_test(ParseUtils
     SOURCES minecraft/ParseUtils_test.cpp
-    LIBS MultiMC_logic
+    LIBS PolycraftLauncher_logic
     )
 
 # the screenshots feature
@@ -358,7 +358,7 @@ set(SETTINGS_SOURCES
 
 add_unit_test(INIFile
     SOURCES settings/INIFile_test.cpp
-    LIBS MultiMC_logic
+    LIBS PolycraftLauncher_logic
     )
 
 set(JAVA_SOURCES
@@ -381,7 +381,7 @@ set(JAVA_SOURCES
 
 add_unit_test(JavaVersion
     SOURCES java/JavaVersion_test.cpp
-    LIBS MultiMC_logic
+    LIBS PolycraftLauncher_logic
     )
 
 set(TRANSLATIONS_SOURCES
@@ -439,7 +439,7 @@ set(FLAME_SOURCES
 
 add_unit_test(Index
     SOURCES meta/Index_test.cpp
-    LIBS MultiMC_logic
+    LIBS PolycraftLauncher_logic
     )
 
 ################################ COMPILE ################################
@@ -471,21 +471,21 @@ set(LOGIC_SOURCES
 
 message(STATUS "FOO! ${LOGIC_SOURCES}")
 
-add_library(MultiMC_logic SHARED ${LOGIC_SOURCES})
-set_target_properties(MultiMC_logic PROPERTIES CXX_VISIBILITY_PRESET hidden VISIBILITY_INLINES_HIDDEN 1)
+add_library(PolycraftLauncher_logic SHARED ${LOGIC_SOURCES})
+set_target_properties(PolycraftLauncher_logic PROPERTIES CXX_VISIBILITY_PRESET hidden VISIBILITY_INLINES_HIDDEN 1)
 
-generate_export_header(MultiMC_logic)
+generate_export_header(PolycraftLauncher_logic)
 
 # Link
-target_link_libraries(MultiMC_logic xz-embedded MultiMC_unpack200 systeminfo MultiMC_quazip MultiMC_classparser ${NBT_NAME} ${ZLIB_LIBRARIES})
-target_link_libraries(MultiMC_logic Qt5::Core Qt5::Xml Qt5::Network Qt5::Concurrent)
+target_link_libraries(PolycraftLauncher_logic xz-embedded PolycraftLauncher_unpack200 systeminfo PolycraftLauncher_quazip PolycraftLauncher_classparser ${NBT_NAME} ${ZLIB_LIBRARIES})
+target_link_libraries(PolycraftLauncher_logic Qt5::Core Qt5::Xml Qt5::Network Qt5::Concurrent)
 
 # Mark and export headers
-target_include_directories(MultiMC_logic PUBLIC "${CMAKE_CURRENT_BINARY_DIR}" "${CMAKE_CURRENT_SOURCE_DIR}" PRIVATE "${ZLIB_INCLUDE_DIRS}")
+target_include_directories(PolycraftLauncher_logic PUBLIC "${CMAKE_CURRENT_BINARY_DIR}" "${CMAKE_CURRENT_SOURCE_DIR}" PRIVATE "${ZLIB_INCLUDE_DIRS}")
 
 # Install it
 install(
-    TARGETS MultiMC_logic
+    TARGETS PolycraftLauncher_logic
     RUNTIME DESTINATION ${LIBRARY_DEST_DIR}
     LIBRARY DESTINATION ${LIBRARY_DEST_DIR}
 )

@@ -110,7 +110,7 @@ bool processFileLists
         }
     }
 
-    // Next, check each file in MultiMC's folder and see if we need to update them.
+    // Next, check each file in PolycraftLauncher's folder and see if we need to update them.
     for (VersionFileEntry entry : newVersion)
     {
         // TODO: Let's not MD5sum a ton of files on the GUI thread. We should probably find a
@@ -204,7 +204,7 @@ bool processFileLists
 
 bool fixPathForOSX(QString &path)
 {
-    if (path.startsWith("MultiMC.app/"))
+    if (path.startsWith("PolycraftLauncher.app/"))
     {
         // remove the prefix and add a new, more appropriate one.
         path.remove(0, 12);

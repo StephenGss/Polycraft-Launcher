@@ -8,7 +8,7 @@
 #include "net/PasteUpload.h"
 #include "dialogs/CustomMessageBox.h"
 
-#include "MultiMC.h"
+#include "PolycraftLauncher.h"
 #include <settings/SettingsObject.h>
 #include <DesktopServices.h>
 #include <BuildConfig.h>
@@ -17,7 +17,7 @@ QString GuiUtil::uploadPaste(const QString &text, QWidget *parentWidget)
 {
     ProgressDialog dialog(parentWidget);
     auto APIKeySetting = MMC->settings()->get("PasteEEAPIKey").toString();
-    if(APIKeySetting == "multimc")
+    if(APIKeySetting == "polycraftlauncher")
     {
         APIKeySetting = BuildConfig.PASTE_EE_KEY;
     }

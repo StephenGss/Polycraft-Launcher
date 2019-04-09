@@ -6,7 +6,7 @@
 #include <QObject>
 #include "PackHelpers.h"
 
-class MULTIMC_LOGIC_EXPORT FtbPackFetchTask : public QObject {
+class POLYCRAFTLAUNCHER_LOGIC_EXPORT FtbPackFetchTask : public QObject {
 
     Q_OBJECT
 

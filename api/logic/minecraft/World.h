@@ -1,4 +1,4 @@
-/* Copyright 2015-2018 MultiMC Contributors
+/* Copyright 2015-2018 Polycraft Launcher Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 #include <QFileInfo>
 #include <QDateTime>
 
-#include "multimc_logic_export.h"
+#include "polycraftlauncher_logic_export.h"
 
 enum class GameType
 {
@@ -26,9 +26,9 @@ enum class GameType
     Adventure,
     Spectator
 };
-QString MULTIMC_LOGIC_EXPORT gameTypeToString(GameType type);
+QString POLYCRAFTLAUNCHER_LOGIC_EXPORT gameTypeToString(GameType type);
 
-class MULTIMC_LOGIC_EXPORT World
+class POLYCRAFTLAUNCHER_LOGIC_EXPORT World
 {
 public:
     World(const QFileInfo &file);

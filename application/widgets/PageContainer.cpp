@@ -1,4 +1,4 @@
-/* Copyright 2013-2018 MultiMC Contributors
+/* Copyright 2013-2018 PolycraftLauncher Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,11 +26,11 @@
 #include <QDialogButtonBox>
 #include <QGridLayout>
 
-#include "MultiMC.h"
+#include "PolycraftLauncher.h"
 #include "settings/SettingsObject.h"
 #include "widgets/IconLabel.h"
 #include "PageContainer_p.h"
-#include <MultiMC.h>
+#include <PolycraftLauncher.h>
 #include <DesktopServices.h>
 
 class PageEntryFilterModel : public QSortFilterProxyModel
@@ -207,7 +207,7 @@ void PageContainer::help()
         QString pageId = m_currentPage->helpPage();
         if (pageId.isEmpty())
             return;
-        DesktopServices::openUrl(QUrl("https://github.com/MultiMC/MultiMC5/wiki/" + pageId));
+        DesktopServices::openUrl(QUrl("https://github.com/PolycraftLauncher/PolycraftLauncher5/wiki/" + pageId));
     }
 }
 

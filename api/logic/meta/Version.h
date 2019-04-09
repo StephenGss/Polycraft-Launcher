@@ -1,4 +1,4 @@
-/* Copyright 2015-2018 MultiMC Contributors
+/* Copyright 2015-2018 Polycraft Launcher Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@
 
 #include "BaseEntity.h"
 
-#include "multimc_logic_export.h"
+#include "polycraftlauncher_logic_export.h"
 
 #include "JsonFormat.h"
 
@@ -34,7 +34,7 @@ namespace Meta
 {
 using VersionPtr = std::shared_ptr<class Version>;
 
-class MULTIMC_LOGIC_EXPORT Version : public QObject, public BaseVersion, public BaseEntity
+class POLYCRAFTLAUNCHER_LOGIC_EXPORT Version : public QObject, public BaseVersion, public BaseEntity
 {
     Q_OBJECT
 

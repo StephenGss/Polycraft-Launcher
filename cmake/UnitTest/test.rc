@@ -14,10 +14,10 @@ BEGIN
         BEGIN
                 BLOCK "000004b0"
                 BEGIN
-                        VALUE "CompanyName", "MultiMC Contributors"
+                        VALUE "CompanyName", "Polycraft Launcher Contributors"
                         VALUE "FileDescription", "Testcase"
                         VALUE "FileVersion", "1.0.0.0"
-                        VALUE "ProductName", "MultiMC Testcase"
+                        VALUE "ProductName", "PolycraftLauncher Testcase"
                         VALUE "ProductVersion", "5"
                 END
         END

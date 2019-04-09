@@ -91,7 +91,7 @@ void UpdateController::installUpdates()
 #ifdef Q_OS_WIN
     QString finishCmd = QApplication::applicationFilePath();
 #elif defined Q_OS_LINUX
-    QString finishCmd = FS::PathCombine(m_root, "MultiMC");
+    QString finishCmd = FS::PathCombine(m_root, "PolycraftLauncher");
 #elif defined Q_OS_MAC
     QString finishCmd = QApplication::applicationFilePath();
 #else
@@ -128,7 +128,7 @@ void UpdateController::installUpdates()
             {
 #ifdef Q_OS_WIN32
                 // hack for people renaming the .exe because ... reasons :)
-                if(op.destination == "MultiMC.exe")
+                if(op.destination == "PolycraftLauncher.exe")
                 {
                     op.destination = QFileInfo(QApplication::applicationFilePath()).fileName();
                 }
@@ -137,7 +137,7 @@ void UpdateController::installUpdates()
 #ifdef Q_OS_WIN32
                 if(QSysInfo::windowsVersion() < QSysInfo::WV_VISTA)
                 {
-                    if(destination.fileName() == "MultiMC.exe")
+                    if(destination.fileName() == "PolycraftLauncher.exe")
                     {
                         QDir rootDir(m_root);
                         exeOrigin = rootDir.relativeFilePath(op.source);
@@ -366,7 +366,7 @@ void UpdateController::fail()
         case Replace:
         {
             msg = QObject::tr("Couldn't replace file %1. Changes will be reverted.\n"
-                "See the MultiMC log file for details.").arg(m_failedFile);
+                "See the PolycraftLauncher log file for details.").arg(m_failedFile);
             doRollback = true;
             QMessageBox::critical(m_parent, failTitle, msg);
             break;
@@ -374,7 +374,7 @@ void UpdateController::fail()
         case Delete:
         {
             msg = QObject::tr("Couldn't remove file %1. Changes will be reverted.\n"
-                "See the MultiMC log file for details.").arg(m_failedFile);
+                "See the PolycraftLauncher log file for details.").arg(m_failedFile);
             doRollback = true;
             QMessageBox::critical(m_parent, failTitle, msg);
             break;
@@ -404,7 +404,7 @@ void UpdateController::fail()
         if(!rollbackOK)
         {
             msg = QObject::tr("The rollback failed too.\n"
-                "You will have to repair MultiMC manually.\n"
+                "You will have to repair PolycraftLauncher manually.\n"
                 "Please let us know why and how this happened.").arg(m_failedFile);
             QMessageBox::critical(m_parent, rollFailTitle, msg);
             qApp->quit();

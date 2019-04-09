@@ -3,14 +3,14 @@ Thumbs.db
 .user
 .directory
 resources/CMakeFiles
-resources/MultiMCLauncher.jar
+resources/PolycraftLauncher.jar
 *~
 *.swp
 html/
 
 # Project Files
-MultiMC5.kdev4
-MultiMC.pro.user
+PolycraftLauncher.kdev4
+PolycraftLauncher.pro.user
 CMakeLists.txt.user
 CMakeLists.txt.user.*
 /.project
