@@ -191,7 +191,7 @@ slots:
         QString path, pathOrig;
         bool result;
         // Proper OSX path
-        pathOrig = path = "MultiMC.app/Foo/Bar/Baz";
+        pathOrig = path = "PolycraftLauncher.app/Foo/Bar/Baz";
         qDebug() << "Proper OSX path: " << path;
         result = fixPathForOSX(path);
         QCOMPARE(path, QString("Foo/Bar/Baz"));

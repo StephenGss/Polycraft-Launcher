@@ -27,7 +27,7 @@ protected:
 
 private:
     void processZipPack();
-    void processMultiMC();
+    void processPolycraftLauncher();
     void processFlame();
 
 private slots:

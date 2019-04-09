@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.1)
 
 string(COMPARE EQUAL "${CMAKE_SOURCE_DIR}" "${CMAKE_BUILD_DIR}" IS_IN_SOURCE_BUILD)
 if(IS_IN_SOURCE_BUILD)
-    message(AUTHOR_WARNING "You are building MultiMC in-source. This is NOT recommended!")
+    message(AUTHOR_WARNING "You are building PolycraftLauncher in-source. This is NOT recommended!")
 endif()
 
 if(WIN32)
@@ -41,7 +41,7 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Werror=return-type")
 ##################################### Set Application options #####################################
 
 ######## Set URLs ########
-set(PolycraftLauncher_NEWS_RSS_URL "https://multimc.org/rss.xml" CACHE STRING "URL to fetch PolycraftLauncher's news RSS feed from.")
+set(PolycraftLauncher_NEWS_RSS_URL "https://polycraftlauncher.com/rss.xml" CACHE STRING "URL to fetch PolycraftLauncher's news RSS feed from.")
 
 # Polycraft World Check for Updates url
 set(PCW_VERSION_URL "" CACHE STRING "URL for the channel list.")
@@ -139,7 +139,7 @@ if(PolycraftLauncher_LAYOUT_REAL STREQUAL "mac-bundle")
     # Mac bundle settings
     set(MACOSX_BUNDLE_BUNDLE_NAME "PolycraftLauncher")
     set(MACOSX_BUNDLE_INFO_STRING "PolycraftLauncher Minecraft launcher and management utility.")
-    set(MACOSX_BUNDLE_GUI_IDENTIFIER "org.multimc.PolycraftLauncher5")
+    set(MACOSX_BUNDLE_GUI_IDENTIFIER "org.polycraftlauncher.PolycraftLauncher")
     set(MACOSX_BUNDLE_BUNDLE_VERSION "${PolycraftLauncher_VERSION_MAJOR}.${PolycraftLauncher_VERSION_MINOR}.${PolycraftLauncher_VERSION_HOTFIX}.${PolycraftLauncher_VERSION_BUILD}")
     set(MACOSX_BUNDLE_SHORT_VERSION_STRING "${PolycraftLauncher_VERSION_MAJOR}.${PolycraftLauncher_VERSION_MINOR}.${PolycraftLauncher_VERSION_HOTFIX}.${PolycraftLauncher_VERSION_BUILD}")
     set(MACOSX_BUNDLE_LONG_VERSION_STRING "${PolycraftLauncher_VERSION_MAJOR}.${PolycraftLauncher_VERSION_MINOR}.${PolycraftLauncher_VERSION_HOTFIX}.${PolycraftLauncher_VERSION_BUILD}")
@@ -196,10 +196,10 @@ elseif(PolycraftLauncher_LAYOUT_REAL STREQUAL "lin-nodeps")
     install(PROGRAMS application/package/linux/PolycraftLauncher DESTINATION ${BUNDLE_DEST_DIR})
 
 elseif(PolycraftLauncher_LAYOUT_REAL STREQUAL "lin-system")
-    set(PolycraftLauncher_APP_BINARY_NAME "multimc" CACHE STRING "Name of the PolycraftLauncher binary")
+    set(PolycraftLauncher_APP_BINARY_NAME "polycraftlauncher" CACHE STRING "Name of the PolycraftLauncher binary")
     set(PolycraftLauncher_BINARY_DEST_DIR "bin" CACHE STRING "Path to the binary directory")
     set(PolycraftLauncher_LIBRARY_DEST_DIR "lib${LIB_SUFFIX}" CACHE STRING "Path to the library directory")
-    set(PolycraftLauncher_SHARE_DEST_DIR "share/multimc" CACHE STRING "Path to the shared data directory")
+    set(PolycraftLauncher_SHARE_DEST_DIR "share/polycraftlauncher" CACHE STRING "Path to the shared data directory")
     set(JARS_DEST_DIR "${PolycraftLauncher_SHARE_DEST_DIR}/jars")
 
     set(BINARY_DEST_DIR ${PolycraftLauncher_BINARY_DEST_DIR})

@@ -1,4 +1,4 @@
-package org.multimc;/*
+package org.polycraftlauncher;/*
  * Copyright 2012-2018 Polycraft Launcher Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");

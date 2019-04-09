@@ -6,7 +6,7 @@
  */
 namespace util
 {
-#ifdef MULTIMC_BIG_ENDIAN
+#ifdef POLYCRAFTLAUNCHER_BIG_ENDIAN
 inline uint64_t bigswap(uint64_t x)
 {
     return x;

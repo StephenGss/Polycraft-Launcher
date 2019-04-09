@@ -13,9 +13,9 @@
  * limitations under the License.
  */
 
-package org.multimc.onesix;
+package org.polycraftlauncher.onesix;
 
-import org.multimc.*;
+import org.polycraftlauncher.*;
 
 import java.applet.Applet;
 import java.io.File;

@@ -106,7 +106,7 @@ void LauncherPartLaunch::executeTask()
 #else
     args << classPath.join(':');
 #endif
-    args << "org.multimc.EntryPoint";
+    args << "org.polycraftlauncher.EntryPoint";
 
     qDebug() << args.join(' ');
 

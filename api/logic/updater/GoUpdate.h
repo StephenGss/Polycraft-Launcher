@@ -124,9 +124,9 @@ bool POLYCRAFTLAUNCHER_LOGIC_EXPORT processFileLists
 );
 
 /*!
- * This fixes destination paths for OSX - removes 'MultiMC.app' prefix
- * The updater runs in MultiMC.app/Contents/MacOs by default
- * The destination paths are such as this: MultiMC.app/blah/blah
+ * This fixes destination paths for OSX - removes 'PolycraftLauncher.app' prefix
+ * The updater runs in PolycraftLauncher.app/Contents/MacOs by default
+ * The destination paths are such as this: PolycraftLauncher.app/blah/blah
  *
  * @return false if the path couldn't be fixed (is invalid)
  */

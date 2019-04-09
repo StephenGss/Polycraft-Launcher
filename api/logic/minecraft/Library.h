@@ -195,7 +195,7 @@ protected: /* data */
     QString m_hint;
 
     /**
-     * storage - by default the local libraries folder in multimc, but could be elsewhere
+     * storage - by default the local libraries folder in polycraftlauncher, but could be elsewhere
      * PolycraftLauncher specific, because of FTB.
      */
     QString m_storagePrefix;

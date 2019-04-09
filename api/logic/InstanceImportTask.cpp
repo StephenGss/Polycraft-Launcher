@@ -158,7 +158,7 @@ void InstanceImportTask::extractFinished()
             processFlame();
             return;
         case ModpackType::PolycraftLauncher:
-            processMultiMC();
+            processPolycraftLauncher();
             return;
         case ModpackType::Unknown:
             emitFailed(tr("Archive does not contain a recognized modpack type."));
@@ -270,7 +270,7 @@ void InstanceImportTask::processFlame()
         }
         else
         {
-            // default to something other than the MultiMC default to distinguish these
+            // default to something other than the PolycraftLauncher default to distinguish these
             instance.setIconKey("flame");
         }
     }
@@ -370,7 +370,7 @@ void InstanceImportTask::processFlame()
     m_modIdResolver->start();
 }
 
-void InstanceImportTask::processMultiMC()
+void InstanceImportTask::processPolycraftLauncher()
 {
     // FIXME: copy from FolderInstanceProvider!!! FIX IT!!!
     QString configPath = FS::PathCombine(m_stagingPath, "instance.cfg");
