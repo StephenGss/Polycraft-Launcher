@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Name=PolycraftLauncher
+GenericName=PolycraftLauncher
+Comment=Free, open source launcher and instance manager for Minecraft.
+Type=Application
+Terminal=false
+Exec=polycraftlauncher
+Icon=polycraftlauncher
+Categories=Game
+Keywords=game;minecraft;
