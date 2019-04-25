@@ -314,8 +314,10 @@ void InstanceImportTask::processFlame()
                 case Flame::File::Type::Folder:
                 {
                     logWarning(tr("This 'Folder' may need extracting: %1").arg(relpath));
-                    // fall-through intentional, we treat these as plain old mods and dump them wherever.
-                    [[clang::fallthrough]];
+                    qDebug() << "Will download" << result.url << "to" << path;
+                    auto dl = Net::Download::makeFile(result.url, path);
+                    m_filesNetJob->addNetAction(dl);
+                    break;
                 }
                 case Flame::File::Type::SingleFile:{
                     qDebug() << "Will download" << result.url << "to" << path;
