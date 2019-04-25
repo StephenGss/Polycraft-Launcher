@@ -38,4 +38,4 @@ add_definitions(-DCLASSPARSER_LIBRARY)
 
 add_library(PolycraftLauncher_classparser STATIC ${CLASSPARSER_SOURCES} ${CLASSPARSER_HEADERS})
 target_include_directories(PolycraftLauncher_classparser PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
-target_link_libraries(PolycraftLauncher_classparser PolycraftLauncher_quazip Qt5::Core)
+target_link_libraries(PolycraftLauncher_classparser MultiMC_quazip Qt5::Core)
