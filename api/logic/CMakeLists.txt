@@ -477,7 +477,7 @@ set_target_properties(PolycraftLauncher_logic PROPERTIES CXX_VISIBILITY_PRESET h
 generate_export_header(PolycraftLauncher_logic)
 
 # Link
-target_link_libraries(PolycraftLauncher_logic xz-embedded PolycraftLauncher_unpack200 systeminfo PolycraftLauncher_quazip PolycraftLauncher_classparser ${NBT_NAME} ${ZLIB_LIBRARIES})
+target_link_libraries(PolycraftLauncher_logic xz-embedded PolycraftLauncher_unpack200 systeminfo MultiMC_quazip PolycraftLauncher_classparser ${NBT_NAME} ${ZLIB_LIBRARIES})
 target_link_libraries(PolycraftLauncher_logic Qt5::Core Qt5::Xml Qt5::Network Qt5::Concurrent)
 
 # Mark and export headers
