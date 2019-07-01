@@ -92,6 +92,11 @@ public:
         return m_instances.count();
     }
 
+    QString InstanceDir()
+    {
+        return m_instDir;
+    }
+
     InstListError loadList();
     void saveNow();
 

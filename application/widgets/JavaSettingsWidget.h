@@ -5,6 +5,8 @@
 #include <BaseVersion.h>
 #include <QObjectPtr.h>
 #include <QIcon>
+#include "tasks/Task.h"
+#include <JavaInstallTask.h>
 
 class QLineEdit;
 class VersionSelectWidget;
@@ -16,6 +18,7 @@ class QGroupBox;
 class QGridLayout;
 class QLabel;
 class QToolButton;
+
 
 /**
  * This is a widget for all the Java settings dialogs and pages.
@@ -56,12 +59,26 @@ public:
     int maxHeapSize() const;
     QString javaPath() const;
 
+    // Wrap an instance creation task in some more task machinery and make it ready to be used
+    Task * wrapJavaInstallTask(JavaInstallTask * task);
+
+    /**
+     * Create a new empty staging area for instance creation and @return a path/key top commit it later.
+     * Used by instance manipulation tasks.
+     */
+    QString getStagedInstancePath();
+
+    bool commitStagedJavaInstall();
+
+    bool destroyStagingPath(const QString& keyPath);
+
 
 protected slots:
     void memoryValueChanged(int);
     void javaPathEdited(const QString &path);
     void javaVersionSelected(BaseVersionPtr version);
     void on_javaBrowseBtn_clicked();
+    void on_javaInstallBtn_clicked();
     void on_javaStatusBtn_clicked();
     void checkFinished(JavaCheckResult result);
 
@@ -70,6 +87,7 @@ protected: /* methods */
     void checkJavaPath(const QString &path);
     void setJavaStatus(JavaStatus status);
     void setupUi();
+    void runModalTask(Task *task);
 
 private: /* data */
     VersionSelectWidget *m_versionWidget = nullptr;
@@ -77,6 +95,7 @@ private: /* data */
 
     QLineEdit * m_javaPathTextBox = nullptr;
     QPushButton * m_javaBrowseBtn = nullptr;
+    QPushButton * m_javaInstallBtn = nullptr;
     QToolButton * m_javaStatusBtn = nullptr;
     QHBoxLayout *m_horizontalLayout = nullptr;
 

@@ -70,6 +70,8 @@ SET(POLYCRAFTLAUNCHER_SOURCES
     # Processes
     LaunchController.h
     LaunchController.cpp
+    JavaInstallStaging.cpp
+    JavaInstallStaging.h
 
     # page provider for instances
     InstancePageProvider.h

@@ -80,6 +80,10 @@ set(CORE_SOURCES
     # A Recursive file system watcher
     RecursiveFileSystemWatcher.h
     RecursiveFileSystemWatcher.cpp
+
+    # Java Installation task
+    JavaInstallTask.h
+    JavaInstallTask.cpp
 )
 
 add_unit_test(FileSystem

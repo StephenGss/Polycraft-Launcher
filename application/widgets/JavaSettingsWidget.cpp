@@ -5,6 +5,11 @@
 #include <dialogs/CustomMessageBox.h>
 #include <java/JavaUtils.h>
 #include <sys.h>
+#include <InstanceList.h>
+#include <InstanceTask.h>
+#include <JavaInstallTask.h>
+#include <dialogs/ProgressDialog.h>
+#include <JavaInstallStaging.h>
 
 #include <QVBoxLayout>
 #include <QGroupBox>
@@ -31,6 +36,7 @@ JavaSettingsWidget::JavaSettingsWidget(QWidget* parent) : QWidget(parent)
     connect(m_permGenSpinBox, SIGNAL(valueChanged(int)), this, SLOT(memoryValueChanged(int)));
     connect(m_versionWidget, &VersionSelectWidget::selectedVersionChanged, this, &JavaSettingsWidget::javaVersionSelected);
     connect(m_javaBrowseBtn, &QPushButton::clicked, this, &JavaSettingsWidget::on_javaBrowseBtn_clicked);
+    connect(m_javaInstallBtn, &QPushButton::clicked, this, &JavaSettingsWidget::on_javaInstallBtn_clicked);
     connect(m_javaPathTextBox, &QLineEdit::textEdited, this, &JavaSettingsWidget::javaPathEdited);
     connect(m_javaStatusBtn, &QToolButton::clicked, this, &JavaSettingsWidget::on_javaStatusBtn_clicked);
 }
@@ -43,6 +49,10 @@ void JavaSettingsWidget::setupUi()
 
     m_versionWidget = new VersionSelectWidget(this);
     m_verticalLayout->addWidget(m_versionWidget);
+
+    m_javaInstallBtn = new QPushButton(this);
+    m_javaInstallBtn->setObjectName(QStringLiteral("javaInstallBtn"));
+    m_verticalLayout->addWidget(m_javaInstallBtn);
 
     m_horizontalLayout = new QHBoxLayout();
     m_horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
@@ -268,6 +278,85 @@ void JavaSettingsWidget::on_javaBrowseBtn_clicked()
     checkJavaPath(cooked_path);
 }
 
+void JavaSettingsWidget::on_javaInstallBtn_clicked()
+{
+    QString url;
+#if defined Q_OS_WIN32
+    url = "http://polycraft.utdallas.edu/downloads/java_8_runtime_win.zip";
+#else
+    url = "Java (java)";
+#endif
+    JavaInstallTask * creationTask = new JavaInstallTask(url);
+    creationTask->setName("Java Install");
+    if(creationTask)
+    {
+        unique_qobject_ptr<Task> task(wrapJavaInstallTask(creationTask));
+
+        connect(task.get(), &Task::succeeded, [this]()
+            {
+                //upon successful java install, set path text box to java instal location
+                QString relPath = "Java/";
+                // Create aand normalize path
+                if (!QDir::current().exists(relPath))
+                {
+                    return false;
+                }
+
+                if(!QFile::exists("Java/runtime/jre-x64/bin/javaw.exe")){
+                    return false;
+                }
+                auto path = QDir(relPath).canonicalPath();
+                auto cooked_path = FS::PathCombine(path, "runtime/jre-x64/bin/javaw.exe");
+                m_javaPathTextBox->setText(FS::PathCombine(path, "runtime/jre-x64/bin/javaw.exe"));
+                checkJavaPath(cooked_path);
+                return true;
+            });
+        runModalTask(task.get());
+    }
+
+}
+
+void JavaSettingsWidget::runModalTask(Task *task)
+{
+    connect(task, &Task::failed, [this](QString reason)
+        {
+            CustomMessageBox::selectable(this, tr("Error"), reason, QMessageBox::Critical)->show();
+        });
+    connect(task, &Task::succeeded, [this, task]()
+        {
+            QStringList warnings = task->warnings();
+            if(warnings.count())
+            {
+                CustomMessageBox::selectable(this, tr("Warnings"), warnings.join('\n'), QMessageBox::Warning)->show();
+            }
+        });
+    ProgressDialog loadDialog(this);
+    loadDialog.setSkipButton(true, tr("Abort"));
+    loadDialog.execWithTask(task);
+}
+
+Task * JavaSettingsWidget::wrapJavaInstallTask(JavaInstallTask * task)
+{
+    auto stagingPath = getStagedInstancePath();
+    task->setStagingPath(stagingPath);
+    task->setParentSettings(MMC->settings());
+    return new JavaInstallStaging(this, task, stagingPath);
+}
+
+QString JavaSettingsWidget::getStagedInstancePath()
+{
+    QString relPath = "Java/";
+    // Create aand normalize path
+    if (!QDir::current().exists(relPath))
+    {
+        QDir::current().mkpath(relPath);
+    }
+
+    // NOTE: canonicalPath requires the path to exist. Do not move this above the creation block!
+    auto path = QDir(relPath).canonicalPath();
+    return path;
+}
+
 void JavaSettingsWidget::on_javaStatusBtn_clicked()
 {
     QString text;
@@ -424,5 +513,29 @@ void JavaSettingsWidget::retranslate()
     m_labelMaxMem->setText(tr("Maximum memory allocation:"));
     m_minMemSpinBox->setToolTip(tr("The amount of memory Minecraft is started with."));
     m_permGenSpinBox->setToolTip(tr("The amount of memory available to store loaded Java classes."));
+    m_javaInstallBtn->setText(tr("Click Here to Install Java"));
     m_javaBrowseBtn->setText(tr("Browse"));
+}
+
+bool JavaSettingsWidget::commitStagedJavaInstall()
+{
+    QString relPath = "Java/";
+    // Create aand normalize path
+    if (!QDir::current().exists(relPath))
+    {
+        return false;
+    }
+
+    if(!QFile::exists("Java/runtime/jre-x64/bin/javaw.exe")){
+        return false;
+    }
+    auto path = QDir(relPath).canonicalPath();
+    m_javaPathTextBox->setText(FS::PathCombine(path, "runtime/jre-x64/bin/javaw.exe"));
+
+    return true;
+}
+
+bool JavaSettingsWidget::destroyStagingPath(const QString& keyPath)
+{
+    return FS::deletePath(keyPath);
 }
