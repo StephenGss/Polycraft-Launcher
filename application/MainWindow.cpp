@@ -1581,8 +1581,10 @@ void MainWindow::installPolycraftInstanceFromURL(QUrl url, QString name, QString
 void MainWindow::on_actionToggleAdvanced_triggered()
 {
     if(this->ui->newsToolBar->isHidden()){
+        MMC->SendAnalyticsEvent("Button", "Advanced Show", "test", QVariant(1));
         showAdvanced();
     }else{
+        MMC->SendAnalyticsEvent("Button", "Advanced Hide", "test", QVariant(1));
         hideAdvanced();
     }
 }

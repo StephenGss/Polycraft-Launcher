@@ -2,6 +2,7 @@
 #include "ui_PlayPolycraft.h"
 #include "PolycraftLauncher.h"
 #include "InstanceList.h"
+#include "ganalytics.h"
 
 PlayPolycraft::~PlayPolycraft()
 {
@@ -25,7 +26,7 @@ void PlayPolycraft::initialize(QStringList instances)
 
 void PlayPolycraft::on_pushButton_clicked()
 {
-
+    MMC->SendAnalyticsEvent("Launch", ui->instances->currentText(), "test", QVariant(1));
     MMC->launch(MMC->instances()->getInstanceById(ui->instances->currentText()));
 }
 
