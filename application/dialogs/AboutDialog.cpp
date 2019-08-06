@@ -41,25 +41,19 @@ static QString getCreditsHtml(QStringList patrons)
         "<body style=' font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;'>"
         ""
         "<h3>PolycraftLauncher Developers</h3>"
-        "<p>Andrew Okin &lt;<a href='mailto:forkk@forkk.net'>forkk@forkk.net</a>&gt;</p>"
-        "<p>Petr Mrázek &lt;<a href='mailto:peterix@gmail.com'>peterix@gmail.com</a>&gt;</p>"
-        "<p>Sky Welch &lt;<a href='mailto:polycraftlauncher@bunnies.io'>polycraftlauncher@bunnies.io</a>&gt;</p>"
-        "<p>Jan (02JanDal) &lt;<a href='mailto:02jandal@gmail.com'>02jandal@gmail.com</a>&gt;</p>"
-        "<p>RoboSky &lt;<a href='https://twitter.com/RoboSky_'>@RoboSky_</a>&gt;</p>"
+        "<p>Stephen Goss &lt;<a href='mailto:stephen@polycraftworld.com'>stephen@polycraftworld.com</a>&gt;</p>"
         ""
         "<h3>With thanks to</h3>"
-        "<p>Orochimarufan &lt;<a href='mailto:orochimarufan.x3@gmail.com'>orochimarufan.x3@gmail.com</a>&gt;</p>"
-        "<p>TakSuyu &lt;<a href='mailto:taksuyu@gmail.com'>taksuyu@gmail.com</a>&gt;</p>"
-        "<p>Kilobyte &lt;<a href='mailto:stiepen22@gmx.de'>stiepen22@gmx.de</a>&gt;</p>"
-        "<p>Rootbear75 &lt;<a href='https://twitter.com/rootbear75'>@rootbear75</a>&gt;</p>"
+        "<p>Eric Kildebeck &lt;&gt;</p>"
+        "<p>Walter Voit &lt;&gt;</p>"
         ""
-        "<h3>Patrons</h3>"
+        "<h3></h3>"
         "%1"
         ""
         "</body>"
         "</html>");
     if (patrons.isEmpty())
-        return creditsHtml.arg(QObject::tr("<p>Loading...</p>"));
+        return creditsHtml.arg(QObject::tr("<p></p>"));
     else
     {
         QString patronsStr;
@@ -94,7 +88,7 @@ AboutDialog::AboutDialog(QWidget *parent) : QDialog(parent), ui(new Ui::AboutDia
     ui->urlLabel->setOpenExternalLinks(true);
 
     ui->icon->setPixmap(MMC->getThemedIcon("logo").pixmap(64));
-    ui->title->setText("PolycraftLauncher 5");
+    ui->title->setText("PolycraftLauncher");
 
     ui->versionLabel->setText(tr("Version") +": " + BuildConfig.printableVersionString());
     ui->platformLabel->setText(tr("Platform") +": " + BuildConfig.BUILD_PLATFORM);
@@ -113,7 +107,7 @@ AboutDialog::AboutDialog(QWidget *parent) : QDialog(parent), ui(new Ui::AboutDia
 
     connect(ui->aboutQt, &QPushButton::clicked, &QApplication::aboutQt);
 
-    loadPatronList();
+    //loadPatronList();
 }
 
 AboutDialog::~AboutDialog()

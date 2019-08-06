@@ -1634,12 +1634,12 @@ void MainWindow::droppedURLs(QList<QUrl> urls)
 
 void MainWindow::on_actionREDDIT_triggered()
 {
-    DesktopServices::openUrl(QUrl("https://www.reddit.com/r/PolycraftLauncher/"));
+    DesktopServices::openUrl(QUrl("https://www.reddit.com/r/polycraft_world/"));
 }
 
 void MainWindow::on_actionDISCORD_triggered()
 {
-    DesktopServices::openUrl(QUrl("https://discord.gg/0k2zsXGNHs0fE4Wm"));
+    DesktopServices::openUrl(QUrl("https://discord.gg/yRXdmmb"));
 }
 
 void MainWindow::on_actionChangeInstIcon_triggered()
@@ -1813,7 +1813,7 @@ void MainWindow::on_actionManageAccounts_triggered()
 
 void MainWindow::on_actionReportBug_triggered()
 {
-    DesktopServices::openUrl(QUrl("https://github.com/PolycraftLauncher/PolycraftLauncher5/issues"));
+    DesktopServices::openUrl(QUrl("https://github.com/StephenGss/Polycraft-Launcher/issues"));
 }
 
 void MainWindow::on_actionPatreon_triggered()
