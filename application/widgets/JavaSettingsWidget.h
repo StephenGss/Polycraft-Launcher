@@ -7,6 +7,7 @@
 #include <QIcon>
 #include "tasks/Task.h"
 #include <JavaInstallTask.h>
+#include <QDesktopServices>
 
 class QLineEdit;
 class VersionSelectWidget;

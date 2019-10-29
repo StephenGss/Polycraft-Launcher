@@ -281,11 +281,9 @@ void JavaSettingsWidget::on_javaBrowseBtn_clicked()
 void JavaSettingsWidget::on_javaInstallBtn_clicked()
 {
     QString url;
+    //if windows, install our version, else open link to java download
 #if defined Q_OS_WIN32
     url = "http://polycraft.utdallas.edu/downloads/java_8_runtime_win.zip";
-#else
-    url = "Java (java)";
-#endif
     JavaInstallTask * creationTask = new JavaInstallTask(url);
     creationTask->setName("Java Install");
     if(creationTask)
@@ -313,6 +311,10 @@ void JavaSettingsWidget::on_javaInstallBtn_clicked()
             });
         runModalTask(task.get());
     }
+#else
+    url = "https://www.java.com/en/";
+    QDesktopServices::openUrl(QUrl(url));
+#endif
 
 }
 
