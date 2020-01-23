@@ -26,6 +26,9 @@ void PlayPolycraft::initialize(QStringList instances)
 
 void PlayPolycraft::on_pushButton_clicked()
 {
+//    ui->pushButton->setStyleSheet("background-color: qlineargradient(spread:pad, x1:0.478, y1:1, x2:0.483, y2:0, stop:0.357955 rgba(45, 45, 45, 255), stop:1 rgba(198, 198, 198, 255));"
+//                                  "background-image: none !important;");
+
     MMC->SendAnalyticsEvent("Launch", ui->instances->currentText(), "test", QVariant(1));
     MMC->launch(MMC->instances()->getInstanceById(ui->instances->currentText()));
 }

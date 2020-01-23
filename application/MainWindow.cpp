@@ -648,7 +648,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        QString winTitle = tr("PolycraftLauncher 5 - Version %1").arg(BuildConfig.printableVersionString());
+        QString winTitle = tr("PolycraftLauncher - Version %1").arg(BuildConfig.printableVersionString());
         if (!BuildConfig.BUILD_PLATFORM.isEmpty())
         {
             winTitle += tr(" on %1", "on platform, as in operating system").arg(BuildConfig.BUILD_PLATFORM);

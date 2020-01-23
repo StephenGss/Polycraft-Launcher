@@ -17,6 +17,14 @@
 
 #include <QtWidgets/QDialog>
 #include <QtCore/QEventLoop>
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
+#include <QNetworkReply>
+#include <QUrlQuery>
+#include <BuildConfig.h>
+#include <QJsonDocument>
+#include <QUrl>
+#include <QMessageBox>
 
 #include "minecraft/auth/MojangAccount.h"
 
@@ -42,11 +50,14 @@ private:
 protected
 slots:
     void accept();
+    void accept2();
 
     void onTaskFailed(const QString &reason);
     void onTaskSucceeded();
     void onTaskStatus(const QString &status);
     void onTaskProgress(qint64 current, qint64 total);
+
+    void checkForPolycraftAccount(QNetworkReply *reply);
 
     void on_userTextBox_textEdited(const QString &newText);
     void on_passTextBox_textEdited(const QString &newText);
@@ -55,4 +66,6 @@ private:
     Ui::LoginDialog *ui;
     MojangAccountPtr m_account;
     std::shared_ptr<Task> m_loginTask;
+    QNetworkAccessManager * manager;
+    QNetworkReply *reply = nullptr;
 };

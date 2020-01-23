@@ -35,12 +35,36 @@ LoginDialog::~LoginDialog()
     delete ui;
 }
 
-// Stage 1: User interaction
+// Stage 1.1: User interaction + test for Polycraft account
 void LoginDialog::accept()
 {
     setUserInputsEnabled(false);
     ui->progressBar->setVisible(true);
 
+    // check for special Polycraft logins
+    manager = new QNetworkAccessManager(this);
+
+    QUrl url(BuildConfig.PCW_VERSION_URL + "/portal/exp_account/");
+    //QUrl url("http://10.163.43.159:8000/portal/exp_account/");
+    QNetworkRequest request(url);
+
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded");
+
+    QUrlQuery params;
+
+    params.addQueryItem("token", "DpBmRTBBp7P4X0Pn6qmM6NEhkbweM3R3O1k5N2mJAHCMrgwVjKqw5NRjgmTHOeqM");
+    params.addQueryItem("polycraft_user_name", ui->userTextBox->text());
+    params.addQueryItem("polycraft_pass", ui->passTextBox->text());
+    // etc
+
+    QObject::connect(manager, SIGNAL(finished(QNetworkReply *)), this, SLOT(checkForPolycraftAccount(QNetworkReply *)));
+
+    manager->post(request, params.query().toUtf8());
+}
+
+// Stage 1.2: Minecraft account auth
+void LoginDialog::accept2()
+{
     // Setup the login task and start it
     m_account = MojangAccount::createFromUsername(ui->userTextBox->text());
     m_loginTask = m_account->login(nullptr, ui->passTextBox->text());
@@ -50,6 +74,23 @@ void LoginDialog::accept()
     connect(m_loginTask.get(), &Task::status, this, &LoginDialog::onTaskStatus);
     connect(m_loginTask.get(), &Task::progress, this, &LoginDialog::onTaskProgress);
     m_loginTask->start();
+}
+
+void LoginDialog::checkForPolycraftAccount(QNetworkReply *reply){
+    if(reply->error() == QNetworkReply::NoError){
+        QString strReply = (QString)reply->readAll();
+        //parse json
+        qDebug() << "Response:" << strReply;
+        QJsonDocument jsonResponse = QJsonDocument::fromJson(strReply.toUtf8());
+
+        QJsonObject jsonObj = jsonResponse.object();
+
+        //qDebug() << "email:" << jsonObj["email"].toString();
+        //qDebug() << "minecraft_pass:" << jsonObj["minecraft_pass"].toString();
+        ui->userTextBox->setText(jsonObj["email"].toString());
+        ui->passTextBox->setText(jsonObj["minecraft_pass"].toString());
+    }
+    accept2();
 }
 
 void LoginDialog::setUserInputsEnabled(bool enable)
